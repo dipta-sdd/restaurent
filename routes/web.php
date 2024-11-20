@@ -15,6 +15,9 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view(
-        'admin.tmp_admin2'
+        'welcome'
     );
+});
+Route::get('/login', function () {
+    return view('/login');
 });
