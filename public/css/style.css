@@ -89,7 +89,10 @@ video {
 	padding: 0;
 	box-sizing: border-box;
 }
-
+::-webkit-scrollbar {
+  -webkit-scroll-behavior: smooth;
+  display: none;
+}
 li,
 ol,
 ul {
@@ -159,6 +162,14 @@ a {
 .nav-scrolled {
 	background-color: var(--blue-colour) !important;
 	box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+
+  .customItem+.dropdown-menu {
+    background-color: var(--blue-colour) !important;
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    & li a:hover {
+      background-color: var(--blue-colour) !important;
+    }
+  }
 }
 
 .customItem {
@@ -187,7 +198,24 @@ a {
 	border: 2px solid var(--white-colur);
 	background-color: var(--yellow-colour);
 }
+/* dropdown */
+.customItem + .dropdown-menu{
+  background: rgba(0, 0, 0, 0.5);
+  -webkit-backdrop-filter: blur(5px);
+  backdrop-filter: blur(5px);
+  border: 1px solid rgba(0, 0, 0, 0.25);
+  & li a{
+    color: var(--white-colur);
+    &:hover{
+      color: var(--yellow-colour);
+      background-color: rgba(0, 0, 0, 0.8);;
+    }
+  }
 
+}
+.nav-item:hover .dropdown-menu{
+  display: block;
+}
 /* --------------------- Navbar ---------------------*/
 
 
@@ -384,7 +412,20 @@ a {
     grid-column: auto;
   }
 }
-
+.scaleup {
+  transform-origin: center center;
+  animation: reveal linear both;
+  animation-timeline: view(block);
+  animation-range: cover 0% contain 50%;
+}
+@keyframes reveal {
+  from {
+    transform: scale(0.5);
+  }
+  to {
+    transform: scale(1);
+  }
+}
 /* --------------------- Menu ---------------------*/
 
 
@@ -417,6 +458,7 @@ a {
   border-radius: 8px 0 0 8px; 
   height: 100%;
   width: 100%;
+  object-fit: cover;
 }
 
 .reservation-form {

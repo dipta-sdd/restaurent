@@ -26,5 +26,5 @@ Route::middleware(['auth:api'])->get('current-user', [AuthController::class, 'cu
 
 Route::middleware('web')->group(function () {
     Route::post('/login', [AuthController::class, 'login']);
-    // Route::get('/logout', [AuthController::class, 'logout']);
+    Route::get('/logout', [AuthController::class, 'logout']);
 });
