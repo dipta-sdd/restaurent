@@ -29,6 +29,8 @@ class User extends Authenticatable
         'created_by',
         'updated_by',
         'status_id',
+        'is_admin',
+
     ];
 
     /**
@@ -51,4 +53,20 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+    public function is_admin()
+    {
+        return in_array($this->role, ['admin', 'manager', 'staff']);
+    }
+    public function is_rider()
+    {
+        return $this->role === 'rider';
+    }
+    public function is_customer()
+    {
+        return $this->role === 'user';
+    }
+    public function is_super_admin()
+    {
+        return $this->role === 'admin';
+    }
 }

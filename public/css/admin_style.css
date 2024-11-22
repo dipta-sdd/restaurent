@@ -155,9 +155,15 @@ border-radius: 10px;
  .table>thead {
    vertical-align: top;
  }
+ /* empty table msg in caption */
+ tr ~ tr > .errors{
+  display: none!important;
+ }
+
  /* main */
  main{
     background-color: var(--bs-secondary-bg);
+    min-height: calc(100vh - 48px);
     /* background-color: var(--bs-body-bg); */
     /* background-color: var(--mybg); */
  }

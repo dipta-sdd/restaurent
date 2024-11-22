@@ -67,6 +67,9 @@
 
                             <ul class="dropdown-menu rounded-0">
                                 <li><a class="dropdown-item" href="/profile">{{ Auth::user()->name }}</a></li>
+                                @if (Auth::user()->is_admin())
+                                <li><a class="dropdown-item" href="/admin/dashboard">Dashboard</a></li>
+                                @endif
                                 <li><a class="dropdown-item" href="/api/logout">Logout</a></li>
                             </ul>
 
