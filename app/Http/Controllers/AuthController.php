@@ -21,17 +21,7 @@ class AuthController extends Controller
 
         $user = User::create($data);
 
-        $token = JWTAuth::fromUser($user);
-
-        return response()->json(compact('user', 'token'), 201);
-    }
-    public function currentUser(Request $request)
-    {
-        // Get the authenticated user
-        $user = JWTAuth::parseToken()->authenticate();
-
-        // Return the user data
-        return response()->json($user);
+        return response()->json(['message' => 'User created successfully', 'user' => $user], 201);
     }
     public function login(Request $request)
     {
@@ -50,23 +40,17 @@ class AuthController extends Controller
             $request->session()->regenerate();
             $user = Auth::user();
 
-            $token = $user->createToken('api-token')->accessToken; // Generate token for both
-
             return response()->json([
-                'user' => $user,
-                'token' => $token
+                'user' => $user
             ]);
         } else {
             $credentials = $request->only('phone', 'password');
             if (Auth::attempt($credentials)) {
                 $request->session()->regenerate();
                 $user = Auth::user();
-                // dd(json_encode($user));
-                $token = $user->createToken('api-token')->accessToken;
 
                 return response()->json([
-                    'user' => $user,
-                    'token' => $token
+                    'user' => $user
                 ]);
             }
             return response()->json(['error' => 'Unauthorized'], 401);
@@ -74,11 +58,15 @@ class AuthController extends Controller
     }
     public function logout(Request $request)
     {
-        $request->user()->tokens()->delete();
+        // $request->user()->tokens()->delete();
         $request->session()->invalidate();
         $request->session()->regenerateToken();
         return redirect('/login');
 
         return response()->json(['message' => 'Logged out']);
+    }
+    public function me(Request $request)
+    {
+        return response()->json($request->user());
     }
 }

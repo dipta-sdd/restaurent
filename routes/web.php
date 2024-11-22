@@ -18,6 +18,11 @@ Route::get('/', function () {
         'welcome'
     );
 });
+Route::get('/dashboard', function () {
+    return view(
+        'admin.tmp_admin'
+    );
+});
 Route::get('/login', function () {
     return view('/login');
 });

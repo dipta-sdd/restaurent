@@ -215,6 +215,7 @@ a {
 }
 .nav-item:hover .dropdown-menu{
   display: block;
+  min-width: 100%;
 }
 /* --------------------- Navbar ---------------------*/
 

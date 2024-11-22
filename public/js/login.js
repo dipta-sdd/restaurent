@@ -42,8 +42,7 @@ $("#login").click(function (e) {
         },
 
         success: function (response) {
-            console.log(response);
-            localStorage.setItem("apiToken", response.token);
+            // console.log(response);
             // Optionally redirect the user or display a success message
             window.location.href = "/";
         },
