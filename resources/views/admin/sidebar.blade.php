@@ -34,22 +34,13 @@
                     <button class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed"
                         data-bs-toggle="collapse" data-bs-target="#supply-collapse" aria-expanded="false">
                         <i class="fas fa-box"></i> &nbsp;
-                        Supply
+                        Category
                     </button>
                     <div class="collapse" id="supply-collapse">
                         <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-                            <li><a href="/supplys"
+                            <li><a href="/admin/categories"
                                     class="link-body-emphasis d-inline-flex text-decoration-none rounded">All
-                                    supplys</a></li>
-                            <li class="d-none"><a href="/supply"
-                                    class="link-body-emphasis d-inline-flex text-decoration-none rounded">Supply</a>
-                            </li>
-                            <li><a href="#"
-                                    class="link-body-emphasis d-inline-flex text-decoration-none rounded">Shipped</a>
-                            </li>
-                            <li><a href="#"
-                                    class="link-body-emphasis d-inline-flex text-decoration-none rounded">Returned</a>
-                            </li>
+                                    categories</a></li>
                         </ul>
                     </div>
                 </li>

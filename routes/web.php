@@ -26,3 +26,6 @@ Route::get('/dashboard', function () {
 Route::get('/login', function () {
     return view('/login');
 });
+Route::get('/admin/categories', function () {
+    return view('admin.categories');
+});
