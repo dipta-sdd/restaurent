@@ -41,19 +41,17 @@
                     <h1 class="h2">Categories</h1>
 
                     <div class="btn-toolbar mb-2 mb-md-0">
-                        <div class="btn-group me-2">
-                            <a type="button" class="btn btn-sm btn-outline-secondary"> <i class="fas fa-download"></i>
-                                Export</a>
-                            <a type="button" class="btn btn-sm btn-outline-secondary" onclick="window.print()"> <i
-                                    class="fas fa-print"></i> Print</a>
-                        </div>
-                        <a type="button" class="btn btn-sm btn-primary" href="#">
-                            <i class="fas fa-plus"></i> Add New
-                        </a>
+                        <button type="button" class="btn btn-sm btn-outline-secondary me-2" onclick="window.print()">
+                            <i class="fas fa-print"></i> Print
+                        </button>
+                        <button type="button" class="btn btn-sm btn-outline-secondary">
+                            <i class="fas fa-download"></i> Export
+                        </button>
                     </div>
                 </div>
-                {{ json_encode($subcategories) }}
-                <div class="card mb-4" id="manage_category">
+                <!-- this is how you saw a data sended from backed -->
+                <!-- {{ json_encode($subcategories) }} -->
+                <div class="card mb-4 p-none" id="manage_category">
                     <div class="card-header">
                         <h5 class="card-title mb-0">Create New Category</h5>
                     </div>
@@ -75,15 +73,18 @@
                                 <label for="name" class="form-label">Category Name <small
                                         class="text-danger">*</small></label>
                                 <input type="text" id="name" class="form-control" name="name" />
+                                <small class="text-danger"></small>
                             </div>
                             <div class="col-md-12">
-                                <label for="description" class="form-label">Description <small
-                                        class="text-danger">*</small></label>
+                                <label for="description" class="form-label">Description</label>
                                 <input type="text" id="description" class="form-control" name="description" />
                             </div>
                             <div class="text-end">
-                                <button type="submit" class="btn btn-primary">
+                                <button type="submit" class="btn btn-primary save">
                                     <i class="fas fa-plus"></i> Add New
+                                </button>
+                                <button type="submit" class="btn btn-primary update d-none">
+                                    <i class="fas fa-save"></i> Update
                                 </button>
                             </div>
                         </form>
@@ -92,10 +93,10 @@
 
 
                 <div class="row">
-                    <div class="col-md-6 mb-4">
+                    <div class="col-12 mb-4">
                         <div class="card">
                             <div class="card-header">
-                                <h5 class="card-title mb-0">Supply List</h5>
+                                <h5 class="card-title mb-0 ">Category List</h5>
                             </div>
                             <div class="card-body">
                                 <div class="table-responsive">
@@ -106,49 +107,36 @@
                                                 <th>Type</th>
                                                 <th>Category Name</th>
                                                 <th>Description</th>
-                                                <th>Created At</th>
                                                 <th>Created By</th>
+                                                <th>Created At</th>
+                                                <th>Updated By</th>
+                                                <th>Updated At</th>
+                                                <th>Action</th>
                                             </tr>
                                         </thead>
-                                        <tbody class="supply-table">
-
-                                            <tr>
-                                                <td colspan="6" class="text-center errors">There is no data available in
-                                                    table</td>
+                                        <tbody class="supply-table text-capitalize" id="subTobdy">
+                                            @foreach ($subcategories as $item)
+                                            <tr id="tr-{{ $item->id }}">
+                                                <td>{{ $item->id }}</td>
+                                                <td data-val="{{ $item->category_id }}">{{ $item->type }}</td>
+                                                <td>{{ $item->name }}</td>
+                                                <td>{{ $item->description ?? "N/A"}}</td>
+                                                <td>{{ $item->created_by ?? 'N/A'}}</td>
+                                                <td>{{ $item->created_at ? $item->created_at->format('d M, Y, H:i') : 'N/A' }}
+                                                </td>
+                                                <td>{{ $item->updated_by ?? 'N/A'}}</td>
+                                                <td>{{ $item->updated_at ? $item->updated_at->format('d M, Y, H:i') : 'N/A' }}
+                                                </td>
+                                                <td>
+                                                    <button class="btn btn-sm btn-primary">
+                                                        <i class="fas fa-edit"></i> Edit
+                                                    </button>
+                                                    <button class="btn btn-sm btn-danger" data-id="{{ $item->id }}">
+                                                        <i class="fas fa-trash"></i> Delete
+                                                    </button>
+                                                </td>
                                             </tr>
-
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-md-6 mb-4">
-                        <div class="card">
-                            <div class="card-header">
-                                <h5 class="card-title mb-0">Supply List</h5>
-                            </div>
-                            <div class="card-body">
-                                <div class="table-responsive">
-                                    <table class="table table-hover">
-                                        <thead>
-                                            <tr>
-
-                                                <th>#</th>
-                                                <th>Type</th>
-                                                <th>Category Name</th>
-                                                <th>Description</th>
-                                                <th>Created At</th>
-                                                <th>Created By</th>
-
-                                            </tr>
-                                        </thead>
-                                        <tbody class="supply-table">
-                                            <tr>
-                                                <td colspan="6" class="text-center errors">There is no data available in
-                                                    table</td>
-                                            </tr>
+                                            @endforeach
                                         </tbody>
                                     </table>
                                 </div>
@@ -163,6 +151,146 @@
     <script src="{{ asset('/js/popper.min.js') }}"></script>
     <script src="{{ asset('/js/bootstrap.min.js') }}"></script>
     <script src="{{ asset('/js/script.js') }}"></script>
+    <script>
+        $(document).ready(function() {
+            const idToType = ['', 'Food', 'Drinks', ];
+            $('#manage_category form .save').click(function(e) {
+                e.preventDefault();
+                let data = collectData('#manage_category form .form-control');
+                $.ajax({
+                    type: "post",
+                    url: "/api/admin/category",
+                    data: data,
+                    headers: {
+                        "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+                    },
+
+                    success: function(response) {
+                        // add new category
+                        $('#subTobdy').append(`
+                            <tr id="tr-${response.id}">
+                                <td>${response.id}</td>
+                                <td data-val="${response.category_id}">${idToType[response.category_id]}</td>
+                                <td>${response.name}</td>
+                                <td>${response.description ?? "N/A"}</td>
+                                <td>${response.created_by}</td>
+                                <td>${myDateFormat(response.created_at)}</td>
+                                <td>${response.updated_by}</td>
+                                <td>${myDateFormat(response.updated_at)}</td>
+                                <td>
+                                    <button class="btn btn-sm btn-primary">
+                                        <i class="fas fa-edit"></i> Edit
+                                    </button>
+                                    <button class="btn btn-sm btn-danger" data-id="${response.id}">
+                                        <i class="fas fa-trash"></i> Delete
+                                    </button>
+                                </td>
+                            </tr>
+                        `);
+                        // clear input
+                        $('#manage_category form .form-control').val('');
+                        // clear error
+                        $('#manage_category form .form-control+small.text-danger').html('');
+                        $('#manage_category form .form-control').removeClass('is-invalid');
+                        showToast('Category added successfully', 'success');
+                    },
+                    error: function(xhr) {
+                        res = xhr.responseJSON;
+                        if (res.errors) {
+                            // console.table(res.errors);
+                            // display errors
+                            labelErrors('#manage_category form .form-control', res.errors);
+                        } else showToast('Internal server error', 'danger');
+                    }
+                });
+            });
+            // on edit click load data to form
+            $(document).on('click', '#subTobdy .btn.btn-primary', function(e) {
+                e.preventDefault();
+                const tr = $(this).closest('tr');
+
+                const id = tr.find('td').eq(0).text().trim();
+                const data = {
+                    category_id: tr.find('td').eq(1).data('val'),
+                    name: tr.find('td').eq(2).text().trim(),
+                    description: tr.find('td').eq(3).text().trim() == 'N/A' ? '' : tr.find('td').eq(3)
+                        .text().trim(),
+                };
+                loadData('#manage_category form .form-control', data);
+                $('#manage_category form .update').attr('data-id', id);
+                $('#manage_category form button.save').addClass('d-none');
+                $('#manage_category form button.update').removeClass('d-none');
+                $('#manage_category .card-title').text('Update Category');
+            });
+            // update click
+            $('#manage_category form .update').click(function(e) {
+                e.preventDefault();
+                let id = $(this).attr('data-id');
+                let data = collectData('#manage_category form .form-control');
+                $.ajax({
+                    type: "post",
+                    url: "/api/admin/category/" + id,
+                    data: data,
+                    headers: {
+                        "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+                    },
+
+                    success: function(response) {
+                        // update category
+
+                        $('#tr-' + id).find('td').eq(1).text(idToType[response.category_id]);
+                        $('#tr-' + id).find('td').eq(2).text(response.name);
+                        $('#tr-' + id).find('td').eq(3).text(response.description ?? "N/A");
+                        $('#tr-' + id).find('td').eq(6).text(response.updated_by);
+                        $('#tr-' + id).find('td').eq(7).text(myDateFormat(response.updated_at));
+                        // clear input
+                        $('#manage_category form .form-control').val('');
+                        // clear error
+                        $('#manage_category form .form-control+small.text-danger').html('');
+                        $('#manage_category form .form-control').removeClass('is-invalid');
+                        // hide update button
+                        $('#manage_category form button.update').addClass('d-none');
+                        $('#manage_category form button.save').removeClass('d-none');
+                        // change title
+                        $('#manage_category .card-title').text('Create New Category');
+                        showToast('Category updated successfully', 'success');
+                    },
+                    error: function(xhr) {
+                        res = xhr.responseJSON;
+                        if (res.errors) {
+                            // console.table(res.errors);    
+                            // display errors
+                            labelErrors('#manage_category form .form-control', res.errors);
+                        } else showToast('Internal server error', 'danger');
+                    }
+                });
+            });
+            // click on delete button
+            $('#subTobdy .btn.btn-danger').click(function(e) {
+                e.preventDefault();
+                // alert('Are you sure you want to delete this category?');
+                let id = $(this).attr('data-id');
+                $.ajax({
+                    type: "delete",
+                    url: "/api/admin/category/" + id,
+                    headers: {
+                        "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+                    },
+                    success: function(response) {
+                        $('#tr-' + id).remove();
+                        showToast('Category deleted successfully', 'success');
+                    },
+                    error: function(xhr, status, error) {
+                        // console.log(xhr);
+                        // console.log(status);
+                        // console.log(error);
+                        showToast('Internal server error', 'danger');
+                    }
+                });
+            });
+
+        });
+    </script>
 </body>
 
 </html>
