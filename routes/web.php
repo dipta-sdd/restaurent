@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\manageCategory;
+use App\Http\Middleware\IsAdmin;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -25,7 +27,13 @@ Route::get('/dashboard', function () {
 });
 Route::get('/login', function () {
     return view('/login');
-});
-Route::get('/admin/categories', function () {
-    return view('admin.categories');
+})->name('login');
+
+Route::group(['middleware' => ['auth:sanctum', IsAdmin::class], 'prefix' => 'admin'], function () {
+    Route::get('/categories', function (manageCategory $manageCategory) {
+        return $manageCategory->adminCategory();
+    });
+    Route::get('/dashboard', function () {
+        return view('admin.tmp_admin2');
+    });
 });

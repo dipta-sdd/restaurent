@@ -38,24 +38,42 @@ $(document).on("click", ".bd-mode-toggle .dropdown-item", function (event) {
     $(".bd-mode-toggle .dropdown-toggle i." + val).removeClass("d-none");
 });
 
-// $.ajax({
-//     url: "/api/cccc",
-//     type: "get",
-//     success: function (response) {
-//         console.log(response);
-//     },
-//     error: function (xhr) {
-//         console.error("Registration failed", xhr.responseJSON);
-//         // Handle errors, e.g., display validation errors to the user
-//     },
-// });
 function labelErrors(selector, e) {
     $(selector).each(function () {
-        // let name = $(this).attr('name');
         if (e[$(this).attr("name")]) {
             $(this).addClass("is-invalid");
+            $(this).next("small.text-danger").text(e[$(this).attr("name")]);
         } else {
             $(this).removeClass("is-invalid");
+            $(this).next("small.text-danger").text();
         }
     });
 }
+
+function collectData(selector) {
+    let data = {};
+    $(selector).each(function () {
+        data[$(this).attr("name")] = $(this).val();
+    });
+    return data;
+}
+function loadData(selector, data) {
+    $(selector).each(function () {
+        $(this).val(data[$(this).attr("name")]);
+    });
+}
+
+function myDateFormat(date) {
+    const formatter = new Intl.DateTimeFormat("en-GB", {
+        day: "numeric",
+        month: "short",
+        year: "numeric",
+        hour: "2-digit",
+        minute: "2-digit",
+        hour12: false,
+        timeZone: "UTC", // Force UTC time
+    });
+
+    return formatter.format(new Date(date));
+}
+function showToast(message, color = "success") {}
