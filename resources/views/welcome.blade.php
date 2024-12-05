@@ -437,6 +437,23 @@
         const carousel = new bootstrap.Carousel(myCarouselElement, {
             interval: 10000
         })
+        // $.ajax({
+        //     type: "post",
+        //     url: "/api/signup",
+        //     data: {
+        //         name: "John Doe",
+        //         email: "admin@email.com",
+        //         password: "12345678",
+        //         password_confirmation: "12345678"
+        //     },
+            
+        //     headers: {
+        //         "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+        //     },
+        //     success: function (response) {
+                
+        //     }
+        // });
     </script>
 </body>
 
