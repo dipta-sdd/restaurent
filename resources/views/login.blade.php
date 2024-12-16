@@ -248,12 +248,12 @@
             <!-- Email Input -->
             <div class="mb-3 input-wrapper">
                 <i class="fas fa-envelope input-icon"></i>
-                <input type="email" class="form-control" placeholder="Email">
+                <input type="email" name="email" class="form-control" placeholder="Email">
             </div>
             <!-- Password Input -->
             <div class="mb-4 input-wrapper">
                 <i class="fas fa-lock input-icon"></i>
-                <input type="password" class="form-control" id="password" placeholder="Password">
+                <input type="password" name="password" class="form-control" id="password" placeholder="Password">
                 <i class="far fa-eye" id="togglePassword"></i>
             </div>
             <!-- Submit Button -->
@@ -285,8 +285,11 @@
     </div>
 
     <!-- ================ SCRIPTS ================ -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
 
+    <script src="/js/jquery-3.7.1.min.js"></script>
+    <script src="/js/popper.min.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
+    <script src="/js/script.js"></script>
     <!-- Password Toggle Script -->
     <script>
     const togglePassword = document.querySelector('#togglePassword');
@@ -311,6 +314,42 @@
                     loader.style.display = 'none';
                 }, 500);
             }, 1000); // Adjust time as needed
+        });
+    });
+    // on login button click
+    $('form').submit(function(e) {
+        e.preventDefault();
+        var email = $('input[name=email]').val();
+        var password = $('input[name=password]').val();
+        $.ajax({
+            url: '/api/login',
+            type: 'POST',
+
+            headers: {
+                "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+            },
+            data: {
+                email: email,
+                password: password
+            },
+            success: function(res) {
+                if (res.user.role == 'admin') {
+                    window.location.href = '/admin/dashboard';
+                } else {
+                    window.location.href = '/';
+                }
+            },
+            error: function(xhr, status, error) {
+                // console.log(xhr);
+                // console.log(status);
+                // console.log(error);
+                if (xhr.responseJSON.errors) {
+                    labelErrors('form input', xhr.responseJSON.errors);
+                }
+                // showToast('Internal server error', 'danger');
+
+
+            }
         });
     });
     </script>
