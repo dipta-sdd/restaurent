@@ -1,129 +1,319 @@
-<!doctype html>
+<!--
+  File: login.html
+  Description: Restaurant login page
+  Features:
+  - User login form
+  - Password visibility toggle
+  - Social login options
+  - Responsive design
+-->
+
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <title>{{ config('app.name', 'My POS') }}</title>
+    <!-- ================ EXTERNAL LIBRARIES ================ -->
+    <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.5.1/css/all.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
 
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
-        integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
-        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <title>Login Interface</title>
 
-    <link href="{{ asset('/css/bootstrap.min.css') }}" rel="stylesheet">
-    <link href="{{ asset('/css/style.css') }}" rel="stylesheet">
-    <link href="{{ asset('/css/login.css') }}" rel="stylesheet">
+    <!-- ================ STYLES ================ -->
+    <style>
+    /* Global Styles */
+    body {
+        font-family: 'Poppins', sans-serif;
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: url(./Images/vegetables-set-left-black-slate.jpg) center/cover;
+        background-attachment: fixed;
+        position: relative;
+        color: white;
+    }
+
+    /* Dark Overlay */
+    body::before {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.7);
+    }
+
+    /* Login Container */
+    .login-container {
+        width: 90%;
+        max-width: 400px;
+        background: rgba(0, 0, 0, 0.7);
+        padding: 2rem;
+        border-radius: 10px;
+        position: relative;
+        z-index: 1;
+        backdrop-filter: blur(10px);
+    }
+
+    /* Form Controls */
+    .form-control {
+        background: white;
+        color: black;
+        padding-left: 40px;
+    }
+
+    .form-control:focus {
+        border-color: #f8c14d;
+        box-shadow: 0 0 5px #f8c14d;
+        outline: none;
+    }
+
+    /* Input Icons */
+    .input-wrapper {
+        position: relative;
+    }
+
+    .input-icon {
+        position: absolute;
+        top: 50%;
+        left: 10px;
+        transform: translateY(-50%);
+        color: #495057;
+    }
+
+    /* Password Toggle */
+    #togglePassword {
+        position: absolute;
+        right: 10px;
+        top: 50%;
+        transform: translateY(-50%);
+        cursor: pointer;
+        color: #495057;
+        z-index: 10;
+    }
+
+    /* Button Styles */
+    .btn-primary {
+        background-color: #f8c14d;
+        border: none;
+        color: black;
+        transition: all 0.3s ease;
+    }
+
+    .btn-primary:hover {
+        background-color: #e0a526;
+        transform: translateY(-2px);
+    }
+
+    /* Social Login Buttons */
+    .social-login a {
+        background-color: #343a40;
+        color: white;
+        padding: 10px 20px;
+        border-radius: 25px;
+        transition: all 0.3s ease;
+        text-decoration: none;
+    }
+
+    .social-login a:hover {
+        background-color: #f8c14d;
+        color: black;
+    }
+
+    /* Link Styles */
+    a {
+        color: #f8c14d;
+        text-decoration: none;
+        transition: all 0.3s ease;
+    }
+
+    a:hover {
+        color: #e0a526;
+    }
+
+    /* Page Loader Styles */
+    .loader-wrapper {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: #000000;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 9999;
+        transition: opacity 0.5s ease-in-out;
+    }
+
+    .loader {
+        text-align: center;
+    }
+
+    .spinner {
+        width: 50px;
+        height: 50px;
+        border: 5px solid #f3f3f3;
+        border-top: 5px solid #082A45;
+        border-radius: 50%;
+        animation: spin 1s linear infinite;
+        margin: 0 auto 20px;
+    }
+
+    .loader-text {
+        color: #ffffff;
+        font-size: 18px;
+        font-weight: 500;
+        font-family: 'Poppins', sans-serif;
+        letter-spacing: 2px;
+    }
+
+    @keyframes spin {
+        0% {
+            transform: rotate(0deg);
+        }
+
+        100% {
+            transform: rotate(360deg);
+        }
+    }
+
+    /* Hide loader after page load */
+    .loader-wrapper.fade-out {
+        opacity: 0;
+        visibility: hidden;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 480px) {
+        .login-container {
+            width: 95%;
+            padding: 1.5rem;
+        }
+
+        .social-login a {
+            padding: 8px 16px;
+            font-size: 14px;
+        }
+    }
+
+    @media (max-width: 360px) {
+        .login-container {
+            padding: 1rem;
+        }
+
+        h2 {
+            font-size: 1.5rem;
+        }
+
+        p {
+            font-size: 0.9rem;
+        }
+
+        .social-login {
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+    }
+    </style>
 </head>
 
-<body class="d-flex align-items-center py-4 bg-body-tertiary">
-    <svg xmlns="http://www.w3.org/2000/svg" class="d-none">
-        <symbol id="check2" viewBox="0 0 16 16">
-            <path
-                d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z">
-            </path>
-        </symbol>
-        <symbol id="circle-half" viewBox="0 0 16 16">
-            <path d="M8 15A7 7 0 1 0 8 1v14zm0 1A8 8 0 1 1 8 0a8 8 0 0 1 0 16z"></path>
-        </symbol>
-        <symbol id="moon-stars-fill" viewBox="0 0 16 16">
-            <path
-                d="M6 .278a.768.768 0 0 1 .08.858 7.208 7.208 0 0 0-.878 3.46c0 4.021 3.278 7.277 7.318 7.277.527 0 1.04-.055 1.533-.16a.787.787 0 0 1 .81.316.733.733 0 0 1-.031.893A8.349 8.349 0 0 1 8.344 16C3.734 16 0 12.286 0 7.71 0 4.266 2.114 1.312 5.124.06A.752.752 0 0 1 6 .278z">
-            </path>
-            <path
-                d="M10.794 3.148a.217.217 0 0 1 .412 0l.387 1.162c.173.518.579.924 1.097 1.097l1.162.387a.217.217 0 0 1 0 .412l-1.162.387a1.734 1.734 0 0 0-1.097 1.097l-.387 1.162a.217.217 0 0 1-.412 0l-.387-1.162A1.734 1.734 0 0 0 9.31 6.593l-1.162-.387a.217.217 0 0 1 0-.412l1.162-.387a1.734 1.734 0 0 0 1.097-1.097l.387-1.162zM13.863.099a.145.145 0 0 1 .274 0l.258.774c.115.346.386.617.732.732l.774.258a.145.145 0 0 1 0 .274l-.774.258a1.156 1.156 0 0 0-.732.732l-.258.774a.145.145 0 0 1-.274 0l-.258-.774a1.156 1.156 0 0 0-.732-.732l-.774-.258a.145.145 0 0 1 0-.274l.774-.258c.346-.115.617-.386.732-.732L13.863.1z">
-            </path>
-        </symbol>
-        <symbol id="sun-fill" viewBox="0 0 16 16">
-            <path
-                d="M8 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM8 0a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 0zm0 13a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 13zm8-5a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2a.5.5 0 0 1 .5.5zM3 8a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2A.5.5 0 0 1 3 8zm10.657-5.657a.5.5 0 0 1 0 .707l-1.414 1.415a.5.5 0 1 1-.707-.708l1.414-1.414a.5.5 0 0 1 .707 0zm-9.193 9.193a.5.5 0 0 1 0 .707L3.05 13.657a.5.5 0 0 1-.707-.707l1.414-1.414a.5.5 0 0 1 .707 0zm9.193 2.121a.5.5 0 0 1-.707 0l-1.414-1.414a.5.5 0 0 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .707zM4.464 4.465a.5.5 0 0 1-.707 0L2.343 3.05a.5.5 0 1 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .708z">
-            </path>
-        </symbol>
-    </svg>
-
-    <div class="dropdown position-fixed bottom-0 end-0 mb-3 me-3 bd-mode-toggle">
-        <button class="btn btn-bd-primary py-2 dropdown-toggle d-flex align-items-center" id="bd-theme" type="button"
-            aria-expanded="false" data-bs-toggle="dropdown" aria-label="Toggle theme (light)">
-            <svg class="bi my-1 theme-icon-active" width="1em" height="1em">
-                <use href="#sun-fill"></use>
-            </svg>
-            <span class="visually-hidden" id="bd-theme-text">Toggle theme</span>
-        </button>
-        <ul class="dropdown-menu dropdown-menu-end shadow" aria-labelledby="bd-theme-text" style="">
-            <li>
-                <button type="button" class="dropdown-item d-flex align-items-center active" data-bs-theme-value="light"
-                    aria-pressed="true">
-                    <svg class="bi me-2 opacity-50" width="1em" height="1em">
-                        <use href="#sun-fill"></use>
-                    </svg>
-                    Light
-                    <svg class="bi ms-auto d-none" width="1em" height="1em">
-                        <use href="#check2"></use>
-                    </svg>
-                </button>
-            </li>
-            <li>
-                <button type="button" class="dropdown-item d-flex align-items-center" data-bs-theme-value="dark"
-                    aria-pressed="false">
-                    <svg class="bi me-2 opacity-50" width="1em" height="1em">
-                        <use href="#moon-stars-fill"></use>
-                    </svg>
-                    Dark
-                    <svg class="bi ms-auto d-none" width="1em" height="1em">
-                        <use href="#check2"></use>
-                    </svg>
-                </button>
-            </li>
-            <li>
-                <button type="button" class="dropdown-item d-flex align-items-center" data-bs-theme-value="auto"
-                    aria-pressed="false">
-                    <svg class="bi me-2 opacity-50" width="1em" height="1em">
-                        <use href="#circle-half"></use>
-                    </svg>
-                    Auto
-                    <svg class="bi ms-auto d-none" width="1em" height="1em">
-                        <use href="#check2"></use>
-                    </svg>
-                </button>
-            </li>
-        </ul>
+<body>
+    <!-- Page Loader -->
+    <div class="loader-wrapper">
+        <div class="loader">
+            <div class="spinner"></div>
+            <div class="loader-text">Loading...</div>
+        </div>
     </div>
 
+    <!-- ================ MAIN CONTAINER ================ -->
+    <div class="login-container">
+        <!-- Back Navigation -->
+        <div class="text-start mb-3">
+            <a href="/" class="btn btn-outline-light btn-sm">
+                <i class="fas fa-arrow-left"></i> Back to Home
+            </a>
+        </div>
 
-    <main class="form-signin w-100 m-auto">
+        <!-- Form Header -->
+        <h2 class="text-warning fw-bold mb-3">Login</h2>
+        <p class="text-white mb-4">Please enter your credentials to continue.</p>
+
+        <!-- Login Form -->
         <form>
-            <img class="mb-4" src="/docs/5.3/assets/brand/bootstrap-logo.svg" alt="" width="72" height="57">
-            <h1 class="h3 mb-3 fw-normal">Please sign in</h1>
-
-            <div class="form-floating">
-                <input type="email" class="form-control" id="email" placeholder="name@example.com">
-                <label for="email">Email address</label>
+            <!-- Email Input -->
+            <div class="mb-3 input-wrapper">
+                <i class="fas fa-envelope input-icon"></i>
+                <input type="email" class="form-control" placeholder="Email">
             </div>
-            <div class="form-floating">
+            <!-- Password Input -->
+            <div class="mb-4 input-wrapper">
+                <i class="fas fa-lock input-icon"></i>
                 <input type="password" class="form-control" id="password" placeholder="Password">
-                <label for="password">Password</label>
+                <i class="far fa-eye" id="togglePassword"></i>
             </div>
-
-            <div class="form-check text-start my-3">
-                <input class="form-check-input" type="checkbox" value="remember-me" id="flexCheckDefault">
-                <label class="form-check-label" for="flexCheckDefault">
-                    Remember me
-                </label>
+            <!-- Submit Button -->
+            <div class="text-center">
+                <button type="submit" class="btn btn-primary w-100">Login</button>
             </div>
-            <button class="btn btn-primary w-100 py-2" type="submit" id="login">Sign in</button>
-            <p class="mt-5 mb-3 text-body-secondary">© 2017- 2024 </p>
-
         </form>
-    </main>
-    <script src="{{ asset('/js/jquery-3.7.1.min.js') }}"></script>
-    <script src="{{ asset('/js/popper.min.js') }}"></script>
-    <script src="{{ asset('/js/bootstrap.min.js') }}"></script>
-    <script src="{{ asset('/js/script.js') }}"></script>
-    <script src="{{ asset('/js/login.js') }}"></script>
 
+        <!-- Forgot Password Link -->
+        <div class="text-center mt-3">
+            <a href="/forget_password">Forgot Password?</a>
+        </div>
 
+        <!-- Social Login Options -->
+        <div class="text-center mt-4">
+            <p class="text-white-50">Or login with:</p>
+            <div class="social-login d-flex justify-content-center gap-3 mt-2">
+                <a href="#"><i class="fab fa-google"></i> Google</a>
+                <a href="#"><i class="fab fa-apple"></i> Apple</a>
+            </div>
+        </div>
+
+        <!-- Sign Up Link -->
+        <div class="text-center mt-4">
+            <p class="text-white-50">Don't have an account?
+                <a href="/signup">Sign Up</a>
+            </p>
+        </div>
+    </div>
+
+    <!-- ================ SCRIPTS ================ -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Password Toggle Script -->
+    <script>
+    const togglePassword = document.querySelector('#togglePassword');
+    const passwordField = document.querySelector('#password');
+
+    togglePassword.addEventListener('click', () => {
+        const type = passwordField.getAttribute('type') === 'password' ? 'text' : 'password';
+        passwordField.setAttribute('type', type);
+        togglePassword.classList.toggle('fa-eye-slash');
+    });
+
+    // Page Loader
+    document.addEventListener('DOMContentLoaded', function() {
+        // Show loader
+        const loader = document.querySelector('.loader-wrapper');
+
+        // Hide loader after page loads
+        window.addEventListener('load', function() {
+            setTimeout(function() {
+                loader.classList.add('fade-out');
+                setTimeout(function() {
+                    loader.style.display = 'none';
+                }, 500);
+            }, 1000); // Adjust time as needed
+        });
+    });
+    </script>
 </body>
 
 </html>
