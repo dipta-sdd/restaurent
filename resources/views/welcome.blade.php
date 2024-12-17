@@ -28,7 +28,7 @@
 </head>
 
 <body>
-
+    <div class="toast-container" id="toast-container"></div>
     <!-- Navbar Section -->
     <header>
         <nav class="navbar navbar-expand-lg customNav">

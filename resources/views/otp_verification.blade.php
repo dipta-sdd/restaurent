@@ -26,152 +26,153 @@
 
     <!-- ================ STYLES ================ -->
     <style>
-    /* Base styles */
-    body {
-        font-family: 'Poppins', sans-serif;
-        background-color: #212529;
-        min-height: 100vh;
-    }
+        /* Base styles */
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #212529;
+            min-height: 100vh;
+        }
 
-    /* OTP Container styles */
-    .otp-container {
-        background-color: rgba(0, 0, 0, 0.8);
-        border-radius: 15px;
-        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
-    }
+        /* OTP Container styles */
+        .otp-container {
+            background-color: rgba(0, 0, 0, 0.8);
+            border-radius: 15px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+        }
 
-    /* OTP Input field styles */
-    .otp-input {
-        width: 45px;
-        height: 45px;
-        font-size: 1.5rem;
-        text-align: center;
-        border: 1px solid #495057;
-        border-radius: 8px;
-        background-color: #343a40;
-        color: white;
-        transition: all 0.3s ease;
-    }
-
-    /* Focus state for input fields */
-    .otp-input:focus {
-        border-color: #f8c14d;
-        box-shadow: 0 0 5px #f8c14d;
-        outline: none;
-    }
-
-    /* Resend link styles with hover effects */
-    .resend-link {
-        color: #f8c14d;
-        text-decoration: none;
-        transition: all 0.3s ease;
-    }
-
-    .resend-link:hover {
-        color: #ffd166;
-        text-decoration: underline;
-        transform: translateY(-1px);
-    }
-
-    /* Timer styles */
-    .timer {
-        color: #f8c14d;
-        font-size: 0.9rem;
-        margin-bottom: 1rem;
-    }
-
-    /* Resend link states */
-    .resend-link {
-        color: #6c757d;
-        pointer-events: none;
-        opacity: 0.7;
-    }
-
-    .resend-link.active {
-        color: #f8c14d;
-        pointer-events: auto;
-        opacity: 1;
-    }
-
-    /* Remove number input spinners for all browsers */
-    .otp-input::-webkit-outer-spin-button,
-    .otp-input::-webkit-inner-spin-button {
-        -webkit-appearance: none;
-        margin: 0;
-    }
-
-    .otp-input[type=number] {
-        appearance: textfield;
-        -moz-appearance: textfield;
-        /* Firefox */
-    }
-
-    /* Mobile responsive styles */
-    @media (max-width: 380px) {
+        /* OTP Input field styles */
         .otp-input {
-            width: 35px;
-            height: 35px;
-            font-size: 1rem;
-        }
-    }
-
-    /* Page Loader Styles */
-    .loader-wrapper {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: #000000;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        z-index: 9999;
-        transition: opacity 0.5s ease-in-out;
-    }
-
-    .loader {
-        text-align: center;
-    }
-
-    .spinner {
-        width: 50px;
-        height: 50px;
-        border: 5px solid #f3f3f3;
-        border-top: 5px solid #082A45;
-        border-radius: 50%;
-        animation: spin 1s linear infinite;
-        margin: 0 auto 20px;
-    }
-
-    .loader-text {
-        color: #ffffff;
-        font-size: 18px;
-        font-weight: 500;
-        font-family: 'Poppins', sans-serif;
-        letter-spacing: 2px;
-    }
-
-    @keyframes spin {
-        0% {
-            transform: rotate(0deg);
+            width: 45px;
+            height: 45px;
+            font-size: 1.5rem;
+            text-align: center;
+            border: 1px solid #495057;
+            border-radius: 8px;
+            background-color: #343a40;
+            color: white;
+            transition: all 0.3s ease;
         }
 
-        100% {
-            transform: rotate(360deg);
+        /* Focus state for input fields */
+        .otp-input:focus {
+            border-color: #f8c14d;
+            box-shadow: 0 0 5px #f8c14d;
+            outline: none;
         }
-    }
 
-    /* Hide loader after page load */
-    .loader-wrapper.fade-out {
-        opacity: 0;
-        visibility: hidden;
-    }
+        /* Resend link styles with hover effects */
+        .resend-link {
+            color: #f8c14d;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .resend-link:hover {
+            color: #ffd166;
+            text-decoration: underline;
+            transform: translateY(-1px);
+        }
+
+        /* Timer styles */
+        .timer {
+            color: #f8c14d;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+
+        /* Resend link states */
+        .resend-link {
+            color: #6c757d;
+            pointer-events: none;
+            opacity: 0.7;
+        }
+
+        .resend-link.active {
+            color: #f8c14d;
+            pointer-events: auto;
+            opacity: 1;
+        }
+
+        /* Remove number input spinners for all browsers */
+        .otp-input::-webkit-outer-spin-button,
+        .otp-input::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+
+        .otp-input[type=number] {
+            appearance: textfield;
+            -moz-appearance: textfield;
+            /* Firefox */
+        }
+
+        /* Mobile responsive styles */
+        @media (max-width: 380px) {
+            .otp-input {
+                width: 35px;
+                height: 35px;
+                font-size: 1rem;
+            }
+        }
+
+        /* Page Loader Styles */
+        .loader-wrapper {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #000000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            transition: opacity 0.5s ease-in-out;
+        }
+
+        .loader {
+            text-align: center;
+        }
+
+        .spinner {
+            width: 50px;
+            height: 50px;
+            border: 5px solid #f3f3f3;
+            border-top: 5px solid #082A45;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 20px;
+        }
+
+        .loader-text {
+            color: #ffffff;
+            font-size: 18px;
+            font-weight: 500;
+            font-family: 'Poppins', sans-serif;
+            letter-spacing: 2px;
+        }
+
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        /* Hide loader after page load */
+        .loader-wrapper.fade-out {
+            opacity: 0;
+            visibility: hidden;
+        }
     </style>
 </head>
 
 <body class="d-flex align-items-center justify-content-center">
     <!-- Page Loader -->
+    <div class="toast-container" id="toast-container"></div>
     <div class="loader-wrapper">
         <div class="loader">
             <div class="spinner"></div>
@@ -227,131 +228,135 @@
 
     <!-- Main JavaScript -->
     <script>
-    document.addEventListener('DOMContentLoaded', function() {
+        document.addEventListener('DOMContentLoaded', function() {
 
-        // Show loader
-        const loader = document.querySelector('.loader-wrapper');
+            // Show loader
+            const loader = document.querySelector('.loader-wrapper');
 
-        // Hide loader after page loads
-        window.addEventListener('load', function() {
-            setTimeout(function() {
-                loader.classList.add('fade-out');
+            // Hide loader after page loads
+            window.addEventListener('load', function() {
                 setTimeout(function() {
-                    loader.style.display = 'none';
-                }, 500);
-            }, 1000); // Adjust time as needed
-        });
-
-        // Initialize variables
-        const inputs = document.querySelectorAll('.otp-input');
-        const form = document.querySelector('form');
-        const spinner = document.getElementById('spinner');
-
-        // Handle OTP input functionality
-        inputs.forEach((input, index) => {
-            // Prevent non-numeric inputs
-            input.addEventListener('keydown', function(e) {
-                if (e.key === 'e' || e.key === '+' || e.key === '-' || e.key === '.') {
-                    e.preventDefault();
-                }
+                    loader.classList.add('fade-out');
+                    setTimeout(function() {
+                        loader.style.display = 'none';
+                    }, 500);
+                }, 1000); // Adjust time as needed
             });
 
-            // Handle input and auto-focus
-            input.addEventListener('input', function(e) {
-                // Clean input - numbers only
-                this.value = this.value.replace(/[^0-9]/g, '');
+            // Initialize variables
+            const inputs = document.querySelectorAll('.otp-input');
+            const form = document.querySelector('form');
+            const spinner = document.getElementById('spinner');
 
-                // Ensure single digit
-                if (this.value.length > 1) {
-                    this.value = this.value.slice(0, 1);
-                }
+            // Handle OTP input functionality
+            inputs.forEach((input, index) => {
+                // Prevent non-numeric inputs
+                input.addEventListener('keydown', function(e) {
+                    if (e.key === 'e' || e.key === '+' || e.key === '-' || e.key === '.') {
+                        e.preventDefault();
+                    }
+                });
 
-                // Auto-focus next input
-                if (this.value.length === 1 && index < inputs.length - 1) {
-                    inputs[index + 1].focus();
-                }
+                // Handle input and auto-focus
+                input.addEventListener('input', function(e) {
+                    // Clean input - numbers only
+                    this.value = this.value.replace(/[^0-9]/g, '');
 
-                // Check for form completion
-                if (index === inputs.length - 1 && this.value.length === 1) {
-                    const otp = Array.from(inputs).map(input => input.value).join('');
+                    // Ensure single digit
+                    if (this.value.length > 1) {
+                        this.value = this.value.slice(0, 1);
+                    }
 
-                    spinner.classList.remove('d-none');
-                    $.ajax({
-                        type: 'POST',
-                        url: '/api/verify-otp',
-                        data: {
-                            otp: otp
-                        },
-                        headers: {
-                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                        },
-                        success: function(response) {
-                            spinner.classList.add('d-none');
-                            window.location.href = '/';
-                        },
-                        error: function(xhr, status, error) {
-                            spinner.classList.add('d-none');
-                            if (xhr.responseJSON.message) {
-                                showToast(xhr.responseJSON.message, 'danger');
+                    // Auto-focus next input
+                    if (this.value.length === 1 && index < inputs.length - 1) {
+                        inputs[index + 1].focus();
+                    }
+
+                    // Check for form completion
+                    if (index === inputs.length - 1 && this.value.length === 1) {
+                        const otp = Array.from(inputs).map(input => input.value).join('');
+
+                        spinner.classList.remove('d-none');
+                        $.ajax({
+                            type: 'POST',
+                            url: '/api/verify-otp',
+                            data: {
+                                otp: otp
+                            },
+                            headers: {
+                                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                            },
+                            success: function(response) {
+                                spinner.classList.add('d-none');
+                                window.location.href = '/';
+                            },
+                            error: function(xhr, status, error) {
+                                spinner.classList.add('d-none');
+                                if (xhr.responseJSON.message) {
+                                    showToast(xhr.responseJSON.message, 'danger');
+                                }
                             }
-                        }
-                    })
-                    
-                }
-            });
+                        })
 
-            // Handle backspace navigation
-            input.addEventListener('keydown', function(e) {
-                if (e.key === 'Backspace' && index > 0 && input.value.length === 0) {
-                    inputs[index - 1].focus();
-                }
+                    }
+                });
+
+                // Handle backspace navigation
+                input.addEventListener('keydown', function(e) {
+                    if (e.key === 'Backspace' && index > 0 && input.value.length === 0) {
+                        inputs[index - 1].focus();
+                    }
+                });
             });
         });
-    });
 
-    // Timer functionality
-    //let timeLeft = {{$timeLeft}};
-    let timeLeft = {{$timeLeft}};
-
-
-    let timerId = null;
-    const timerDisplay = document.getElementById('timer');
-    const resendLink = document.getElementById('resendLink');
-
-    // Start timer function
-    function startTimer() {
-        resendLink.classList.remove('active');
-
-        if (timerId) clearInterval(timerId);
-
-        timerId = setInterval(() => {
-            if (timeLeft <= 0) {
-                clearInterval(timerId);
-                resendLink.classList.add('active');
-                timerDisplay.textContent = '00:00';
-                return;
+        // Timer functionality
+        //let timeLeft = {{$timeLeft}};
+        let timeLeft = {
+            {
+                $timeLeft
             }
+        };
 
-            const minutes = Math.floor(timeLeft / 60);
-            const seconds = timeLeft % 60;
 
-            timerDisplay.textContent =
-                `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
-            timeLeft--;
-        }, 1000);
-    }
+        let timerId = null;
+        const timerDisplay = document.getElementById('timer');
+        const resendLink = document.getElementById('resendLink');
 
-    // Start timer when page loads
-    startTimer(timeLeft);
+        // Start timer function
+        function startTimer() {
+            resendLink.classList.remove('active');
 
-    // Handle resend click
-    resendLink.addEventListener('click', (e) => {
-        e.preventDefault();
-        if (resendLink.classList.contains('active')) {
-            // Add your resend OTP logic here
-            startTimer();
+            if (timerId) clearInterval(timerId);
+
+            timerId = setInterval(() => {
+                if (timeLeft <= 0) {
+                    clearInterval(timerId);
+                    resendLink.classList.add('active');
+                    timerDisplay.textContent = '00:00';
+                    return;
+                }
+
+                const minutes = Math.floor(timeLeft / 60);
+                const seconds = timeLeft % 60;
+
+                timerDisplay.textContent =
+                    `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+                timeLeft--;
+            }, 1000);
         }
-    });
+
+        // Start timer when page loads
+        startTimer(timeLeft);
+
+        // Handle resend click
+        resendLink.addEventListener('click', (e) => {
+            e.preventDefault();
+            if (resendLink.classList.contains('active')) {
+                // Add your resend OTP logic here
+                startTimer();
+            }
+        });
     </script>
 </body>
 

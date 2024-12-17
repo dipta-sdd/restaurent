@@ -44,33 +44,12 @@
             rel="stylesheet"
         />
         <link href="./css/style.css" rel="stylesheet" />
-        <link rel="stylesheet" href="style.css" />
         <title>Restaurant Name</title>
     </head>
 
     <body>
         <!-- Navbar Section -->
-        <div class="toast-container" id="toast-container">
-            <div
-                class="toast align-items-center text-bg-primary border-0"
-                role="alert"
-                aria-live="assertive"
-                aria-atomic="true"
-                data-bs-config='{"delay":100, "autohide":true}'
-            >
-                <div class="d-flex">
-                    <div class="toast-body">
-                        Hello, world! This is a toast message.
-                    </div>
-                    <button
-                        type="button"
-                        class="btn-close btn-close-white me-2 m-auto"
-                        data-bs-dismiss="toast"
-                        aria-label="Close"
-                    ></button>
-                </div>
-            </div>
-        </div>
+        <div class="toast-container" id="toast-container"></div>
         <!-- end toast -->
         <header>
             <nav class="navbar navbar-expand-lg customNav">
@@ -751,6 +730,7 @@
         <script src="http://127.0.0.1:8000/js/jquery-3.7.1.min.js"></script>
         <script src="http://127.0.0.1:8000/js/popper.min.js"></script>
         <script src="http://127.0.0.1:8000/js/bootstrap.min.js"></script>
+        <script src="http://127.0.0.1:8000/js/script.js"></script>
 
         <script>
             const navbar = document.querySelector(".customNav");
@@ -773,6 +753,9 @@
             const carousel = new bootstrap.Carousel(myCarouselElement, {
                 interval: 10000,
             });
+            setInterval(() => {
+                showToast("Welcome to our restaurant!");
+            }, 1000);
         </script>
     </body>
 </html>

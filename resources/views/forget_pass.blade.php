@@ -180,6 +180,7 @@
 </head>
 
 <body>
+  <div class="toast-container" id="toast-container"></div>
   <!-- ================ MAIN CONTAINER ================ -->
   <div class="forgot-password-container">
     <!-- Back Navigation -->

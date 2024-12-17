@@ -36,9 +36,7 @@ function myDateFormat(date) {
 
     return formatter.format(new Date(date));
 }
-function showToast(message, color = "success") {
-    alert(message);
-}
+
 function getCookie(name) {
     let nameEQ = name + "=";
     let ca = document.cookie.split(";");
@@ -50,3 +48,42 @@ function getCookie(name) {
     }
     return null;
 }
+function showToast(
+    message,
+    color = "primary",
+    autohide = true,
+    timeout = 5000
+) {
+    $("#toast-container").append(`
+    <div class="toast align-items-center text-bg-${color} border-0 "
+        role="alert"
+        aria-live="assertive"
+        data-bs-animation="true"
+        data-bs-autohide="${autohide}"
+        aria-atomic="true">
+        <div class="d-flex">
+            <div class="toast-body">
+                ${message}
+            </div>
+            <button
+                type="button"
+                class="btn-close btn-close-white me-2 m-auto"
+                data-bs-dismiss="toast"
+                aria-label="Close" 
+            ></button>
+        </div>
+    </div>
+    `);
+    if (autohide) {
+        var newToast = $(".toast:last");
+
+        newToast.show(1000);
+        setTimeout(function () {
+            newToast.hide(1000);
+        }, timeout);
+    }
+}
+$(document).on("click", ".toast button.btn-close", function (e) {
+    e.preventDefault();
+    $(this).closest(".toast").hide(1000);
+});
