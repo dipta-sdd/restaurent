@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\SignupValidetor;
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -68,5 +69,50 @@ class AuthController extends Controller
     public function me(Request $request)
     {
         return response()->json($request->user());
+    }
+    public function verification(Request $request)
+    {
+        $user = Auth::user();
+        if ($user) {
+            if ($user->otp_exp) {
+                $timeLeft = (int)now()->diffInSeconds(Carbon::parse($user->otp_exp));
+                // dd($timeLeft);
+                if ($timeLeft > 180) {
+                    return view('/otp_verification', ['timeLeft' => $timeLeft]);
+                }
+            }
+            $otp = rand(122454, 999999);
+            $user->otp = $otp;
+            // call otp send function here
+            $user->otp_exp = now()->addMinutes(5);
+            $user->save();
+            $timeLeft =
+                (int)now()->diffInSeconds(Carbon::parse($user->otp_exp));
+            return view('/otp_verification', ['timeLeft' => $timeLeft]);
+        } else {
+            redirect('/login');
+        }
+    }
+
+    public function verifyOtp(Request $request)
+    {
+        $user = Auth::user();
+
+        $timeLeft =
+            (int)now()->diffInSeconds(Carbon::parse($user->otp_exp));
+        if ($timeLeft > 0) {
+            if ($user->otp == $request->otp) {
+                $user->otp = null;
+                $user->otp_exp = null;
+                $user->verified_at = now();
+                $user->status = 'active';
+                $user->save();
+                return response()->json(['message' => 'Otp verified successfully']);
+            } else {
+                return response()->json(['error' => 'Otp does not match'], 401);
+            }
+        } else {
+            return response()->json(['error' => 'Otp expired'], 401);
+        }
     }
 }

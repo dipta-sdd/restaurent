@@ -1,6 +1,8 @@
 <?php
 
+use App\Http\Controllers\AuthController;
 use App\Http\Controllers\manageCategory;
+use App\Http\Middleware\IsActive;
 use App\Http\Middleware\IsAdmin;
 use Illuminate\Support\Facades\Route;
 
@@ -15,16 +17,6 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view(
-        'welcome'
-    );
-});
-Route::get('/dashboard', function () {
-    return view(
-        'admin.tmp_admin'
-    );
-});
 Route::get('/login', function () {
     return view('/login');
 })->name('login');
@@ -32,18 +24,31 @@ Route::get('/login', function () {
 Route::get('/signup', function () {
     return view('/signup');
 });
-Route::get('/verification', function () {
-    return view('/otp_verification');
+Route::get('/verification', function (AuthController $authController) {
+    return $authController->verification(request());
 });
-Route::get('/forget_password', function () {
-    return view('/forget_pass');
-});
-
-Route::group(['middleware' => ['auth:sanctum', IsAdmin::class], 'prefix' => 'admin'], function () {
-    Route::get('/categories', function (manageCategory $manageCategory) {
-        return $manageCategory->adminCategory();
+Route::middleware([IsActive::class])->group(function () {
+    Route::get('/', function () {
+        return view(
+            'welcome'
+        );
     });
     Route::get('/dashboard', function () {
-        return view('admin.tmp_admin2');
+        return view(
+            'admin.tmp_admin'
+        );
+    });
+
+    Route::get('/forget_password', function () {
+        return view('/forget_pass');
+    });
+
+    Route::group(['middleware' => ['auth:sanctum', IsAdmin::class], 'prefix' => 'admin'], function () {
+        Route::get('/categories', function (manageCategory $manageCategory) {
+            return $manageCategory->adminCategory();
+        });
+        Route::get('/dashboard', function () {
+            return view('admin.tmp_admin2');
+        });
     });
 });

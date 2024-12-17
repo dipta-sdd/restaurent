@@ -1,0 +1,778 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta
+            name="csrf-token"
+            content="eXBLsIq0JDCEKDJ7htWfZFPE62NgDYD5HdrpjQlz"
+        />
+        <title>BENGAL TANDOORI RESTAURANT</title>
+        <!-- Font Awesome -->
+        <link
+            rel="stylesheet"
+            href="https://site-assets.fontawesome.com/releases/v6.5.1/css/all.css"
+        />
+        <link
+            rel="stylesheet"
+            href="https://site-assets.fontawesome.com/releases/v6.5.1/css/sharp-thin.css"
+        />
+        <link
+            rel="stylesheet"
+            href="https://site-assets.fontawesome.com/releases/v6.5.1/css/sharp-solid.css"
+        />
+        <link
+            rel="stylesheet"
+            href="https://site-assets.fontawesome.com/releases/v6.5.1/css/sharp-regular.css"
+        />
+        <link
+            rel="stylesheet"
+            href="https://site-assets.fontawesome.com/releases/v6.5.1/css/sharp-light.css"
+        />
+
+        <!-- Google Fonts -->
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+            rel="stylesheet"
+        />
+
+        <!-- Bootstrap CSS -->
+        <link
+            href="http://127.0.0.1:8000/css/bootstrap.min.css"
+            rel="stylesheet"
+        />
+        <link href="./css/style.css" rel="stylesheet" />
+        <link rel="stylesheet" href="style.css" />
+        <title>Restaurant Name</title>
+    </head>
+
+    <body>
+        <!-- Navbar Section -->
+        <div class="toast-container" id="toast-container">
+            <div
+                class="toast align-items-center text-bg-primary border-0"
+                role="alert"
+                aria-live="assertive"
+                aria-atomic="true"
+                data-bs-config='{"delay":100, "autohide":true}'
+            >
+                <div class="d-flex">
+                    <div class="toast-body">
+                        Hello, world! This is a toast message.
+                    </div>
+                    <button
+                        type="button"
+                        class="btn-close btn-close-white me-2 m-auto"
+                        data-bs-dismiss="toast"
+                        aria-label="Close"
+                    ></button>
+                </div>
+            </div>
+        </div>
+        <!-- end toast -->
+        <header>
+            <nav class="navbar navbar-expand-lg customNav">
+                <div class="container-fluid">
+                    <a class="navbar-brand d-flex align-items-center" href="#">
+                        <img
+                            src="/Images/logo.png"
+                            class="nav__logo"
+                            alt="logo"
+                        />
+                        <h3 class="logo__text px-2">
+                            BENGAL TANDOORI RESTAURANT
+                        </h3>
+                    </a>
+                    <button
+                        class="navbar-toggler"
+                        type="button"
+                        data-bs-toggle="collapse"
+                        data-bs-target="#navbarSupportedContent"
+                        aria-controls="navbarSupportedContent"
+                        aria-expanded="false"
+                        aria-label="Toggle navigation"
+                    >
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div
+                        class="collapse navbar-collapse"
+                        id="navbarSupportedContent"
+                    >
+                        <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                            <li class="nav-item">
+                                <a class="customItem" href="menu.html">Menu</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="customItem" href="#">Order Online</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="customItem" href="pricing.html"
+                                    >Reservations</a
+                                >
+                            </li>
+                            <li class="nav-item">
+                                <a class="customItem" href="#">Contact</a>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a
+                                    class="customItem dropdown-toggle"
+                                    href="#"
+                                    role="button"
+                                    data-bs-toggle="dropdown"
+                                    aria-expanded="false"
+                                >
+                                    dipta
+                                </a>
+
+                                <ul class="dropdown-menu rounded-0">
+                                    <li>
+                                        <a
+                                            class="dropdown-item"
+                                            href="/profile"
+                                        ></a>
+                                    </li>
+                                    <li>
+                                        <a
+                                            class="dropdown-item"
+                                            href="/api/logout"
+                                            >Logout</a
+                                        >
+                                    </li>
+                                </ul>
+
+                                <!-- same ending for both -->
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+        </header>
+
+        <!-- Slider Section -->
+        <section class="hero-slider">
+            <div
+                id="heroCarousel"
+                class="carousel slide"
+                data-bs-ride="carousel"
+            >
+                <div class="carousel-inner">
+                    <div class="carousel-item active">
+                        <img
+                            src="./Images/slider_1.jpg"
+                            class="d-block w-100"
+                            alt="Slider Image 1"
+                        />
+                        <div class="carousel-caption d-none d-md-block">
+                            <h2>Welcome to</h2>
+                            <h5>BENGAL TANDOORI RESTAURANT</h5>
+                            <p>
+                                Experience the flavors of our exquisite cuisine.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="carousel-item">
+                        <img
+                            src="./Images/slider_2.jpg"
+                            class="d-block w-100"
+                            alt="Slider Image 2"
+                        />
+                        <div class="carousel-caption d-none d-md-block">
+                            <h5>Authentic Dishes</h5>
+                            <p>Made with fresh, locally sourced ingredients.</p>
+                        </div>
+                    </div>
+                    <div class="carousel-item">
+                        <img
+                            src="./Images/slider_3.jpg"
+                            class="d-block w-100"
+                            alt="Slider Image 3"
+                        />
+                        <div class="carousel-caption d-none d-md-block">
+                            <h5>Unforgettable Dining Experience</h5>
+                            <p>Enjoy our warm hospitality and cozy ambiance.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <button
+                    class="carousel-control-prev"
+                    type="button"
+                    data-bs-target="#heroCarousel"
+                    data-bs-slide="prev"
+                    style="z-index: 2"
+                >
+                    <span
+                        class="carousel-control-prev-icon"
+                        aria-hidden="true"
+                    ></span>
+                    <span class="visually-hidden">Previous</span>
+                </button>
+                <button
+                    class="carousel-control-next"
+                    type="button"
+                    data-bs-target="#heroCarousel"
+                    data-bs-slide="next"
+                    style="z-index: 2"
+                >
+                    <span
+                        class="carousel-control-next-icon"
+                        aria-hidden="true"
+                    ></span>
+                    <span class="visually-hidden">Next</span>
+                </button>
+            </div>
+        </section>
+
+        <!-- About Us Section -->
+        <div class="container my-5">
+            <div class="about-section row align-items-center">
+                <div class="col-md-6">
+                    <video
+                        class="img-fluid about-video"
+                        autoplay
+                        muted
+                        loop
+                        controls
+                    >
+                        <source src="./videos/1119.mp4" type="video/mp4" />
+                        Your browser does not support the video tag.
+                    </video>
+                </div>
+                <div class="col-lg-6">
+                    <div class="about-us-content">
+                        <h2 class="display-4">Our Story</h2>
+                        <p>
+                            Lorem ipsum dolor sit amet, consectetur adipiscing
+                            elit. Maecenas sed diam eget risus varius blandit
+                            sit amet non magna.
+                        </p>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <ul class="list-unstyled">
+                                    <li>
+                                        <i class="fas fa-check"></i> Fresh,
+                                        local ingredients
+                                    </li>
+                                    <li>
+                                        <i class="fas fa-check"></i> Authentic
+                                        recipes
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="col-md-6">
+                                <ul class="list-unstyled">
+                                    <li>
+                                        <i class="fas fa-check"></i> Cozy
+                                        ambiance
+                                    </li>
+                                    <li>
+                                        <i class="fas fa-check"></i> Friendly
+                                        service
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <a href="#" class="btn btn-primary mt-4 w-100"
+                            >Learn More</a
+                        >
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Menu Section -->
+        <section class="menu py-5">
+            <div class="container scaleup">
+                <h2 class="text-center mb-5 heading_h2 display-4 scaleup">
+                    Our Menu
+                </h2>
+                <div class="menu-grid">
+                    <div class="grid-item">
+                        <img src="./Images/food_1.jpg" alt="Dish 1" />
+                        <div class="menu-details">
+                            <h3>Dish 1</h3>
+                            <p>Delicious and fresh ingredients.</p>
+                        </div>
+                    </div>
+                    <div class="grid-item">
+                        <img src="./Images/food_2.jpg" alt="Dish 2" />
+                        <div class="menu-details">
+                            <h3>Dish 2</h3>
+                            <p>Prepared with love and care.</p>
+                        </div>
+                    </div>
+                    <div class="grid-item grid-item-tall">
+                        <img src="./Images/food_3.jpg" alt="Dish 3" />
+                        <div class="menu-details">
+                            <h3>Dish 3</h3>
+                            <p>A perfect blend of flavors.</p>
+                        </div>
+                    </div>
+                    <div class="grid-item grid-item-wide">
+                        <img src="./Images/food_4.jpg" alt="Dish 4" />
+                        <div class="menu-details">
+                            <h3>Dish 4</h3>
+                            <p>Satisfying and nourishing.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="text-center mt-4">
+                    <a href="#full-menu" class="btn btn-lg btn-primary"
+                        >View Full Menu</a
+                    >
+                </div>
+            </div>
+        </section>
+
+        <!-- Reservation Section -->
+        <section class="reservation-section py-5">
+            <div class="container">
+                <h2 class="text-center mb-4 heading_h2 display-4 py-3">
+                    Reserve Your Table
+                </h2>
+                <div class="reservation-container">
+                    <div class="reservation-image">
+                        <img
+                            src="./Images/3914790.jpg"
+                            alt="Restaurant Table"
+                            class="img-fluid"
+                        />
+                    </div>
+                    <div class="reservation-form">
+                        <form action="#" method="post">
+                            <h3 class="form-heading text-center mb-4">
+                                Book Your Table
+                            </h3>
+                            <div class="mb-3">
+                                <label for="name" class="form-label"
+                                    >Full Name</label
+                                >
+                                <input
+                                    type="text"
+                                    id="name"
+                                    name="name"
+                                    class="form-control"
+                                    placeholder="Enter your name"
+                                    required
+                                />
+                            </div>
+                            <div class="mb-3">
+                                <label for="email" class="form-label"
+                                    >Email Address</label
+                                >
+                                <input
+                                    type="email"
+                                    id="email"
+                                    name="email"
+                                    class="form-control"
+                                    placeholder="Enter your email"
+                                    required
+                                />
+                            </div>
+                            <div class="mb-3">
+                                <label for="date" class="form-label"
+                                    >Reservation Date</label
+                                >
+                                <input
+                                    type="date"
+                                    id="date"
+                                    name="date"
+                                    class="form-control"
+                                    required
+                                />
+                            </div>
+                            <div class="mb-3">
+                                <label for="time" class="form-label"
+                                    >Reservation Time</label
+                                >
+                                <input
+                                    type="time"
+                                    id="time"
+                                    name="time"
+                                    class="form-control"
+                                    required
+                                />
+                            </div>
+                            <div class="mb-3">
+                                <label for="guests" class="form-label"
+                                    >Number of Guests</label
+                                >
+                                <input
+                                    type="number"
+                                    id="guests"
+                                    name="guests"
+                                    class="form-control"
+                                    placeholder="Enter number of guests"
+                                    required
+                                />
+                            </div>
+                            <div class="text-center">
+                                <button
+                                    type="submit"
+                                    class="btn btn-lg btn-primary m-0"
+                                >
+                                    Reserve Now
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Testimonial Section -->
+        <section class="testimonials py-5">
+            <div class="container">
+                <h2 class="text-center mb-5 heading_h2 display-4">
+                    What Our Guests Say
+                </h2>
+                <div class="testimonial-slider-wrapper">
+                    <div class="gradient-left"></div>
+                    <div class="gradient-right"></div>
+                    <div class="testimonial-slider">
+                        <div class="testimonial-slide">
+                            <div class="testimonial-image">
+                                <img
+                                    src="./Images/face1.jpg"
+                                    alt="Testimonial Author 1"
+                                />
+                            </div>
+                            <div class="testimonial-content">
+                                <p>
+                                    "The food was incredible, the service was
+                                    impeccable..."
+                                </p>
+                                <div class="testimonial-author">
+                                    - Sarah Lee
+                                </div>
+                            </div>
+                        </div>
+                        <div class="testimonial-slide">
+                            <div class="testimonial-image">
+                                <img
+                                    src="./Images/face2.jpg"
+                                    alt="Testimonial Author 2"
+                                />
+                            </div>
+                            <div class="testimonial-content">
+                                <p>
+                                    "This restaurant exceeded our expectations!
+                                    The dishes..."
+                                </p>
+                                <div class="testimonial-author">
+                                    - David Chen
+                                </div>
+                            </div>
+                        </div>
+                        <div class="testimonial-slide">
+                            <div class="testimonial-image">
+                                <img
+                                    src="./Images/face3.jpg"
+                                    alt="Testimonial Author 3"
+                                />
+                            </div>
+                            <div class="testimonial-content">
+                                <p>
+                                    "We had a wonderful dining experience. The
+                                    food was..."
+                                </p>
+                                <div class="testimonial-author">
+                                    - Peter Jones
+                                </div>
+                            </div>
+                        </div>
+                        <div class="testimonial-slide">
+                            <div class="testimonial-image">
+                                <img
+                                    src="./Images/face1.jpg"
+                                    alt="Testimonial Author 4"
+                                />
+                            </div>
+                            <div class="testimonial-content">
+                                <p>
+                                    "Absolutely loved the atmosphere and the
+                                    delicious meals..."
+                                </p>
+                                <div class="testimonial-author">
+                                    - Anna Brown
+                                </div>
+                            </div>
+                        </div>
+                        <div class="testimonial-slide">
+                            <div class="testimonial-image">
+                                <img
+                                    src="./Images/face2.jpg"
+                                    alt="Testimonial Author 4"
+                                />
+                            </div>
+                            <div class="testimonial-content">
+                                <p>
+                                    "Absolutely loved the atmosphere and the
+                                    delicious meals..."
+                                </p>
+                                <div class="testimonial-author">
+                                    - Anna Brown
+                                </div>
+                            </div>
+                        </div>
+                        <div class="testimonial-slide">
+                            <div class="testimonial-image">
+                                <img
+                                    src="./Images/face3.jpg"
+                                    alt="Testimonial Author 4"
+                                />
+                            </div>
+                            <div class="testimonial-content">
+                                <p>
+                                    "Absolutely loved the atmosphere and the
+                                    delicious meals..."
+                                </p>
+                                <div class="testimonial-author">
+                                    - Anna Brown
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section class="contact-section py-5">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="contact-info">
+                            <h2 class="mb-4 heading_h2 display-3">
+                                Get in Touch
+                            </h2>
+                            <div class="contact-item">
+                                <i
+                                    class="fas fa-map-marker-alt contact-icon"
+                                ></i>
+                                <p>
+                                    <strong>Address:</strong> 123 Food Street,
+                                    Flavor Town
+                                </p>
+                            </div>
+                            <div class="contact-item">
+                                <i class="fas fa-phone-alt contact-icon"></i>
+                                <p><strong>Phone:</strong> +123 456 7890</p>
+                            </div>
+                            <div class="contact-item">
+                                <i class="fas fa-envelope contact-icon"></i>
+                                <p>
+                                    <strong>Email:</strong> info@restaurant.com
+                                </p>
+                            </div>
+                            <div class="contact-item">
+                                <i class="fas fa-clock contact-icon"></i>
+                                <p>
+                                    <strong>Opening Hours:</strong><br />
+                                    Mon - Fri: 10:00 AM - 10:00 PM<br />
+                                    Sat - Sun: 12:00 PM - 11:00 PM
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="map-container">
+                            <iframe
+                                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d12654.536034802328!2d-0.1277583341976418!3d51.50735187009144!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x48761bcd8e42d1a7%3A0xf93b07ab2e8ed217!2sLondon!5e0!3m2!1sen!2suk!4v1697011782936!5m2!1sen!2suk"
+                                width="100%"
+                                height="350"
+                                style="border: 0"
+                                allowfullscreen=""
+                                loading="lazy"
+                                referrerpolicy="no-referrer-when-downgrade"
+                            ></iframe>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="footer bg-dark text-white pt-5">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-4 mb-4">
+                        <h5 class="text-uppercase">Important Links</h5>
+                        <ul class="list-unstyled">
+                            <li>
+                                <a
+                                    href="#"
+                                    class="text-white text-decoration-none"
+                                    >Home</a
+                                >
+                            </li>
+                            <li>
+                                <a
+                                    href="#"
+                                    class="text-white text-decoration-none"
+                                    >Our Menu</a
+                                >
+                            </li>
+                            <li>
+                                <a
+                                    href="#"
+                                    class="text-white text-decoration-none"
+                                    >Reservations</a
+                                >
+                            </li>
+                            <li>
+                                <a
+                                    href="#"
+                                    class="text-white text-decoration-none"
+                                    >About Us</a
+                                >
+                            </li>
+                            <li>
+                                <a
+                                    href="#"
+                                    class="text-white text-decoration-none"
+                                    >Careers</a
+                                >
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="col-md-4 mb-4">
+                        <h5 class="text-uppercase">Follow Us</h5>
+                        <div class="d-flex align-items-center">
+                            <a href="#" class="text-white me-3"
+                                ><i class="fab fa-facebook fa-2x"></i
+                            ></a>
+                            <a href="#" class="text-white me-3"
+                                ><i class="fab fa-instagram fa-2x"></i
+                            ></a>
+                            <a href="#" class="text-white me-3"
+                                ><i class="fab fa-twitter fa-2x"></i
+                            ></a>
+                            <a href="#" class="text-white me-3"
+                                ><i class="fab fa-linkedin fa-2x"></i
+                            ></a>
+                        </div>
+                    </div>
+                    <div class="col-md-4 mb-4">
+                        <h5 class="text-uppercase">Newsletter</h5>
+                        <p>
+                            Stay updated with our latest news, events, and
+                            offers. Subscribe to our newsletter!
+                        </p>
+                        <form>
+                            <div class="mb-3">
+                                <input
+                                    type="email"
+                                    class="form-control"
+                                    placeholder="Your Email"
+                                    required
+                                />
+                            </div>
+                            <button type="submit" class="btn btn-primary">
+                                Subscribe
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom text-center py-3">
+                <p class="mb-0">
+                    &copy; 2024 Restaurant Name. All Rights Reserved.
+                    <a href="#" class="text-white text-decoration-none"
+                        >Terms</a
+                    >
+                    |
+                    <a href="#" class="text-white text-decoration-none"
+                        >Privacy Policy</a
+                    >
+                </p>
+            </div>
+        </footer>
+
+        <!-- Modal -->
+        <div
+            class="modal fade"
+            id="openingModal"
+            tabindex="-1"
+            aria-labelledby="openingModalLabel"
+            aria-hidden="true"
+        >
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div
+                        class="modal-header text-center"
+                        style="
+                            background: linear-gradient(
+                                to right,
+                                #082a45,
+                                #073d69
+                            );
+                        "
+                    >
+                        <h5
+                            class="modal-title w-100 text-white fw-bold"
+                            id="openingModalLabel"
+                        >
+                            Welcome to Our Restaurant
+                        </h5>
+                        <button
+                            type="button"
+                            class="btn-close btn-close-white"
+                            data-bs-dismiss="modal"
+                            aria-label="Close"
+                        ></button>
+                    </div>
+                    <div class="modal-body text-center">
+                        <p class="fw-bold fs-4">
+                            Opening Time:
+                            <span class="text-primary">10:00 AM</span>
+                        </p>
+                        <p class="fw-bold fs-4">
+                            Closing Time:
+                            <span class="text-danger">11:00 PM</span>
+                        </p>
+                    </div>
+                    <div class="modal-footer justify-content-center">
+                        <button
+                            type="button"
+                            class="btn btn-success px-4"
+                            data-bs-dismiss="modal"
+                        >
+                            Got It!
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Bootstrap JS -->
+        <script src="http://127.0.0.1:8000/js/jquery-3.7.1.min.js"></script>
+        <script src="http://127.0.0.1:8000/js/popper.min.js"></script>
+        <script src="http://127.0.0.1:8000/js/bootstrap.min.js"></script>
+
+        <script>
+            const navbar = document.querySelector(".customNav");
+            window.addEventListener("scroll", () => {
+                if (window.scrollY > 50) {
+                    navbar.classList.add("nav-scrolled");
+                } else {
+                    navbar.classList.remove("nav-scrolled");
+                }
+            });
+
+            document.addEventListener("DOMContentLoaded", () => {
+                const openingModal = new bootstrap.Modal(
+                    document.getElementById("openingModal")
+                );
+                // openingModal.show();
+            });
+            const myCarouselElement = document.querySelector("#heroCarousel");
+
+            const carousel = new bootstrap.Carousel(myCarouselElement, {
+                interval: 10000,
+            });
+        </script>
+    </body>
+</html>

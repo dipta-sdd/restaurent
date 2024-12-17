@@ -492,7 +492,7 @@ class Middleware
 
             'api' => array_values(array_filter([
                 $this->statefulApi ? \Laravel\Sanctum\Http\Middleware\EnsureFrontendRequestsAreStateful::class : null,
-                $this->apiLimiter ? 'throttle:'.$this->apiLimiter : null,
+                $this->apiLimiter ? 'throttle:' . $this->apiLimiter : null,
                 \Illuminate\Routing\Middleware\SubstituteBindings::class,
             ])),
         ];
@@ -559,8 +559,8 @@ class Middleware
      */
     public function redirectTo(callable|string|null $guests = null, callable|string|null $users = null)
     {
-        $guests = is_string($guests) ? fn () => $guests : $guests;
-        $users = is_string($users) ? fn () => $users : $users;
+        $guests = is_string($guests) ? fn() => $guests : $guests;
+        $users = is_string($users) ? fn() => $users : $users;
 
         if ($guests) {
             Authenticate::redirectUsing($guests);
@@ -622,7 +622,7 @@ class Middleware
      */
     public function convertEmptyStringsToNull(array $except = [])
     {
-        collect($except)->each(fn (Closure $callback) => ConvertEmptyStringsToNull::skipWhen($callback));
+        collect($except)->each(fn(Closure $callback) => ConvertEmptyStringsToNull::skipWhen($callback));
 
         return $this;
     }
@@ -635,9 +635,9 @@ class Middleware
      */
     public function trimStrings(array $except = [])
     {
-        [$skipWhen, $except] = collect($except)->partition(fn ($value) => $value instanceof Closure);
+        [$skipWhen, $except] = collect($except)->partition(fn($value) => $value instanceof Closure);
 
-        $skipWhen->each(fn (Closure $callback) => TrimStrings::skipWhen($callback));
+        $skipWhen->each(fn(Closure $callback) => TrimStrings::skipWhen($callback));
 
         TrimStrings::except($except->all());
 

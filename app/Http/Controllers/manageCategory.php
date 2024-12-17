@@ -13,7 +13,7 @@ class manageCategory extends Controller
     public function adminCategory()
     {
         $categories = Category::all();
-        $subcategories = Subcategory::selectRaw('subcategories.*, categories.name as type, users.name as created_by, updated_by.name as updated_by')
+        $subcategories = Subcategory::selectRaw('subcategories.*, categories.name as type, concat(users.first_name, " ", users.last_name) as created_by, concat(updated_by.first_name, " ", updated_by.last_name) as updated_by')
             ->join('categories', 'subcategories.category_id', '=', 'categories.id')
             ->leftJoin('users', 'subcategories.created_by', '=', 'users.id')
             ->leftJoin('users as updated_by', 'subcategories.updated_by', '=', 'updated_by.id')
@@ -40,6 +40,7 @@ class manageCategory extends Controller
     }
     public function editSubcategory(Request $request, $id)
     {
+        // dd(json_encode(auth()->user()));
         $data = $request->validate([
             'category_id' => 'required',
             'name' => 'required',

@@ -27,12 +27,15 @@ Route::middleware('web')->group(function () {
     Route::post('/login', [AuthController::class, 'login']);
     Route::get('/logout', [AuthController::class, 'logout']);
     Route::get('/me', [AuthController::class, 'me']);
+    Route::post('/verify-otp', [AuthController::class, 'verifyOtp']);
+
     // Route::group(['middleware' => ['auth:sanctum', IsAdmin::class], 'prefix' => 'admin'], function () {
     //     Route::post('/category/add', [manageCategory::class, 'addSubCategory']);
     // });
     Route::post('/admin/category', [manageCategory::class, 'addSubCategory']);
-    Route::post('/admin/category/{id}', [manageCategory::class, 'editSubCategory']);
     Route::delete('/admin/category/{id}', [manageCategory::class, 'deleteSubCategory']);
+    Route::post('/admin/category/{id}', [manageCategory::class, 'editSubCategory']);
 });
+
 
 // Route::post('/admin/category/add', [manageCategory::class, 'addSubCategory']);

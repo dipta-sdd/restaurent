@@ -13,7 +13,8 @@ return new class extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
+            $table->string('first_name');
+            $table->string('last_name');
             $table->string('email')->unique();
             $table->string('password');
 
@@ -29,8 +30,8 @@ return new class extends Migration
             $table->foreignId('updated_by')->nullable()->constrained('users')->nullOnDelete();
             $table->enum(
                 'status',
-                ['active', 'suspended', 'banned']
-            )->default('active');
+                ['inactive', 'active', 'suspended', 'banned']
+            )->default('inactive');
         });
 
         Schema::create('password_reset_tokens', function (Blueprint $table) {

@@ -62,7 +62,7 @@
 
                             <a class="customItem dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
                                 aria-expanded="false">
-                                {{ Auth::user()->name }}
+                                {{ Auth::user()->first_name }}
                             </a>
 
                             <ul class="dropdown-menu rounded-0">

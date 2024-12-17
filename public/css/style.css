@@ -811,6 +811,17 @@ footer ul li {
 }
 
 
+/* toast */
+#toast-container{
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  height: auto;
+  width: auto;
+  background-color: transparent;
+  z-index: 1000000;
+}
+
 
 
 

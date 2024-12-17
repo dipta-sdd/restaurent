@@ -114,10 +114,70 @@
             font-size: 1rem;
         }
     }
+
+    /* Page Loader Styles */
+    .loader-wrapper {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: #000000;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 9999;
+        transition: opacity 0.5s ease-in-out;
+    }
+
+    .loader {
+        text-align: center;
+    }
+
+    .spinner {
+        width: 50px;
+        height: 50px;
+        border: 5px solid #f3f3f3;
+        border-top: 5px solid #082A45;
+        border-radius: 50%;
+        animation: spin 1s linear infinite;
+        margin: 0 auto 20px;
+    }
+
+    .loader-text {
+        color: #ffffff;
+        font-size: 18px;
+        font-weight: 500;
+        font-family: 'Poppins', sans-serif;
+        letter-spacing: 2px;
+    }
+
+    @keyframes spin {
+        0% {
+            transform: rotate(0deg);
+        }
+
+        100% {
+            transform: rotate(360deg);
+        }
+    }
+
+    /* Hide loader after page load */
+    .loader-wrapper.fade-out {
+        opacity: 0;
+        visibility: hidden;
+    }
     </style>
 </head>
 
 <body class="d-flex align-items-center justify-content-center">
+    <!-- Page Loader -->
+    <div class="loader-wrapper">
+        <div class="loader">
+            <div class="spinner"></div>
+            <div class="loader-text">Loading...</div>
+        </div>
+    </div>
     <!-- ================ MAIN CONTAINER ================ -->
     <div class="otp-container p-4 p-sm-5 mx-3" style="max-width: 450px;">
         <!-- Back Navigation -->
@@ -160,11 +220,28 @@
 
     <!-- ================ SCRIPTS ================ -->
     <!-- Bootstrap Bundle -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="/js/jquery-3.7.1.min.js"></script>
+    <script src="/js/popper.min.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
+    <script src="/js/script.js"></script>
 
     <!-- Main JavaScript -->
     <script>
     document.addEventListener('DOMContentLoaded', function() {
+
+        // Show loader
+        const loader = document.querySelector('.loader-wrapper');
+
+        // Hide loader after page loads
+        window.addEventListener('load', function() {
+            setTimeout(function() {
+                loader.classList.add('fade-out');
+                setTimeout(function() {
+                    loader.style.display = 'none';
+                }, 500);
+            }, 1000); // Adjust time as needed
+        });
+
         // Initialize variables
         const inputs = document.querySelectorAll('.otp-input');
         const form = document.querySelector('form');
@@ -197,11 +274,29 @@
                 // Check for form completion
                 if (index === inputs.length - 1 && this.value.length === 1) {
                     const otp = Array.from(inputs).map(input => input.value).join('');
+
                     spinner.classList.remove('d-none');
-                    setTimeout(() => {
-                        console.log('OTP entered:', otp);
-                        form.submit();
-                    }, 1500);
+                    $.ajax({
+                        type: 'POST',
+                        url: '/api/verify-otp',
+                        data: {
+                            otp: otp
+                        },
+                        headers: {
+                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                        },
+                        success: function(response) {
+                            spinner.classList.add('d-none');
+                            window.location.href = '/';
+                        },
+                        error: function(xhr, status, error) {
+                            spinner.classList.add('d-none');
+                            if (xhr.responseJSON.message) {
+                                showToast(xhr.responseJSON.message, 'danger');
+                            }
+                        }
+                    })
+                    
                 }
             });
 
@@ -215,7 +310,10 @@
     });
 
     // Timer functionality
-    let timeLeft = 120; // 2 minutes in seconds
+    //let timeLeft = {{$timeLeft}};
+    let timeLeft = {{$timeLeft}};
+
+
     let timerId = null;
     const timerDisplay = document.getElementById('timer');
     const resendLink = document.getElementById('resendLink');
@@ -223,7 +321,6 @@
     // Start timer function
     function startTimer() {
         resendLink.classList.remove('active');
-        timeLeft = 120;
 
         if (timerId) clearInterval(timerId);
 
@@ -245,7 +342,7 @@
     }
 
     // Start timer when page loads
-    startTimer();
+    startTimer(timeLeft);
 
     // Handle resend click
     resendLink.addEventListener('click', (e) => {
