@@ -312,11 +312,7 @@
 
         // Timer functionality
         //let timeLeft = {{$timeLeft}};
-        let timeLeft = {
-            {
-                $timeLeft
-            }
-        };
+        let timeLeft = {{$timeLeft}};
 
 
         let timerId = null;
