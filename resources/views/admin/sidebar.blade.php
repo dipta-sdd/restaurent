@@ -33,15 +33,29 @@
                 </li>
                 <li class="mb-1">
                     <button class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed"
-                        data-bs-toggle="collapse" data-bs-target="#supply-collapse" aria-expanded="false">
+                        data-bs-toggle="collapse" data-bs-target="#cat-collapse" aria-expanded="false">
                         <i class="fas fa-box"></i> &nbsp;
                         Category
                     </button>
-                    <div class="collapse" id="supply-collapse">
+                    <div class="collapse" id="cat-collapse">
                         <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
                             <li><a href="/admin/categories"
                                     class="link-body-emphasis d-inline-flex text-decoration-none rounded">All
                                     categories</a></li>
+                        </ul>
+                    </div>
+                </li>
+                <li class="mb-1">
+                    <button class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed"
+                        data-bs-toggle="collapse" data-bs-target="#item-collapse" aria-expanded="false">
+                        <i class="fas fa-box"></i> &nbsp;
+                        Items
+                    </button>
+                    <div class="collapse" id="item-collapse">
+                        <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+                            <li><a href="/admin/items"
+                                    class="link-body-emphasis d-inline-flex text-decoration-none rounded">All
+                                    Items</a></li>
                         </ul>
                     </div>
                 </li>
