@@ -16,15 +16,15 @@ class manageItems extends Controller
     public function adminItems()
     {
         $subcategories = Subcategory::all();
-        $items = Item::selectRaw('items.*, subcategories.name as subcategory_name, users.name as created_by, updated_by.name as updated_by')
+        $items = Item::selectRaw('items.*, subcategories.name as subcategory_name,  CONCAT(users.first_name, " ", users.last_name)  as created_by,  CONCAT(updated_by.first_name, " ", updated_by.last_name)  as updated_by')
             ->join('subcategories', 'items.subcategory_id', '=', 'subcategories.id')
             ->leftJoin('users', 'items.created_by', '=', 'users.id')
             ->leftJoin('users as updated_by', 'items.updated_by', '=', 'updated_by.id')
             ->orderBy('subcategory_id')
             ->get();
-        
+
         return view('admin.items', [
-            'subcategories' => $subcategories, 
+            'subcategories' => $subcategories,
             'items' => $items
         ]);
     }
@@ -48,7 +48,7 @@ class manageItems extends Controller
         if (isset($data['image']) && !empty($data['image'])) {
             // Decode the base64 string
             $image = $data['image'];
-            
+
             // Extract the image extension from the base64 string
             preg_match('/data:image\/(.*?);base64/', $image, $matches);
             $extension = $matches[1] ?? 'png'; // Default to 'png' if no extension found
@@ -99,7 +99,7 @@ class manageItems extends Controller
         if (isset($data['image']) && !empty($data['image'])) {
             // Decode the base64 string
             $image = $data['image'];
-            
+
             // Extract the image extension from the base64 string
             preg_match('/data:image\/(.*?);base64/', $image, $matches);
             $extension = $matches[1] ?? 'png'; // Default to 'png' if no extension found
@@ -163,13 +163,13 @@ class manageItems extends Controller
 
         // Ensure the item exists
         $item = Item::find($data['item_id']);
-        
 
-      
+
+
         try {
             $variant = Variant::create($data);
             // dd($variant);
-            
+
             $variant->created_by = auth()->user()->id;
             $variant->updated_by = auth()->user()->id;
             // $item->created_by = auth()->user()->name;
@@ -218,7 +218,7 @@ class manageItems extends Controller
         // $item->updated_by = auth()->user()->name;
         $variant->save();
 
-        
+
         $variant->updated_by = auth()->user()->name;
 
         // Return the updated variant with additional details
@@ -253,8 +253,10 @@ class manageItems extends Controller
     {
         $subcategoryId = $request->input('subcategory_id');
 
-        $query = Item::selectRaw('items.*, subcategories.name as subcategory_name')
-            ->join('subcategories', 'items.subcategory_id', '=', 'subcategories.id');
+        $query = Item::selectRaw('items.*, subcategories.name as subcategory_name,  CONCAT(users.first_name, " ", users.last_name)  as created_by,  CONCAT(updated_by.first_name, " ", updated_by.last_name)  as updated_by')
+            ->join('subcategories', 'items.subcategory_id', '=', 'subcategories.id')
+            ->leftJoin('users', 'items.created_by', '=', 'users.id')
+            ->leftJoin('users as updated_by', 'items.updated_by', '=', 'updated_by.id');
 
         if ($subcategoryId) {
             $query->where('items.subcategory_id', $subcategoryId);
