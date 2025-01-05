@@ -25,7 +25,20 @@
   display: none;
 }
 
+/* toast */
+#toast-container {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  height: auto;
+  width: auto;
+  background-color: transparent;
+  z-index: 1000000;
 
+  & .text-bg-primary {
+    background-image: linear-gradient(to right, #3581bf, #392f57);
+  }
+}
 
 
 

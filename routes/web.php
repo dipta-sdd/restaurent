@@ -44,6 +44,8 @@ Route::middleware([IsActive::class])->group(function () {
         return view('/forget_pass');
     });
 
+
+
     Route::group(['middleware' => ['auth:sanctum', IsAdmin::class], 'prefix' => 'admin'], function () {
         Route::get('/categories', function (manageCategory $manageCategory) {
             return $manageCategory->adminCategory();
@@ -54,10 +56,10 @@ Route::middleware([IsActive::class])->group(function () {
         Route::get('/dashboard2', function () {
             return view('admin.tmp_admin2');
         });
-    });
-    Route::get('/items', function (manageItems $manageItems) {
-        return $manageItems->adminItems();
-    });
+        Route::get('/items', function (manageItems $manageItems) {
+            return $manageItems->adminItems();
+        });
 
-    Route::get('/item/{id}', [manageItems::class, 'showItem']);
+        Route::get('/item/{id}', [manageItems::class, 'showItem']);
+    });
 });
