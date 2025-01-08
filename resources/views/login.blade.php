@@ -244,6 +244,13 @@
         <h2 class="text-warning fw-bold mb-3">Login</h2>
         <p class="text-white mb-4">Please enter your credentials to continue.</p>
 
+        @if(session('error'))
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            {{ session('error') }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        @endif
+
         <!-- Login Form -->
         <form>
             <!-- Email Input -->
@@ -272,7 +279,7 @@
         <div class="text-center mt-4">
             <p class="text-white-50">Or login with:</p>
             <div class="social-login d-flex justify-content-center gap-3 mt-2">
-                <a href="#"><i class="fab fa-google"></i> Google</a>
+                <a href="{{ route('google.login') }}"><i class="fab fa-google"></i> Google</a>
                 <a href="#"><i class="fab fa-apple"></i> Apple</a>
             </div>
         </div>

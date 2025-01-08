@@ -63,3 +63,7 @@ Route::middleware([IsActive::class])->group(function () {
         Route::get('/item/{id}', [manageItems::class, 'showItem']);
     });
 });
+
+// Google Login Routes
+Route::get('auth/google', [AuthController::class, 'redirectToGoogle'])->name('google.login');
+Route::get('auth/google/callback', [AuthController::class, 'handleGoogleCallback']);

@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Tymon\JWTAuth\Facades\JWTAuth;
 use Tymon\JWTAuth\Exceptions\JWTException;
+use Laravel\Socialite\Facades\Socialite;
 
 
 class AuthController extends Controller
@@ -113,6 +114,72 @@ class AuthController extends Controller
             }
         } else {
             return response()->json(['error' => 'Otp expired'], 401);
+        }
+    }
+
+    public function redirectToGoogle()
+    {
+        try {
+            // Log all Google-related configuration
+            \Log::info('Google OAuth Config:', [
+                'client_id' => config('services.google.client_id'),
+                'client_secret' => config('services.google.client_secret'),
+                'redirect' => config('services.google.redirect'),
+                'env_client_id' => env('GOOGLE_CLIENT_ID'),
+                'env_client_secret' => env('GOOGLE_CLIENT_SECRET'),
+                'env_redirect' => env('GOOGLE_REDIRECT_URI')
+            ]);
+            
+            return Socialite::driver('google')
+                ->stateless()
+                ->with(['prompt' => 'select_account'])
+                ->redirect();
+        } catch (\Exception $e) {
+            \Log::error('Google OAuth Error: ' . $e->getMessage());
+            \Log::error($e->getTraceAsString());
+            return redirect('/login')->with('error', 'Could not connect to Google. Please try again.');
+        }
+    }
+
+    public function handleGoogleCallback()
+    {
+        try {
+            $googleUser = Socialite::driver('google')->stateless()->user();
+            
+            $user = User::where('google_id', $googleUser->id)->first();
+
+            if (!$user) {
+                // Check if user exists with same email
+                $user = User::where('email', $googleUser->email)->first();
+                
+                if (!$user) {
+                    // Create new user
+                    $user = User::create([
+                        'first_name' => explode(' ', $googleUser->name)[0],
+                        'last_name' => isset(explode(' ', $googleUser->name)[1]) ? explode(' ', $googleUser->name)[1] : '',
+                        'email' => $googleUser->email,
+                        'google_id' => $googleUser->id,
+                        'status' => 'active',
+                        'verified_at' => now()
+                    ]);
+                } else {
+                    // Update existing user with google_id
+                    $user->google_id = $googleUser->id;
+                    $user->save();
+                }
+            }
+
+            Auth::login($user);
+            
+            if ($user->role === 'admin') {
+                return redirect('/admin/dashboard');
+            }
+            return redirect('/');
+
+        } catch (\Exception $e) {
+            \Log::error('Google Callback Error: ' . $e->getMessage());
+            \Log::error($e->getTraceAsString());
+            return redirect('/login')->with('error', 'Something went wrong with Google login. Please try again.');
         }
     }
 }
