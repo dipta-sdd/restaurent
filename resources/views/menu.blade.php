@@ -364,14 +364,14 @@
 
                     cartContainer.append(`
                         <div class="cart-item mb-3">
-                            <div class="d-flex justify-content-between align-items-center">
-                                <div class="cart-item-details">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div class="cart-item-details">
                                     <h6 class="mb-0">${item.name}</h6>
-                                    <span class="price">£${item.price.toFixed(2)}</span>
-                                </div>
+                                <span class="price">£${item.price.toFixed(2)}</span>
                             </div>
+                        </div>
                             <div class="quantity-section mt-2">
-                                <div class="quantity-controls d-flex justify-content-between align-items-center">
+                            <div class="quantity-controls d-flex justify-content-between align-items-center">
                                     <button class="qty-btn minus btn btn-sm btn-outline-secondary" data-id="${item.id}">-</button>
                                     <span class="qty-value mx-2">${item.quantity}</span>
                                     <button class="qty-btn plus btn btn-sm btn-outline-secondary" data-id="${item.id}">+</button>
@@ -396,7 +396,7 @@
                     item.quantity += 1;
                 } else {
                     item.quantity -= 1;
-                    if (item.quantity < 1) {
+                        if (item.quantity < 1) {
                         cartItems = cartItems.filter(i => i.id !== itemId);
                     }
                 }
@@ -411,7 +411,7 @@
                 if (isAllCheck) {
                     $('.category-filter:not(#allCheck)').prop('checked', false);
                     selectedCategories = [];
-                } else {
+                    } else {
                     $('#allCheck').prop('checked', false);
                     const checkedCategories = $('.category-filter:checked:not(#allCheck)').map(function() {
                         return $(this).val();
