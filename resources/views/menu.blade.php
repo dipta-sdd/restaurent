@@ -44,7 +44,7 @@
             <div class="loader-text">Loading...</div>
         </div>
     </div> -->
-
+  
     <!-- ================ NAVIGATION SECTION ================ -->
     @include('navbar')
 
