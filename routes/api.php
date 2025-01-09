@@ -6,6 +6,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\manageCategory;
 use App\Http\Controllers\manageItems;
 use App\Http\Middleware\IsAdmin;
+use App\Http\Controllers\MenuController;
 
 /*
 |--------------------------------------------------------------------------
@@ -47,6 +48,8 @@ Route::middleware('web')->group(function () {
 
     Route::get('/admin/items', [manageItems::class, 'filterItems']);
     Route::post('/admin/category/{id}', [manageCategory::class, 'editSubCategory']);
+
+    Route::get('/menu/items', [MenuController::class, 'getItems']);
 });
 
 

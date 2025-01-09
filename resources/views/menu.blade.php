@@ -77,25 +77,15 @@
                         <div class="mb-4">
                             <h6 class="filter-heading"><i class="fas fa-utensils me-2"></i>Categories</h6>
                             <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="all" id="allCheck">
+                                <input class="form-check-input category-filter" type="checkbox" value="all" id="allCheck" checked>
                                 <label class="form-check-label" for="allCheck">All Items</label>
                             </div>
+                            @foreach($subcategories as $subcategory)
                             <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="starters" id="startersCheck">
-                                <label class="form-check-label" for="startersCheck">Starters</label>
+                                <input class="form-check-input category-filter" type="checkbox" value="{{ $subcategory->id }}" id="category{{ $subcategory->id }}">
+                                <label class="form-check-label" for="category{{ $subcategory->id }}">{{ $subcategory->name }}</label>
                             </div>
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="mains" id="mainsCheck">
-                                <label class="form-check-label" for="mainsCheck">Main Course</label>
-                            </div>
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="desserts" id="dessertsCheck">
-                                <label class="form-check-label" for="dessertsCheck">Desserts</label>
-                            </div>
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="drinks" id="drinksCheck">
-                                <label class="form-check-label" for="drinksCheck">Drinks</label>
-                            </div>
+                            @endforeach
                         </div>
                         
 
@@ -121,140 +111,40 @@
             <!-- Center Content: Menu Items -->
             <div class="col-md-8 col-12">
                 <div class="row row-cols-1 row-cols-md-3 g-3" id="menu-items-container">
-                    <!-- Menu Item 1 -->
-                    <div class="col">
+                    @foreach($items as $item)
+                    <div class="col menu-item" data-category="{{ $item->subcategory_id }}">
                         <div class="card h-100 shadow-sm menu-card" style="transition: transform 0.2s;">
                             <div class="position-relative">
-                                <img src="./Images/food_1.jpg" class="card-img-top menu-img img-fluid" alt="Chicken Tikka Masala">
-                                <span class="badge bg-danger position-absolute top-0 end-0 m-2">Hot</span>
-                                <span class="badge bg-success position-absolute top-0 start-0 m-2">Discount</span>
+                                @if($item->image)
+                                <img src="{{ asset($item->image) }}" class="card-img-top menu-img img-fluid" alt="{{ $item->name }}">
+                                @else
+                                <img src="./Images/food_1.jpg" class="card-img-top menu-img img-fluid" alt="{{ $item->name }}">
+                                @endif
+                                <span class="badge bg-success position-absolute top-0 end-0 m-2">{{ $item->subcategory->name }}</span>
+                                <span class="badge bg-danger position-absolute top-0 start-0 m-2">2% OFF</span>
                             </div>
                             <div class="card-body">
-                                <h5 class="card-title">Chicken Tikka Masala</h5>
-                                <p class="card-text small">Grilled chicken in creamy tomato sauce.</p>
+                                <h5 class="card-title">{{ $item->name }}</h5>
+                                <p class="card-text small">{{ $item->description ?? 'No description available' }}</p>
                                 <div class="d-flex justify-content-between align-items-center">
                                     <div>
-                                        <p class="card-price mb-0"><span class="text-decoration-line-through">£12.99</span> <span class="text-danger">£10.99</span></p>
+                                        <p class="card-price mb-0">
+                                            <span class="text-decoration-line-through">£{{ number_format($item->original_price, 2) }}</span>
+                                            <span class="text-danger">£{{ number_format($item->discounted_price, 2) }}</span>
+                                        </p>
                                     </div>
-                                    <button class="btn btn-primary btn-sm" aria-label="Add Chicken Tikka Masala to cart">
+                                    <button class="btn btn-primary btn-sm add-to-cart" 
+                                            data-id="{{ $item->id }}"
+                                            data-name="{{ $item->name }}"
+                                            data-price="{{ $item->discounted_price }}"
+                                            aria-label="Add {{ $item->name }} to cart">
                                         <i class="fas fa-cart-plus me-1"></i>Add
                                     </button>
                                 </div>
                             </div>
                         </div>
                     </div>
-
-                    <!-- Menu Item 2 -->
-                    <div class="col">
-                        <div class="card h-100 shadow-sm menu-card" style="transition: transform 0.2s;">
-                            <div class="position-relative">
-                                <img src="./Images/food_2.jpg" class="card-img-top menu-img img-fluid" alt="Butter Chicken">
-                                <span class="badge bg-success position-absolute top-0 end-0 m-2">Discount</span>
-                            </div>
-                            <div class="card-body">
-                                <h5 class="card-title">Butter Chicken</h5>
-                                <p class="card-text small">Tender chicken in rich buttery sauce.</p>
-                                <div class="d-flex justify-content-between align-items-center">
-                                    <div>
-                                        <p class="card-price mb-0"><span class="text-decoration-line-through">£13.99</span> <span class="text-danger">£11.99</span></p>
-                                    </div>
-                                    <button class="btn btn-primary btn-sm" aria-label="Add Butter Chicken to cart">
-                                        <i class="fas fa-cart-plus me-1"></i>Add
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Menu Item 3 -->
-                    <div class="col">
-                        <div class="card h-100 shadow-sm menu-card" style="transition: transform 0.2s;">
-                            <div class="position-relative">
-                                <img src="./Images/004.jpg" class="card-img-top menu-img img-fluid" alt="Vegetable Biryani">
-                                <span class="badge bg-success position-absolute top-0 end-0 m-2">Discount</span>
-                            </div>
-                            <div class="card-body">
-                                <h5 class="card-title">Vegetable Biryani</h5>
-                                <p class="card-text small">Aromatic rice with mixed vegetables.</p>
-                                <div class="d-flex justify-content-between align-items-center">
-                                    <div>
-                                        <p class="card-price mb-0"><span class="text-decoration-line-through">£10.99</span> <span class="text-danger">£8.99</span></p>
-                                    </div>
-                                    <button class="btn btn-primary btn-sm" aria-label="Add Vegetable Biryani to cart">
-                                        <i class="fas fa-cart-plus me-1"></i>Add
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Menu Item 4 -->
-                    <div class="col">
-                        <div class="card h-100 shadow-sm menu-card" style="transition: transform 0.2s;">
-                            <div class="position-relative">
-                                <img src="./Images/003.jpg" class="card-img-top menu-img img-fluid" alt="Paneer Tikka">
-                                <span class="badge bg-warning position-absolute top-0 end-0 m-2">Medium</span>
-                                <span class="badge bg-success position-absolute top-0 start-0 m-2">Discount</span>
-                            </div>
-                            <div class="card-body">
-                                <h5 class="card-title">Paneer Tikka</h5>
-                                <p class="card-text small">Grilled cottage cheese with spices.</p>
-                                <div class="d-flex justify-content-between align-items-center">
-                                    <div>
-                                        <p class="card-price mb-0"><span class="text-decoration-line-through">£9.99</span> <span class="text-danger">£7.99</span></p>
-                                    </div>
-                                    <button class="btn btn-primary btn-sm" aria-label="Add Paneer Tikka to cart">
-                                        <i class="fas fa-cart-plus me-1"></i>Add
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Menu Item 5 -->
-                    <div class="col">
-                        <div class="card h-100 shadow-sm menu-card" style="transition: transform 0.2s;">
-                            <div class="position-relative">
-                                <img src="./Images/002.jpg" class="card-img-top menu-img img-fluid" alt="Lamb Rogan Josh">
-                                <span class="badge bg-danger position-absolute top-0 end-0 m-2">Hot</span>
-                                <span class="badge bg-success position-absolute top-0 start-0 m-2">Discount</span>
-                            </div>
-                            <div class="card-body">
-                                <h5 class="card-title">Lamb Rogan Josh</h5>
-                                <p class="card-text small">Tender lamb in aromatic curry sauce.</p>
-                                <div class="d-flex justify-content-between align-items-center">
-                                    <div>
-                                        <p class="card-price mb-0"><span class="text-decoration-line-through">£14.99</span> <span class="text-danger">£12.99</span></p>
-                                    </div>
-                                    <button class="btn btn-primary btn-sm" aria-label="Add Lamb Rogan Josh to cart">
-                                        <i class="fas fa-cart-plus me-1"></i>Add
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Menu Item 6 -->
-                    <div class="col">
-                        <div class="card h-100 shadow-sm menu-card" style="transition: transform 0.2s;">
-                            <div class="position-relative">
-                                <img src="./Images/001.jpg" class="card-img-top menu-img img-fluid" alt="Dal Makhani">
-                                <span class="badge bg-success position-absolute top-0 end-0 m-2">Discount</span>
-                            </div>
-                            <div class="card-body">
-                                <h5 class="card-title">Dal Makhani</h5>
-                                <p class="card-text small">Creamy black lentils, slow-cooked.</p>
-                                <div class="d-flex justify-content-between align-items-center">
-                                    <div>
-                                        <p class="card-price mb-0"><span class="text-decoration-line-through">£8.99</span> <span class="text-danger">£6.99</span></p>
-                                    </div>
-                                    <button class="btn btn-primary btn-sm" aria-label="Add Dal Makhani to cart">
-                                        <i class="fas fa-cart-plus me-1"></i>Add
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    @endforeach
                 </div>
             </div>
 
@@ -368,138 +258,223 @@
 
     <!-- ================ SCRIPTS ================ -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            // Clear Filters functionality
-            document.getElementById('clearFilters').addEventListener('click', () => {
-                // Reset sorting (you may want to implement a default sorting order)
-                const menuContainer = document.getElementById('menu-items-container');
-                const items = Array.from(menuContainer.children);
-                menuContainer.innerHTML = ''; // Clear current items
-                items.forEach(item => menuContainer.appendChild(item)); // Re-append original items
-
-                // Remove active class from buttons
-                document.getElementById('sortLowToHigh').classList.remove('active');
-                document.getElementById('sortHighToLow').classList.remove('active');
-
-                // Clear all selected categories
-                document.querySelectorAll('.filter-sidebar .form-check-input').forEach(checkbox => {
-                    checkbox.checked = false; // Uncheck each checkbox
+        $(document).ready(function() {
+            let selectedCategories = [];
+            let cartItems = [];
+            
+            // Function to load menu items
+            function loadMenuItems(params = {}) {
+                $.ajax({
+                    url: '/api/menu/items',
+                    type: 'GET',
+                    data: params,
+                    success: function(response) {
+                        const container = $('#menu-items-container');
+                        container.empty();
+                        
+                        response.forEach(item => {
+                            const html = `
+                                <div class="col menu-item" data-category="${item.subcategory_id}">
+                                    <div class="card h-100 shadow-sm menu-card">
+                                        <div class="position-relative">
+                                            ${item.image 
+                                                ? `<img src="${item.image}" class="card-img-top menu-img img-fluid" alt="${item.name}">`
+                                                : `<img src="./Images/food_1.jpg" class="card-img-top menu-img img-fluid" alt="${item.name}">`
+                                            }
+                                            <span class="badge bg-success position-absolute top-0 end-0 m-2">${item.subcategory.name}</span>
+                                            <span class="badge bg-danger position-absolute top-0 start-0 m-2">2% OFF</span>
+                                        </div>
+                                        <div class="card-body">
+                                            <h5 class="card-title">${item.name}</h5>
+                                            <p class="card-text small">${item.description || 'No description available'}</p>
+                                            <div class="d-flex justify-content-between align-items-center">
+                                                <div>
+                                                    <p class="card-price mb-0">
+                                                        <span class="text-decoration-line-through">£${parseFloat(item.original_price).toFixed(2)}</span>
+                                                        <span class="text-danger">£${parseFloat(item.discounted_price).toFixed(2)}</span>
+                                                    </p>
+                                                </div>
+                                                <button class="btn btn-primary btn-sm add-to-cart"
+                                                        data-id="${item.id}"
+                                                        data-name="${item.name}"
+                                                        data-price="${item.discounted_price}"
+                                                        aria-label="Add ${item.name} to cart">
+                                                    <i class="fas fa-cart-plus me-1"></i>Add
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            `;
+                            container.append(html);
+                        });
+                        
+                        // Reattach cart event handlers
+                        attachCartHandlers();
+                    },
+                    error: function(xhr) {
+                        console.error('Error loading menu items:', xhr);
+                    }
                 });
-
-                // Optionally, you can also reset any other filters or states here
-            });
-
-            // Sort by Price functionality
-            document.getElementById('sortLowToHigh').addEventListener('click', () => {
-                sortMenuItems('asc');
-            });
-
-            document.getElementById('sortHighToLow').addEventListener('click', () => {
-                sortMenuItems('desc');
-            });
-
-            function sortMenuItems(order) {
-                const menuContainer = document.getElementById('menu-items-container');
-                const items = Array.from(menuContainer.children);
-                items.sort((a, b) => {
-                    const priceA = parseFloat(a.querySelector('.card-price .text-danger').textContent.replace('£', ''));
-                    const priceB = parseFloat(b.querySelector('.card-price .text-danger').textContent.replace('£', ''));
-                    return order === 'asc' ? priceA - priceB : priceB - priceA;
-                });
-                menuContainer.innerHTML = ''; // Clear current items
-                items.forEach(item => menuContainer.appendChild(item)); // Re-append sorted items
             }
 
             // Cart functionality
-            const cartItems = [];
-
-            document.querySelectorAll('.menu-card button').forEach(button => {
-                button.addEventListener('click', (event) => {
-                    const card = event.target.closest('.menu-card');
-                    const title = card.querySelector('.card-title').textContent;
-                    const price = parseFloat(card.querySelector('.card-price .text-danger').textContent.replace('£', ''));
-                    addToCart(title, price);
+            function attachCartHandlers() {
+                $('.add-to-cart').off('click').on('click', function() {
+                    const itemId = $(this).data('id');
+                    const itemName = $(this).data('name');
+                    const itemPrice = parseFloat($(this).data('price'));
+                    
+                    addToCart(itemId, itemName, itemPrice);
+                    showToast('Item added to cart successfully!', 'success');
                 });
-            });
-
-            function addToCart(title, price) {
-                const existingItem = cartItems.find(item => item.title === title);
-                if (existingItem) {
-                    existingItem.quantity += 1; // Increment quantity
-                } else {
-                    cartItems.push({ title, price, quantity: 1 }); // Add new item with quantity 1
-                }
-                updateCart();
             }
 
-            function updateCart() {
-                const cartItemsContainer = document.getElementById('cart-items');
-                cartItemsContainer.innerHTML = ''; // Clear current cart items
+            function addToCart(id, name, price) {
+                const existingItem = cartItems.find(item => item.id === id);
+                if (existingItem) {
+                    existingItem.quantity += 1;
+                } else {
+                    cartItems.push({
+                        id: id,
+                        name: name,
+                        price: price,
+                        quantity: 1
+                    });
+                }
+                updateCartDisplay();
+                updateFloatingCartCount();
+            }
+
+            function updateFloatingCartCount() {
+                const totalItems = cartItems.reduce((sum, item) => sum + item.quantity, 0);
+                $('.cart-count').text(totalItems);
+            }
+
+            function updateCartDisplay() {
+                const cartContainer = $('#cart-items');
+                cartContainer.empty();
                 let subtotal = 0;
 
                 cartItems.forEach(item => {
-                    const cartItemDiv = document.createElement('div');
-                    cartItemDiv.classList.add('cart-item');
-                    cartItemDiv.innerHTML = `
-                        <div class="d-flex justify-content-between align-items-center">
-                            <div class="cart-item-details">
-                                <h6>${item.title}</h6>
-                                <span class="price">£${item.price.toFixed(2)}</span>
+                    const itemTotal = item.price * item.quantity;
+                    subtotal += itemTotal;
+
+                    cartContainer.append(`
+                        <div class="cart-item mb-3">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div class="cart-item-details">
+                                    <h6 class="mb-0">${item.name}</h6>
+                                    <span class="price">£${item.price.toFixed(2)}</span>
+                                </div>
+                            </div>
+                            <div class="quantity-section mt-2">
+                                <div class="quantity-controls d-flex justify-content-between align-items-center">
+                                    <button class="qty-btn minus btn btn-sm btn-outline-secondary" data-id="${item.id}">-</button>
+                                    <span class="qty-value mx-2">${item.quantity}</span>
+                                    <button class="qty-btn plus btn btn-sm btn-outline-secondary" data-id="${item.id}">+</button>
+                                </div>
+                                <div class="item-total text-end mt-1">£${itemTotal.toFixed(2)}</div>
                             </div>
                         </div>
-                        <div class="quantity-section">
-                            <div class="quantity-controls d-flex justify-content-between align-items-center">
-                                <button class="qty-btn minus" data-title="${item.title}">-</button>
-                                <span class="qty-value">${item.quantity}</span>
-                                <button class="qty-btn plus" data-title="${item.title}">+</button>
-                            </div>
-                            <div class="item-total text-end">£${(item.price * item.quantity).toFixed(2)}</div>
-                        </div>
-                    `;
-                    cartItemsContainer.appendChild(cartItemDiv);
-                    subtotal += item.price * item.quantity; // Update subtotal
+                    `);
                 });
 
-                document.getElementById('subtotalAmount').textContent = `£${subtotal.toFixed(2)}`;
-                document.getElementById('totalAmount').textContent = `£${(subtotal + 2.50).toFixed(2)}`; // Adding delivery charge
+                $('#subtotalAmount').text(`£${subtotal.toFixed(2)}`);
+                const total = subtotal + 2.50; // Adding delivery charge
+                $('#totalAmount').text(`£${total.toFixed(2)}`);
             }
 
-            // Event delegation for quantity buttons
-            document.getElementById('cart-items').addEventListener('click', (event) => {
-                if (event.target.classList.contains('qty-btn')) {
-                    const title = event.target.getAttribute('data-title');
-                    if (event.target.classList.contains('plus')) {
-                        const item = cartItems.find(item => item.title === title);
-                        item.quantity += 1; // Increment quantity
-                    } else if (event.target.classList.contains('minus')) {
-                        const item = cartItems.find(item => item.title === title);
-                        item.quantity -= 1; // Decrement quantity
-                        if (item.quantity < 1) {
-                            cartItems.splice(cartItems.indexOf(item), 1); // Remove item if quantity is less than 1
-                        }
+            // Handle quantity buttons
+            $(document).on('click', '.qty-btn', function() {
+                const itemId = $(this).data('id');
+                const item = cartItems.find(item => item.id === itemId);
+                
+                if ($(this).hasClass('plus')) {
+                    item.quantity += 1;
+                } else {
+                    item.quantity -= 1;
+                    if (item.quantity < 1) {
+                        cartItems = cartItems.filter(i => i.id !== itemId);
                     }
-                    updateCart(); // Update cart display
                 }
+                updateCartDisplay();
+                updateFloatingCartCount();
+            });
+
+            // Category filter handling
+            $('.category-filter').on('change', function() {
+                const isAllCheck = $(this).val() === 'all';
+                
+                if (isAllCheck) {
+                    $('.category-filter:not(#allCheck)').prop('checked', false);
+                    selectedCategories = [];
+                } else {
+                    $('#allCheck').prop('checked', false);
+                    const checkedCategories = $('.category-filter:checked:not(#allCheck)').map(function() {
+                        return $(this).val();
+                    }).get();
+                    
+                    selectedCategories = checkedCategories.length > 0 ? checkedCategories : [];
+                }
+
+                loadMenuItems({
+                    subcategories: selectedCategories
+                });
+            });
+
+            // Sort by price handling
+            $('#sortLowToHigh').on('click', function() {
+                $(this).addClass('active').siblings().removeClass('active');
+                loadMenuItems({
+                    subcategories: selectedCategories,
+                    sort: 'asc'
+                });
+            });
+
+            $('#sortHighToLow').on('click', function() {
+                $(this).addClass('active').siblings().removeClass('active');
+                loadMenuItems({
+                    subcategories: selectedCategories,
+                    sort: 'desc'
+                });
             });
 
             // Search functionality
-            const searchInput = document.getElementById('searchInput');
-            searchInput.addEventListener('input', function() {
-                const query = searchInput.value.toLowerCase();
-                const menuItems = document.querySelectorAll('#menu-items-container .col');
-
-                menuItems.forEach(item => {
-                    const title = item.querySelector('.card-title').textContent.toLowerCase();
-                    if (title.includes(query)) {
-                        item.style.display = ''; // Show item
-                    } else {
-                        item.style.display = 'none'; // Hide item
-                    }
-                });
+            let searchTimeout;
+            $('#searchInput').on('input', function() {
+                clearTimeout(searchTimeout);
+                const searchTerm = $(this).val();
+                
+                searchTimeout = setTimeout(() => {
+                    loadMenuItems({
+                        subcategories: selectedCategories,
+                        search: searchTerm
+                    });
+                }, 300);
             });
 
-            // Other existing event listeners and code...
+            // Clear filters
+            $('#clearFilters').on('click', function() {
+                $('#searchInput').val('');
+                $('.category-filter').prop('checked', false);
+                $('#allCheck').prop('checked', true);
+                selectedCategories = [];
+                $('#sortLowToHigh, #sortHighToLow').removeClass('active');
+                loadMenuItems();
+            });
+
+            // Mobile cart toggle
+            $('.floating-cart').on('click', function() {
+                $('.cart-sidebar').toggleClass('show-mobile-cart');
+            });
+
+            // Initial setup
+            attachCartHandlers();
+            updateFloatingCartCount();
+            loadMenuItems();
         });
     </script>
 
@@ -533,6 +508,75 @@
         .item-total {
             margin-top: 5px; /* Space between quantity controls and total */
             font-weight: bold; /* Make the total bold for emphasis */
+        }
+
+        .show-mobile-cart {
+            transform: translateX(0) !important;
+        }
+
+        @media (max-width: 768px) {
+            .cart-sidebar {
+                position: fixed;
+                top: 0;
+                right: 0;
+                height: 100vh;
+                width: 300px;
+                z-index: 1000;
+                transform: translateX(100%);
+                transition: transform 0.3s ease-in-out;
+            }
+        }
+
+        .floating-cart {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 999;
+        }
+
+        .cart-button {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background-color: #007bff;
+            border: none;
+            color: white;
+            position: relative;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .cart-count {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            background-color: #dc3545;
+            color: white;
+            border-radius: 50%;
+            width: 24px;
+            height: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+        }
+
+        .btn-group .btn.active {
+            background-color: #007bff;
+            color: white;
+        }
+
+        .cart-item {
+            border-bottom: 1px solid #dee2e6;
+            padding-bottom: 10px;
+        }
+
+        .qty-btn {
+            width: 30px;
+            height: 30px;
+            padding: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
     </style>
 </body>
