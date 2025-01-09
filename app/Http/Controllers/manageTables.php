@@ -16,14 +16,15 @@ class manageTables extends Controller
             ->orderBy('tables.created_at', 'desc')
             ->get();
 
-        return view('admin.tables', compact('tables'));
+        $statusOptions = Table::getStatusOptions();
+        return view('admin.tables', compact('tables', 'statusOptions'));
     }
 
     public function addTable(Request $request)
     {
         $data = $request->validate([
             'capacity' => 'required|integer|min:1',
-            'status' => 'required|in:available,occupied,reserved,maintenance'
+            'status' => 'required|in:' . implode(',', array_keys(Table::getStatusOptions()))
         ]);
 
         $data['created_by'] = auth()->id();
@@ -45,7 +46,7 @@ class manageTables extends Controller
     {
         $data = $request->validate([
             'capacity' => 'required|integer|min:1',
-            'status' => 'required|in:available,occupied,reserved,maintenance'
+            'status' => 'required|in:' . implode(',', array_keys(Table::getStatusOptions()))
         ]);
 
         $table = Table::findOrFail($id);

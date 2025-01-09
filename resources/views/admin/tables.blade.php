@@ -58,10 +58,9 @@
                             <div class="col-md-6">
                                 <label for="status" class="form-label">Status <small class="text-danger">*</small></label>
                                 <select id="status" class="form-control" name="status" required>
-                                    <option value="available">Available</option>
-                                    <option value="occupied">Occupied</option>
-                                    <option value="reserved">Reserved</option>
-                                    <option value="maintenance">Maintenance</option>
+                                    @foreach($statusOptions as $value => $label)
+                                        <option value="{{ $value }}">{{ $label }}</option>
+                                    @endforeach
                                 </select>
                             </div>
                             <div class="text-end">
@@ -101,8 +100,8 @@
                                         <td>{{ $table->id }}</td>
                                         <td>{{ $table->capacity }}</td>
                                         <td>
-                                            <span class="badge bg-{{ $table->status == 'available' ? 'success' : ($table->status == 'occupied' ? 'danger' : ($table->status == 'reserved' ? 'warning' : 'secondary')) }}">
-                                                {{ ucfirst($table->status) }}
+                                            <span class="badge bg-{{ $table->status == 'available' ? 'success' : ($table->status == 'maintenance' ? 'warning' : 'danger') }}">
+                                                {{ $statusOptions[$table->status] }}
                                             </span>
                                         </td>
                                         <td>{{ $table->creator_name }}</td>
@@ -292,10 +291,10 @@
                 switch (status) {
                     case 'available':
                         return 'success';
-                    case 'occupied':
-                        return 'danger';
-                    case 'reserved':
+                    case 'maintenance':
                         return 'warning';
+                    case 'closed':
+                        return 'danger';
                     default:
                         return 'secondary';
                 }
