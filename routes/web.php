@@ -25,6 +25,11 @@ Route::get('/login', function () {
 Route::get('/signup', function () {
     return view('/signup');
 });
+Route::get('/menu', function () {
+    return view('menu');
+});
+// add here
+
 Route::get('/verification', function (AuthController $authController) {
     return $authController->verification(request());
 });
