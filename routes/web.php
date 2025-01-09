@@ -3,6 +3,7 @@
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\manageCategory;
 use App\Http\Controllers\manageItems;
+use App\Http\Controllers\manageTables;
 use App\Http\Middleware\IsActive;
 use App\Http\Middleware\IsAdmin;
 use Illuminate\Support\Facades\Route;
@@ -61,5 +62,6 @@ Route::middleware([IsActive::class])->group(function () {
         });
 
         Route::get('/item/{id}', [manageItems::class, 'showItem']);
+        Route::get('/tables', [manageTables::class, 'adminTables']);
     });
 });

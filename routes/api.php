@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\manageCategory;
 use App\Http\Controllers\manageItems;
+use App\Http\Controllers\manageTables;
 use App\Http\Middleware\IsAdmin;
 
 /*
@@ -47,6 +48,11 @@ Route::middleware('web')->group(function () {
 
     Route::get('/admin/items', [manageItems::class, 'filterItems']);
     Route::post('/admin/category/{id}', [manageCategory::class, 'editSubCategory']);
+
+    // Table management routes
+    Route::post('/admin/table', [manageTables::class, 'addTable']);
+    Route::post('/admin/table/{id}', [manageTables::class, 'updateTable']);
+    Route::delete('/admin/table/{id}', [manageTables::class, 'deleteTable']);
 });
 
 

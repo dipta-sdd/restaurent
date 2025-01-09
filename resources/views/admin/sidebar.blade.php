@@ -91,6 +91,9 @@
                             <li><a href="/branches"
                                     class="link-body-emphasis d-inline-flex text-decoration-none rounded">All Branch</a>
                             </li>
+                            <li><a href="/admin/tables"
+                                    class="link-body-emphasis d-inline-flex text-decoration-none rounded">Add Table</a>
+                            </li>
 
                         </ul>
                     </div>
