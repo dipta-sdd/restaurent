@@ -53,8 +53,8 @@ class MenuController extends Controller
 
     private function addDiscountedPrice($item)
     {
-        $item->original_price = $item->price;
-        $item->discounted_price = round($item->price * 0.98, 2); // 2% discount
+        $item->discounted_price = $item->price; // Current price is the price from database
+        $item->original_price = round($item->price * 1.02, 2); // Previous price is 2% higher
         return $item;
     }
 }

@@ -121,24 +121,21 @@
                                 <img src="./Images/food_1.jpg" class="card-img-top menu-img img-fluid" alt="{{ $item->name }}">
                                 @endif
                                 <span class="badge bg-success position-absolute top-0 end-0 m-2">{{ $item->subcategory->name }}</span>
-                                <span class="badge bg-danger position-absolute top-0 start-0 m-2">2% OFF</span>
                             </div>
                             <div class="card-body">
                                 <h5 class="card-title">{{ $item->name }}</h5>
                                 <p class="card-text small">{{ $item->description ?? 'No description available' }}</p>
                                 <div class="d-flex justify-content-between align-items-center">
-                                    <div>
-                                        <p class="card-price mb-0">
-                                            <span class="text-decoration-line-through">£{{ number_format($item->original_price, 2) }}</span>
-                                            <span class="text-danger">£{{ number_format($item->discounted_price, 2) }}</span>
-                                        </p>
+                                    <div class="price-section">
+                                        <span class="text-decoration-line-through text-muted small">£{{ number_format($item->original_price, 2) }}</span>
+                                        <span class="text-danger fw-bold ms-1">£{{ number_format($item->discounted_price, 2) }}</span>
                                     </div>
                                     <button class="btn btn-primary btn-sm add-to-cart" 
                                             data-id="{{ $item->id }}"
                                             data-name="{{ $item->name }}"
                                             data-price="{{ $item->discounted_price }}"
                                             aria-label="Add {{ $item->name }} to cart">
-                                        <i class="fas fa-cart-plus me-1"></i>Add
+                                        <i class="fas fa-cart-plus"></i>
                                     </button>
                                 </div>
                             </div>
@@ -284,24 +281,22 @@
                                                 : `<img src="./Images/food_1.jpg" class="card-img-top menu-img img-fluid" alt="${item.name}">`
                                             }
                                             <span class="badge bg-success position-absolute top-0 end-0 m-2">${item.subcategory.name}</span>
-                                            <span class="badge bg-danger position-absolute top-0 start-0 m-2">2% OFF</span>
                                         </div>
                                         <div class="card-body">
                                             <h5 class="card-title">${item.name}</h5>
                                             <p class="card-text small">${item.description || 'No description available'}</p>
                                             <div class="d-flex justify-content-between align-items-center">
-                                                <div>
-                                                    <p class="card-price mb-0">
-                                                        <span class="text-decoration-line-through">£${parseFloat(item.original_price).toFixed(2)}</span>
-                                                        <span class="text-danger">£${parseFloat(item.discounted_price).toFixed(2)}</span>
-                                                    </p>
+                                                <div class="price-section">
+                                                    <span class="text-decoration-line-through text-muted small">£${parseFloat(item.original_price).toFixed(2)}</span>
+                                                    <span class="text-danger fw-bold ms-1">£${parseFloat(item.discounted_price).toFixed(2)}</span>
                                                 </div>
                                                 <button class="btn btn-primary btn-sm add-to-cart"
                                                         data-id="${item.id}"
                                                         data-name="${item.name}"
                                                         data-price="${item.discounted_price}"
                                                         aria-label="Add ${item.name} to cart">
-                                                    <i class="fas fa-cart-plus me-1"></i>Add
+                                                    <i class="fas fa-cart-plus"></i>
+                                                    Add
                                                 </button>
                                             </div>
                                         </div>
