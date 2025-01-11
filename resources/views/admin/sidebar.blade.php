@@ -1,4 +1,5 @@
 <div class="toast-container" id="toast-container"></div>
+<div class="sidebar-overlay"></div>
 <div class="sidebar border border-right col-md-3 col-lg-2 p-0 bg-body-tertiary">
     <div class="offcanvas-md offcanvas-end bg-body-tertiary" tabindex="-1" id="sidebarMenu"
         aria-labelledby="sidebarMenuLabel">
@@ -32,6 +33,11 @@
                     </div>
                 </li>
                 <li class="mb-1">
+                    <a href="/admin/pos" class="btn btn-toggle d-inline-flex align-items-center rounded border-0 icon-only">
+                        <i class="fas fa-cash-register"></i> &nbsp; POS
+                    </a>
+                </li>
+                <li class="mb-1">
                     <button class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed"
                         data-bs-toggle="collapse" data-bs-target="#cat-collapse" aria-expanded="false">
                         <i class="fas fa-box"></i> &nbsp;
@@ -62,6 +68,7 @@
                 <li class="mb-1">
                     <button class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed"
                         data-bs-toggle="collapse" data-bs-target="#orders-collapse" aria-expanded="false">
+                        <i class="fas fa-box"></i> &nbsp;
                         Orders
                     </button>
                     <div class="collapse" id="orders-collapse">

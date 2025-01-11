@@ -3,8 +3,10 @@
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\manageCategory;
 use App\Http\Controllers\manageItems;
+use App\Http\Controllers\PosController;
 use App\Http\Middleware\IsActive;
 use App\Http\Middleware\IsAdmin;
+use App\Models\Item;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -58,6 +60,9 @@ Route::middleware([IsActive::class])->group(function () {
         });
         Route::get('/items', function (manageItems $manageItems) {
             return $manageItems->adminItems();
+        });
+        Route::get('/pos', function (PosController $posController) {
+            return $posController->pos();
         });
 
         Route::get('/item/{id}', [manageItems::class, 'showItem']);
