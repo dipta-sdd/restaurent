@@ -2,6 +2,8 @@
 <html lang="en">
 
 <head>
+<meta name="csrf-token" content="{{ csrf_token() }}">
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Order Summary - Bengal Tandoori Restaurant</title>
@@ -107,8 +109,12 @@
             </div>
         </div>
     </div>
+    <script src="/js/jquery-3.7.1.min.js"></script>
+    <script src="/js/popper.min.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
+    <script src="/js/script.js"></script>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script> -->
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             const orderItemsList = document.getElementById('orderItemsList');
@@ -167,7 +173,7 @@
                         method: 'POST',
                         headers: {
                             'Content-Type': 'application/json',
-                            'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content
+                            "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
                         },
                         body: JSON.stringify(orderDetails)
                     })
@@ -177,6 +183,7 @@
                         localStorage.removeItem('orderData');
                         // Redirect to order confirmation page
                         window.location.href = `/orderconfirmation/${data.order_id}`;
+                        // console.log(data);
                     })
                     .catch(error => {
                         console.error('Error:', error);

@@ -24,6 +24,7 @@ class OrderController extends Controller
             // Create address record
             $address = Address::create([
                 'name' => $request->address,
+                'phone' => '01301727106',
                 'created_by' => Auth::id(),
                 'updated_by' => Auth::id()
             ]);
@@ -36,7 +37,8 @@ class OrderController extends Controller
                 'instructions' => $request->instructions,
                 'total_amount' => $request->total,
                 'address_id' => $address->id,
-                'payment_method_id' => $request->paymentMethod,
+                // 'payment_method_id' => $request->paymentMethod,
+                
                 'created_by' => Auth::id(),
                 'updated_by' => Auth::id()
             ]);
