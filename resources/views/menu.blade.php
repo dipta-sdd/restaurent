@@ -171,7 +171,7 @@
                                 <strong>Total</strong>
                                 <strong id="totalAmount">£2.50</strong>
                             </div>
-                            <button class="btn btn-success w-100">Checkout</button>
+                            <button class="btn btn-success w-100" id="checkoutBtn">Checkout</button>
                         </div>
                     </div>
                 </div>
@@ -470,6 +470,34 @@
             attachCartHandlers();
             updateFloatingCartCount();
             loadMenuItems();
+
+            // Checkout functionality
+            $('#checkoutBtn').on('click', function() {
+                if (cartItems.length === 0) {
+                    alert('Your cart is empty!');
+                    return;
+                }
+                
+                // Store cart data in localStorage
+                const orderData = {
+                    items: cartItems.map(item => ({
+                        id: item.id,
+                        name: item.name,
+                        price: parseFloat(item.price),
+                        quantity: item.quantity,
+                        total: parseFloat(item.price * item.quantity)
+                    })),
+                    subtotal: parseFloat($('#subtotalAmount').text().replace('£', '')),
+                    delivery: 2.50,
+                    total: parseFloat($('#totalAmount').text().replace('£', ''))
+                };
+
+                // Store in localStorage
+                localStorage.setItem('orderData', JSON.stringify(orderData));
+                
+                // Redirect to order summary page
+                window.location.href = '/orderSummary';
+            });
         });
     </script>
 

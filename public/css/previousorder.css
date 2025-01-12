@@ -1,0 +1,144 @@
+/* Single, efficient reset */
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+/* Additional specific resets */
+li, ol, ul {
+	list-style: none;
+}
+
+/* Global Typography */
+body {
+	font-family: "Poppins", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+}
+
+/* Links */
+a {
+	text-decoration: none;
+}
+
+/* --------------------- Buttons ---------------------*/
+
+.btn-primary {
+	background-color: var(--blue-colour);
+	border-color: var(--blue-colour);
+	color: var(--white-colour);
+}
+
+.btn-primary:hover {
+	background-color: var(--yellow-colour);
+	border-color: var(--yellow-colour);
+	color: var(--blue-colour);
+}
+
+.heading_h2 {
+	font-weight: 700;
+	color: #343a40;
+}
+
+/* --------------------- Colours ---------------------*/
+
+:root {
+	--blue-colour: #082A45;
+	--golden-colour: #E4D290;
+	--white-colour: #ffffff;
+	--silver-colour: #CCA46F;
+	--yellow-colour: #FCD980;
+}
+
+.container {
+    background-color: white;
+    border-radius: 15px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    padding: 30px;
+    margin-top: 50px;
+}
+
+h1 {
+    color: #2c3e50;
+    font-weight: bold;
+    margin-bottom: 30px;
+    text-align: center;
+}
+
+.order-card {
+    transition: all 0.3s ease;
+    border: none;
+    border-radius: 10px;
+    overflow: hidden;
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeInUp 0.5s ease forwards;
+}
+
+.order-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.card-header {
+    background-color: var(--blue-colour);
+    color: white;
+    font-weight: bold;
+    padding: 15px;
+}
+
+.card-body {
+    padding: 20px;
+}
+
+.btn-view-details {
+    background-color: #F6C794;
+    border: none;
+    transition: all 0.3s ease;
+    
+}
+
+.btn-view-details:hover {
+    background-color: #f7bf87;
+    transform: scale(1.05);
+}
+
+.btn-reorder {
+    background-color: #ee7264;
+    border: none;
+    transition: all 0.3s ease;
+}
+
+.btn-reorder:hover {
+    background-color: #ce6d63;
+    transform: scale(1.05);
+}
+
+.order-icon {
+    font-size: 2em;
+    margin-right: 10px;
+    vertical-align: middle;
+}
+
+.no-orders {
+    text-align: center;
+    color: #7f8c8d;
+    font-style: italic;
+    margin-top: 50px;
+}
+
+.btn-group {
+    display: flex;
+    gap: 10px;
+}
+
+.spinner-border {
+    margin: 20px auto;
+    display: block;
+}
+
+@keyframes fadeInUp {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}

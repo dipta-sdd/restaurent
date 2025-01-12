@@ -7,6 +7,7 @@ use App\Http\Middleware\IsActive;
 use App\Http\Middleware\IsAdmin;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\MenuController;
+use App\Http\Controllers\OrderController;
 
 /*
 |--------------------------------------------------------------------------
@@ -27,7 +28,15 @@ Route::get('/signup', function () {
     return view('/signup');
 });
 Route::get('/menu', [MenuController::class, 'index']);
+Route::get('/orderSummary', [OrderController::class, 'showOrderSummary'])->name('orderSummary');
+Route::get('/orderconfirmation/{orderId}', [OrderController::class, 'showOrderConfirmation'])->name('orderConfirmation');
 // add here
+Route::get('/previousorder', function () {
+    return view('/previousorder');
+});
+Route::get('/orderconfirmation', function () {
+    return view('/orderconfirmation');
+});
 
 Route::get('/verification', function (AuthController $authController) {
     return $authController->verification(request());
