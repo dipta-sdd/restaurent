@@ -74,5 +74,13 @@ Route::middleware([IsActive::class])->group(function () {
         });
 
         Route::get('/item/{id}', [manageItems::class, 'showItem']);
+
+        // Add new admin order routes
+        Route::get('/orders', [OrderController::class, 'adminOrders']);
+        Route::get('/orders/{orderId}', [OrderController::class, 'adminOrderDetails']);
     });
 });
+
+// Add API route for updating order status
+Route::post('/api/admin/orders/{orderId}/status', [OrderController::class, 'updateOrderStatus'])
+    ->middleware(['auth:sanctum', IsAdmin::class]);

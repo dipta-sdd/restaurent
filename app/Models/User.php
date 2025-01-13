@@ -61,7 +61,7 @@ class User extends Authenticatable
     }
     public function is_admin()
     {
-        return in_array($this->role, ['admin', 'manager', 'staff']);
+        return in_array($this->role, ['admin', 'manager', 'staff', 'rider']);
     }
     public function is_rider()
     {

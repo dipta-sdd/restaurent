@@ -62,21 +62,15 @@
                 <li class="mb-1">
                     <button class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed"
                         data-bs-toggle="collapse" data-bs-target="#orders-collapse" aria-expanded="false">
-                        Orders
+                        <i class="fas fa-shopping-cart"></i> &nbsp; Orders
                     </button>
                     <div class="collapse" id="orders-collapse">
                         <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-                            <li><a href="#"
-                                    class="link-body-emphasis d-inline-flex text-decoration-none rounded">New</a></li>
-                            <li><a href="#"
-                                    class="link-body-emphasis d-inline-flex text-decoration-none rounded">Processed</a>
-                            </li>
-                            <li><a href="#"
-                                    class="link-body-emphasis d-inline-flex text-decoration-none rounded">Shipped</a>
-                            </li>
-                            <li><a href="#"
-                                    class="link-body-emphasis d-inline-flex text-decoration-none rounded">Returned</a>
-                            </li>
+                            <li><a href="/admin/orders" class="link-body-emphasis d-inline-flex text-decoration-none rounded">All Orders</a></li>
+                            <li><a href="/admin/orders?status=pending" class="link-body-emphasis d-inline-flex text-decoration-none rounded">Pending</a></li>
+                            <li><a href="/admin/orders?status=processing" class="link-body-emphasis d-inline-flex text-decoration-none rounded">Processing</a></li>
+                            <li><a href="/admin/orders?status=out_for_delivery" class="link-body-emphasis d-inline-flex text-decoration-none rounded">Out for Delivery</a></li>
+                            <li><a href="/admin/orders?status=delivered" class="link-body-emphasis d-inline-flex text-decoration-none rounded">Delivered</a></li>
                         </ul>
                     </div>
                 </li>

@@ -13,6 +13,7 @@
     </style>
 </head>
 <body>
+    
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-8">
@@ -110,10 +111,10 @@
                         </div>
                     </div>
 
-                    <div class="text-center">
+                    <!-- <div class="text-center">
                         <button onclick="window.location.href='/menu'" class="btn btn-primary me-2">Back to Menu</button>
                         <button onclick="window.location.href='/previousorder'" class="btn btn-outline-secondary">View Order History</button>
-                    </div>
+                    </div> -->
                 </div>
             </div>
         </div>
