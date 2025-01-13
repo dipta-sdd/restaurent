@@ -1,5 +1,6 @@
 <!doctype html>
 <html lang="en">
+
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -7,7 +8,7 @@
     <title>{{ $item->name }} - Details</title>
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.5.1/css/all.css">
-    
+
     <link href="{{ asset('/css/bootstrap.min.css') }}" rel="stylesheet">
     <link href="{{ asset('/css/admin_style.css') }}" rel="stylesheet">
     <style>
@@ -19,11 +20,13 @@
             cursor: pointer;
             transition: transform 0.3s ease;
         }
+
         .item-image:hover {
             transform: scale(1.05);
         }
     </style>
 </head>
+
 <body>
     @include('admin.header')
     <div class="container-fluid">
@@ -31,7 +34,8 @@
             @include('admin.sidebar')
 
             <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4 py-2">
-                <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+                <div
+                    class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
                     <h1 class="h2">{{ $item->name }} Details</h1>
                     <div class="btn-toolbar mb-2 mb-md-0">
                         <a href="{{ url('/admin/items') }}" class="btn btn-sm btn-outline-secondary">
@@ -43,14 +47,10 @@
                 <div class="row">
                     <div class="col-md-4 text-center mb-4">
                         @if($item->image)
-                            <img src="{{ asset($item->image) }}" 
-                                 alt="{{ $item->name }}" 
-                                 class="item-image" 
-                                 id="itemImagePreview"
-                                 data-bs-toggle="modal" 
-                                 data-bs-target="#itemImageModal">
+                        <img src="{{ asset($item->image) }}" alt="{{ $item->name }}" class="item-image"
+                            id="itemImagePreview" data-bs-toggle="modal" data-bs-target="#itemImageModal">
                         @else
-                            <div class="text-center">No Image Available</div>
+                        <div class="text-center">No Image Available</div>
                         @endif
                     </div>
                     <div class="col-md-8">
@@ -68,7 +68,8 @@
                                     <div class="col-md-6">
                                         <p><strong>Allergens:</strong> {{ $item->allergens ?? "N/A" }}</p>
                                         <p><strong>Dietary Options:</strong> {{ $item->dietary_options ?? "N/A" }}</p>
-                                        <p><strong>Created At:</strong> {{ $item->created_at->format('d M, Y, H:i') }}</p>
+                                        <p><strong>Created At:</strong> {{ $item->created_at->format('d M, Y, H:i') }}
+                                        </p>
                                     </div>
                                 </div>
                             </div>
@@ -85,12 +86,14 @@
                             @csrf
                             <input type="hidden" name="item_id" value="{{ $item->id }}">
                             <div class="col-md-6">
-                                <label for="name" class="form-label">Variant Name <small class="text-danger">*</small></label>
+                                <label for="name" class="form-label">Variant Name <small
+                                        class="text-danger">*</small></label>
                                 <input type="text" id="name" class="form-control" name="name" required />
                             </div>
                             <div class="col-md-6">
                                 <label for="price" class="form-label">Price <small class="text-danger">*</small></label>
-                                <input type="number" id="price" class="form-control" name="price" step="0.01" required />
+                                <input type="number" id="price" class="form-control" name="price" step="0.01"
+                                    required />
                             </div>
                             <div class="col-md-6">
                                 <label for="status" class="form-label">Status</label>
@@ -99,7 +102,7 @@
                                     <option value="outofstok">Out of stock</option>
                                 </select>
                             </div>
-                            
+
                             <div class="text-end">
                                 <button type="submit" class="btn btn-primary save">
                                     <i class="fas fa-plus"></i> Add Variant
@@ -137,7 +140,8 @@
                                     <tr id="tr-{{ $variant->id }}">
                                         <td>{{ $variant->id }}</td>
                                         <td>{{ $variant->name }}</td>
-                                        <td>{{ number_format($variant->price, 2) }}</td>
+                                        <td data-price="{{$variant->price}}">{{ number_format($variant->price, 2) }}
+                                        </td>
                                         <td>{{ $variant->status }}</td>
                                         <td>{{ $variant->created_by_name }}</td>
                                         <td>{{ $variant->created_at->format('d M, Y, H:i') }}</td>
@@ -172,7 +176,7 @@
                 </div>
                 <div class="modal-body text-center">
                     @if($item->image)
-                        <img src="{{ asset($item->image) }}" alt="{{ $item->name }}" class="img-fluid">
+                    <img src="{{ asset($item->image) }}" alt="{{ $item->name }}" class="img-fluid">
                     @endif
                 </div>
             </div>
@@ -184,27 +188,27 @@
     <script src="{{ asset('/js/script.js') }}"></script>
 
     <script>
-    $(document).ready(function() {
-        // Variant Add Functionality
-        $('#manage_variant form .save').click(function(e) {
-            e.preventDefault();
-            let data = collectData('#manage_variant form .form-control');
-            data.item_id = $('input[name="item_id"]').val();
-            console.log(data);
-            
-            $.ajax({
-                type: "post",
-                url: "/api/admin/variant",
-                data: data,
-                headers: {
-                    "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
-                },
-                success: function(response) {
-                    $('#variantsTbody').append(`
+        $(document).ready(function() {
+            // Variant Add Functionality
+            $('#manage_variant form .save').click(function(e) {
+                e.preventDefault();
+                let data = collectData('#manage_variant form .form-control');
+                data.item_id = $('input[name="item_id"]').val();
+                console.log(data);
+
+                $.ajax({
+                    type: "post",
+                    url: "/api/admin/variant",
+                    data: data,
+                    headers: {
+                        "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+                    },
+                    success: function(response) {
+                        $('#variantsTbody').append(`
                         <tr id="tr-${response.id}">
                             <td>${response.id}</td>
                             <td>${response.name}</td>
-                            <td>${parseFloat(response.price).toFixed(2)}</td>
+                            <td data-price="${response.price}">${parseFloat(response.price).toFixed(2)}</td>
                             <td>${response.status}</td>
                             <td>${response.created_by}</td>
                             <td>${myDateFormat(response.created_at)}</td>
@@ -221,98 +225,99 @@
                         </tr>
                     `);
 
-                    // Reset form
-                    $('#manage_variant form .form-control').val('');
-                    showToast('Variant added successfully', 'success');
-                },
-                error: function(xhr) {
-                    let res = xhr.responseJSON;
-                    if (res.errors) {
-                        labelErrors('#manage_variant form .form-control', res.errors);
-                    } else {
-                        showToast('Internal server error', 'danger');
+                        // Reset form
+                        $('#manage_variant form .form-control').val('');
+                        showToast('Variant added successfully', 'success');
+                    },
+                    error: function(xhr) {
+                        let res = xhr.responseJSON;
+                        if (res.errors) {
+                            labelErrors('#manage_variant form .form-control', res.errors);
+                        } else {
+                            showToast('Internal server error', 'danger');
+                        }
                     }
-                }
+                });
             });
-        });
 
-        // Edit Variant Functionality
-        $(document).on('click', '#variantsTbody .btn.btn-primary.edit', function(e) {
-            e.preventDefault();
-            const tr = $(this).closest('tr');
-            const id = tr.find('td').eq(0).text().trim();
-            const data = {
-                name: tr.find('td').eq(1).text().trim(),
-                price: tr.find('td').eq(2).text().trim(),
-                status: tr.find('td').eq(3).text().trim()
-            };
-            
-            loadData('#manage_variant form .form-control', data);
-            $('#manage_variant form .update').attr('data-id', id);
-            $('#manage_variant form button.save').addClass('d-none');
-            $('#manage_variant form button.update').removeClass('d-none');
-            $('#manage_variant .card-title').text('Update Variant');
-        });
+            // Edit Variant Functionality
+            $(document).on('click', '#variantsTbody .btn.btn-primary.edit', function(e) {
+                e.preventDefault();
+                const tr = $(this).closest('tr');
+                const id = tr.find('td').eq(0).text().trim();
+                const data = {
+                    name: tr.find('td').eq(1).text().trim(),
+                    price: tr.find('td').eq(2).data('price').trim(),
+                    status: tr.find('td').eq(3).text().trim()
+                };
+                console.table(data);
+                loadData('#manage_variant form .form-control', data);
+                $('#manage_variant form .update').attr('data-id', id);
+                $('#manage_variant form button.save').addClass('d-none');
+                $('#manage_variant form button.update').removeClass('d-none');
+                $('#manage_variant .card-title').text('Update Variant');
+            });
 
-        // Update Variant Functionality
-        $('#manage_variant form .update').click(function(e) {
-            e.preventDefault();
-            let id = $(this).attr('data-id');
-            let data = collectData('#manage_variant form .form-control');
+            // Update Variant Functionality
+            $('#manage_variant form .update').click(function(e) {
+                e.preventDefault();
+                let id = $(this).attr('data-id');
+                let data = collectData('#manage_variant form .form-control');
 
-            $.ajax({
-                type: "post",
-                url: "/api/admin/variant/" + id,
-                data: data,
-                headers: {
-                    "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
-                },
-                success: function(response) {
-                    let $row = $('#tr-' + id);
-                    $row.find('td').eq(1).text(response.name);
-                    $row.find('td').eq(2).text(parseFloat(response.price).toFixed(2));
-                    $row.find('td').eq(3).text(response.status);
-                    $row.find('td').eq(6).text(response.updated_by);
-                    $row.find('td').eq(7).text(myDateFormat(response.updated_at));
-                    
-                    showToast('Variant updated successfully', 'success');
-                    $('#manage_variant form .form-control').val('');
-                    $('#manage_variant form button.save').removeClass('d-none');
-                    $('#manage_variant form button.update').addClass('d-none');
-                    $('#manage_variant .card-title').text('Create New Variant');
-                },
-                error: function(xhr) {
-                    let res = xhr.responseJSON;
-                    if (res.errors) {
-                        labelErrors('#manage_variant form .form-control', res.errors);
-                    } else {
-                        showToast('Internal server error', 'danger');
+                $.ajax({
+                    type: "post",
+                    url: "/api/admin/variant/" + id,
+                    data: data,
+                    headers: {
+                        "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+                    },
+                    success: function(response) {
+                        let $row = $('#tr-' + id);
+                        $row.find('td').eq(1).text(response.name);
+                        $row.find('td').eq(2).text(parseFloat(response.price).toFixed(2));
+                        $row.find('td').eq(3).text(response.status);
+                        $row.find('td').eq(6).text(response.updated_by);
+                        $row.find('td').eq(7).text(myDateFormat(response.updated_at));
+
+                        showToast('Variant updated successfully', 'success');
+                        $('#manage_variant form .form-control').val('');
+                        $('#manage_variant form button.save').removeClass('d-none');
+                        $('#manage_variant form button.update').addClass('d-none');
+                        $('#manage_variant .card-title').text('Create New Variant');
+                    },
+                    error: function(xhr) {
+                        let res = xhr.responseJSON;
+                        if (res.errors) {
+                            labelErrors('#manage_variant form .form-control', res.errors);
+                        } else {
+                            showToast('Internal server error', 'danger');
+                        }
                     }
-                }
+                });
             });
-        });
 
-        // Delete Variant Functionality
-        $(document).on('click', '#variantsTbody .btn.btn-danger.delete', function(e) {
-            e.preventDefault();
-            const id = $(this).data('id');
-            
-            $.ajax({
-                type: "delete",
-                url: "/api/admin/variant/" + id,
-                headers: {
-                    "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
-                },
-                success: function() {
-                    $('#tr-' + id).remove();
-                    showToast('Variant deleted successfully', 'success');
-                },
-                error: function() {
-                    showToast('Error deleting variant', 'danger');
-                }
+            // Delete Variant Functionality
+            $(document).on('click', '#variantsTbody .btn.btn-danger.delete', function(e) {
+                e.preventDefault();
+                const id = $(this).data('id');
+
+                $.ajax({
+                    type: "delete",
+                    url: "/api/admin/variant/" + id,
+                    headers: {
+                        "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+                    },
+                    success: function() {
+                        $('#tr-' + id).remove();
+                        showToast('Variant deleted successfully', 'success');
+                    },
+                    error: function() {
+                        showToast('Error deleting variant', 'danger');
+                    }
+                });
             });
         });
-    });
     </script>
 </body>
+
 </html>
