@@ -6,6 +6,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\manageCategory;
 use App\Http\Controllers\manageItems;
 use App\Http\Controllers\manageTables;
+use App\Http\Controllers\managePaymentMethods;
 use App\Http\Middleware\IsAdmin;
 
 /*
@@ -53,6 +54,11 @@ Route::middleware('web')->group(function () {
     Route::post('/admin/table', [manageTables::class, 'addTable']);
     Route::post('/admin/table/{id}', [manageTables::class, 'updateTable']);
     Route::delete('/admin/table/{id}', [manageTables::class, 'deleteTable']);
+
+    // Payment method management routes
+    Route::post('/admin/payment-method', [managePaymentMethods::class, 'addPaymentMethod']);
+    Route::post('/admin/payment-method/{id}', [managePaymentMethods::class, 'updatePaymentMethod']);
+    Route::delete('/admin/payment-method/{id}', [managePaymentMethods::class, 'deletePaymentMethod']);
 });
 
 

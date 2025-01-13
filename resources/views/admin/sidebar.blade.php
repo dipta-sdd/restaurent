@@ -100,6 +100,19 @@
                 </li>
                 <li class="mb-1">
                     <button class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed"
+                        data-bs-toggle="collapse" data-bs-target="#payment-collapse" aria-expanded="false">
+                        <i class="fas fa-credit-card"></i> &nbsp; Payment
+                    </button>
+                    <div class="collapse" id="payment-collapse">
+                        <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+                            <li><a href="/admin/payment-methods"
+                                    class="link-body-emphasis d-inline-flex text-decoration-none rounded">Payment Methods</a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+                <li class="mb-1">
+                    <button class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed"
                         data-bs-toggle="collapse" data-bs-target="#users-collapse" aria-expanded="false">
                         <i class="fas fa-users"></i> &nbsp; Users
                     </button>
