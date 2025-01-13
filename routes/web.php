@@ -5,6 +5,7 @@ use App\Http\Controllers\manageCategory;
 use App\Http\Controllers\manageItems;
 use App\Http\Controllers\PosController;
 use App\Http\Controllers\manageTables;
+use App\Http\Controllers\managePaymentMethods;
 use App\Http\Middleware\IsActive;
 use App\Http\Middleware\IsAdmin;
 use App\Models\Item;
@@ -63,8 +64,6 @@ Route::middleware([IsActive::class])->group(function () {
         return view('/forget_pass');
     });
 
-
-
     Route::group(['middleware' => ['auth:sanctum', IsAdmin::class], 'prefix' => 'admin'], function () {
         Route::get('/categories', function (manageCategory $manageCategory) {
             return $manageCategory->adminCategory();
@@ -88,6 +87,7 @@ Route::middleware([IsActive::class])->group(function () {
         Route::get('/orders', [OrderController::class, 'adminOrders']);
         Route::get('/orders/{orderId}', [OrderController::class, 'adminOrderDetails']);
         Route::get('/tables', [manageTables::class, 'adminTables']);
+        Route::get('/payment-methods', [managePaymentMethods::class, 'adminPaymentMethods']);
     });
 });
 

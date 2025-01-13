@@ -7,6 +7,7 @@ use App\Http\Controllers\manageCategory;
 use App\Http\Controllers\manageItems;
 use App\Http\Controllers\manageTables;
 use App\Http\Controllers\TabaleReservationController;
+use App\Http\Controllers\managePaymentMethods;
 use App\Http\Middleware\IsAdmin;
 use App\Http\Controllers\MenuController;
 use App\Http\Controllers\OrderController;
@@ -62,6 +63,11 @@ Route::middleware('web')->group(function () {
     Route::delete('/admin/table/{id}', [manageTables::class, 'deleteTable']);
 
     Route::post('/tables/search', [TabaleReservationController::class, 'searchTables']);
+
+    // Payment method management routes
+    Route::post('/admin/payment-method', [managePaymentMethods::class, 'addPaymentMethod']);
+    Route::post('/admin/payment-method/{id}', [managePaymentMethods::class, 'updatePaymentMethod']);
+    Route::delete('/admin/payment-method/{id}', [managePaymentMethods::class, 'deletePaymentMethod']);
 });
 
 

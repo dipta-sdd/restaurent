@@ -9,6 +9,7 @@ class PaymentMethod extends Model
     protected $fillable = [
         'name',
         'description',
+        'status',
         'created_by',
         'updated_by',
     ];
@@ -16,5 +17,13 @@ class PaymentMethod extends Model
     public function orders()
     {
         return $this->hasMany(Order::class);
+    }
+
+    public static function getStatusOptions()
+    {
+        return [
+            'active' => 'Active',
+            'inactive' => 'Inactive'
+        ];
     }
 }
