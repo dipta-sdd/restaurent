@@ -31,7 +31,7 @@ Route::get('/verification', function (AuthController $authController) {
 Route::middleware([IsActive::class])->group(function () {
     Route::get('/', function () {
         return view(
-            'welcome'
+            'home'
         );
     });
     Route::get('/dashboard', function () {
