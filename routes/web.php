@@ -4,6 +4,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\manageCategory;
 use App\Http\Controllers\manageItems;
 use App\Http\Controllers\PosController;
+use App\Http\Controllers\manageTables;
 use App\Http\Middleware\IsActive;
 use App\Http\Middleware\IsAdmin;
 use App\Models\Item;
@@ -42,6 +43,10 @@ Route::get('/orderconfirmation', function () {
 Route::get('/verification', function (AuthController $authController) {
     return $authController->verification(request());
 });
+Route::get('/table_reservation', function () {
+    return view('table_reservation');
+});
+
 Route::middleware([IsActive::class])->group(function () {
     Route::get('/', function () {
         return view(
@@ -82,6 +87,7 @@ Route::middleware([IsActive::class])->group(function () {
         // Add new admin order routes
         Route::get('/orders', [OrderController::class, 'adminOrders']);
         Route::get('/orders/{orderId}', [OrderController::class, 'adminOrderDetails']);
+        Route::get('/tables', [manageTables::class, 'adminTables']);
     });
 });
 
