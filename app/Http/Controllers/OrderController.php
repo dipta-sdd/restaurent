@@ -76,6 +76,10 @@ class OrderController extends Controller
         $order = Order::with(['orderItems.item', 'address'])
             ->findOrFail($orderId);
 
+        // Get customer name from User table
+        $customer = User::find($order->customer_id);
+        $order->customerName = $customer ? $customer->name : 'Customer';
+
         return view('orderconfirmation', compact('order'));
     }
 

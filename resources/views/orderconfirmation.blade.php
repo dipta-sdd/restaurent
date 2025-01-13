@@ -78,7 +78,7 @@
                         <div class="card border-0 shadow-sm p-3">
                             <div class="card-body">
                                 <h5 class="card-title mb-3"><i class="fas fa-map-marker-alt text-danger me-2"></i>Your Address</h5>
-                                <p class="mb-1"><strong>{{ Auth::user()->first_name }} {{ Auth::user()->last_name }}</strong></p>
+                                <p class="mb-1"><strong>{{ $order->customerName }}</strong></p>
                                 <p class="mb-1">{{ $order->address->name }}</p>
                                 @if($order->instructions)
                                     <p class="mb-1"><strong>Instructions:</strong> {{ $order->instructions }}</p>
