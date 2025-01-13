@@ -94,7 +94,7 @@
 
                         </ul>
                     </div>
-                </li>
+                </li>  
                 <li class="mb-1">
                     <button class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed"
                         data-bs-toggle="collapse" data-bs-target="#users-collapse" aria-expanded="false">
