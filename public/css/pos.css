@@ -1,0 +1,92 @@
+#pos-container{
+    flex-wrap: nowrap;
+    overflow: hidden;
+}
+#menu-container{
+    width: auto;
+    flex-grow: 1;
+}
+#total-container{
+    width: 500px;
+    flex-grow: 0;
+}
+
+@media (max-width: 1200px) {
+    #pos-container{
+        flex-wrap: wrap;
+    }
+    #total-container{
+        width: 100%;
+    }
+    #menu-container{
+        width: 100%;
+    }
+}
+#foodsAccordion .accordion-item:last-of-type .accordion-collapse,
+#drinksAccordion .accordion-item:last-of-type .accordion-collapse{
+    border-bottom: none !important;
+}
+.food-item-container{
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 20px;
+}
+.food-item{
+    padding: 4px;
+    position: relative;
+    border-radius: 5px;
+    transition: all 0.2ss ease-in-out;
+    &:hover{
+        cursor: pointer;
+        transform: translateY(-4px);
+    }
+}
+
+.food-item img{
+    width: 100%;
+    height: auto;
+    aspect-ratio: 1/1;
+    overflow: hidden;
+    object-fit: cover;
+    margin-bottom: 10px;
+}
+
+.food-item .quantity{
+    position: absolute;
+    display: block;
+    top: 0;
+    right: 0;
+    z-index: 10;
+    padding: 4px;
+    font-size: 1.5rem;
+    line-height: 1.5rem;
+    min-width: 2rem;
+    width: auto;
+    aspect-ratio: 1/1 !important;
+    border-radius: 100%;
+    transform: translate(50%, -50%);
+    
+}
+.food-item .quantity:hover::after{
+    content: '+';
+    position: absolute;
+    background-color: inherit;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    font-size: 1.5rem;
+    aspect-ratio: 1/1 !important;
+    border-radius: 100%;
+    display: grid;
+    place-items: center;
+    rotate: 45deg;
+}
+.cart-item:last-of-type{
+    border-bottom: none !important;
+}
+
+body:has(#dineIn:checked) #tableNoContainer{
+    display: block !important;
+}
+
