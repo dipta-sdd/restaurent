@@ -14,8 +14,8 @@ return new class extends Migration
         Schema::create('tables', function (Blueprint $table) {
             $table->id();
             $table->integer('capacity');
-            $table->enum('status', ['available', 'occupied'])->default('available');
-            $table->timestamps();
+            $table->enum('status', ['available', 'maintenance', 'closed'])->default('available');
+            $table->$table->timestamps();
             $table->foreignId('created_by')->nullable()->constrained('users')->nullOnDelete();
             $table->foreignId('updated_by')->nullable()->constrained('users')->nullOnDelete();
         });
