@@ -69,7 +69,7 @@
                     <input type="number" class="form-control" id="guestCount" min="1" max="20" required>
                 </div>
                 <div class="col-12 text-center mt-4">
-                    <button  class="btn btn-primary px-4" id="searchButton">
+                    <button class="btn btn-primary px-4" id="searchButton">
                         <i class="fas fa-search me-2"></i>Search Available Tables
                     </button>
                 </div>
@@ -80,124 +80,123 @@
             <!-- Floor Plan Section -->
             <div class="floor-plan mb-4">
                 <!-- Entrance and Exit -->
-            <div class="entrance" style="top: 0; left: 22%; width: 120px; transform: none;">
-                <i class="fas fa-door-open"></i> Main Entrance
-            </div>
-            <div class="emergency-exit" style="top: 0; right: 22%; width: 120px; transform: none;">
-                <i class="fas fa-door-open"></i> Emergency Exit
-            </div>
+                <div class="entrance" style="top: 0; left: 22%; width: 120px; transform: none;">
+                    <i class="fas fa-door-open"></i> Main Entrance
+                </div>
+                <div class="emergency-exit" style="top: 0; right: 22%; width: 120px; transform: none;">
+                    <i class="fas fa-door-open"></i> Emergency Exit
+                </div>
 
-            <!-- Windows -->
-            <div class="window" style="top: 0; left: 8%; width: 80px;">Window</div>
-            <div class="window" style="top: 0; left: 38%; width: 80px;">Window</div>
+                <!-- Windows -->
+                <div class="window" style="top: 0; left: 8%; width: 80px;">Window</div>
+                <div class="window" style="top: 0; left: 38%; width: 80px;">Window</div>
 
-            <!-- Center Divider -->
-            <div class="divider"></div>
+                <!-- Center Divider -->
+                <div class="divider"></div>
 
-            <!-- Left Side Tables (1-8) -->
-            <!-- Tables 1-4 along left wall -->
-            <div class="table-layout" style="left: 8%; top: 12%;" data-table="T1">
-                <span>Table 1</span>
-                <span class="capacity-label">2p</span>
-            </div>
-            <div class="table-layout" style="left: 8%; top: 24%;" data-table="T2">
-                <span>Table 2</span>
-                <span class="capacity-label">4p</span>
-            </div>
-            <div class="table-layout" style="left: 8%; top: 36%;" data-table="T3">
-                <span>Table 3</span>
-                <span class="capacity-label">4p</span>
-            </div>
-            <div class="table-layout" style="left: 8%; top: 48%;" data-table="T4">
-                <span>Table 4</span>
-                <span class="capacity-label">4p</span>
-            </div>
+                <!-- Left Side Tables (1-8) -->
+                <!-- Tables 1-4 along left wall -->
+                <div class="table-layout" style="left: 8%; top: 12%;" data-table="T1">
+                    <span>Table 1</span>
+                    <span class="capacity-label">2p</span>
+                </div>
+                <div class="table-layout" style="left: 8%; top: 24%;" data-table="T2">
+                    <span>Table 2</span>
+                    <span class="capacity-label">4p</span>
+                </div>
+                <div class="table-layout" style="left: 8%; top: 36%;" data-table="T3">
+                    <span>Table 3</span>
+                    <span class="capacity-label">4p</span>
+                </div>
+                <div class="table-layout" style="left: 8%; top: 48%;" data-table="T4">
+                    <span>Table 4</span>
+                    <span class="capacity-label">4p</span>
+                </div>
 
-            <!-- Tables 5-8 along divider -->
-            <div class="table-layout" style="left: 38%; top: 12%;" data-table="T5">
-                <span>Table 5</span>
-                <span class="capacity-label">2p</span>
-            </div>
-            <div class="table-layout" style="left: 38%; top: 24%;" data-table="T6">
-                <span>Table 6</span>
-                <span class="capacity-label">4p</span>
-            </div>
-            <div class="table-layout" style="left: 38%; top: 36%;" data-table="T7">
-                <span>Table 7</span>
-                <span class="capacity-label">4p</span>
-            </div>
-            <div class="table-layout" style="left: 38%; top: 48%;" data-table="T8">
-                <span>Table 8</span>
-                <span class="capacity-label">4p</span>
-            </div>
+                <!-- Tables 5-8 along divider -->
+                <div class="table-layout" style="left: 38%; top: 12%;" data-table="T5">
+                    <span>Table 5</span>
+                    <span class="capacity-label">2p</span>
+                </div>
+                <div class="table-layout" style="left: 38%; top: 24%;" data-table="T6">
+                    <span>Table 6</span>
+                    <span class="capacity-label">4p</span>
+                </div>
+                <div class="table-layout" style="left: 38%; top: 36%;" data-table="T7">
+                    <span>Table 7</span>
+                    <span class="capacity-label">4p</span>
+                </div>
+                <div class="table-layout" style="left: 38%; top: 48%;" data-table="T8">
+                    <span>Table 8</span>
+                    <span class="capacity-label">4p</span>
+                </div>
 
-            <!-- Right Side Tables (9-21) -->
-            <!-- First Column (9-13) -->
-            <div class="table-layout" style="right: 38%; top: 12%;" data-table="T9">
-                <span>Table 9</span>
-                <span class="capacity-label">2p</span>
-            </div>
-            <div class="table-layout" style="right: 38%; top: 24%;" data-table="T10">
-                <span>Table 10</span>
-                <span class="capacity-label">4p</span>
-            </div>
-            <div class="table-layout" style="right: 38%; top: 36%;" data-table="T11">
-                <span>Table 11</span>
-                <span class="capacity-label">4p</span>
-            </div>
-            <div class="table-layout" style="right: 38%; top: 48%;" data-table="T12">
-                <span>Table 12</span>
-                <span class="capacity-label">3p</span>
-            </div>
-            <div class="table-layout" style="right: 38%; top: 60%;" data-table="T13">
-                <span>Table 13</span>
-                <span class="capacity-label">4p</span>
-            </div>
+                <!-- Right Side Tables (9-21) -->
+                <!-- First Column (9-13) -->
+                <div class="table-layout" style="right: 38%; top: 12%;" data-table="T9">
+                    <span>Table 9</span>
+                    <span class="capacity-label">2p</span>
+                </div>
+                <div class="table-layout" style="right: 38%; top: 24%;" data-table="T10">
+                    <span>Table 10</span>
+                    <span class="capacity-label">4p</span>
+                </div>
+                <div class="table-layout" style="right: 38%; top: 36%;" data-table="T11">
+                    <span>Table 11</span>
+                    <span class="capacity-label">4p</span>
+                </div>
+                <div class="table-layout" style="right: 38%; top: 48%;" data-table="T12">
+                    <span>Table 12</span>
+                    <span class="capacity-label">3p</span>
+                </div>
+                <div class="table-layout" style="right: 38%; top: 60%;" data-table="T13">
+                    <span>Table 13</span>
+                    <span class="capacity-label">4p</span>
+                </div>
 
-            <!-- Second Column (14-19) -->
-            <div class="table-layout" style="right: 8%; top: 12%;" data-table="T14">
-                <span>Table 14</span>
-                <span class="capacity-label">2p</span>
-            </div>
-            <div class="table-layout" style="right: 8%; top: 24%;" data-table="T15">
-                <span>Table 15</span>
-                <span class="capacity-label">4p</span>
-            </div>
-            <div class="table-layout" style="right: 8%; top: 36%;" data-table="T16">
-                <span>Table 16</span>
-                <span class="capacity-label">4p</span>
-            </div>
-            <div class="table-layout" style="right: 8%; top: 48%;" data-table="T17">
-                <span>Table 17</span>
-                <span class="capacity-label">4p</span>
-            </div>
-            <div class="table-layout" style="right: 8%; top: 60%;" data-table="T18">
-                <span>Table 18</span>
-                <span class="capacity-label">6p</span>
-            </div>
-            <div class="table-layout" style="right: 8%; top: 78%;" data-table="T19">
-                <span>Table 19</span>
-                <span class="capacity-label">6p</span>
-            </div>
+                <!-- Second Column (14-19) -->
+                <div class="table-layout" style="right: 8%; top: 12%;" data-table="T14">
+                    <span>Table 14</span>
+                    <span class="capacity-label">2p</span>
+                </div>
+                <div class="table-layout" style="right: 8%; top: 24%;" data-table="T15">
+                    <span>Table 15</span>
+                    <span class="capacity-label">4p</span>
+                </div>
+                <div class="table-layout" style="right: 8%; top: 36%;" data-table="T16">
+                    <span>Table 16</span>
+                    <span class="capacity-label">4p</span>
+                </div>
+                <div class="table-layout" style="right: 8%; top: 48%;" data-table="T17">
+                    <span>Table 17</span>
+                    <span class="capacity-label">4p</span>
+                </div>
+                <div class="table-layout" style="right: 8%; top: 60%;" data-table="T18">
+                    <span>Table 18</span>
+                    <span class="capacity-label">6p</span>
+                </div>
+                <div class="table-layout" style="right: 8%; top: 78%;" data-table="T19">
+                    <span>Table 19</span>
+                    <span class="capacity-label">6p</span>
+                </div>
 
-            <!-- Bottom Tables -->
-            <div class="table-layout" style="right: 23%; bottom: 2%;" data-table="T20">
-                <span>Table 20</span>
-                <span class="capacity-label">4p</span>
-            </div>
-            <div class="table-layout" style="right: 38%; bottom: 2%;" data-table="T21">
-                <span>Table 21</span>
-                <span class="capacity-label">2p</span>
-            </div>
+                <!-- Bottom Tables -->
+                <div class="table-layout" style="right: 23%; bottom: 2%;" data-table="T20">
+                    <span>Table 20</span>
+                    <span class="capacity-label">4p</span>
+                </div>
+                <div class="table-layout" style="right: 38%; bottom: 2%;" data-table="T21">
+                    <span>Table 21</span>
+                    <span class="capacity-label">2p</span>
+                </div>
 
+            </div>
         </div>
-    </div>
 
         <!-- Available Tables Section -->
         <div id="availableTablesSection" class="mt-4" style="display: none;">
             <h3 class="mb-3">Available Tables</h3>
             <div class="row" id="tablesList">
-                <!-- Table cards will be dynamically inserted here -->
             </div>
         </div>
 
@@ -209,32 +208,33 @@
         </div>
 
 
-    <!-- Confirmation Modal -->
-    <div class="modal fade" id="confirmationModal" tabindex="-1">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">Confirm Reservation</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-                </div>
-                <div class="modal-body">
-                    <div class="reservation-details">
-                        <!-- Details will be populated dynamically -->
+        <!-- Confirmation Modal -->
+        <div class="modal fade" id="confirmationModal" tabindex="-1">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Confirm Reservation</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                     </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                    <button type="button" class="btn btn-primary" id="confirmReservation">Confirm Reservation</button>
+                    <div class="modal-body">
+                        <div class="reservation-details">
+                            <!-- Details will be populated dynamically -->
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                        <button type="button" class="btn btn-primary" id="confirmReservation">Confirm
+                            Reservation</button>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
 
-    <!-- Bootstrap Bundle -->
-    <script src="/js/jquery-3.7.1.min.js"></script>
-    <script src="/js/popper.min.js"></script>
-    <script src="/js/bootstrap.min.js"></script>
-    <script>
+        <!-- Bootstrap Bundle -->
+        <script src="/js/jquery-3.7.1.min.js"></script>
+        <script src="/js/popper.min.js"></script>
+        <script src="/js/bootstrap.min.js"></script>
+        <script>
         // Updated table data based on the floor plan
 
 
@@ -254,7 +254,7 @@
                 e.target.value = today.toISOString().split('T')[0];
             }
         });
-        
+
         // Show booked tables in red initially
         function showBookedTables() {
 
@@ -266,7 +266,7 @@
         // showBookedTables();
 
 
-        $('#searchButton').click(function (e) { 
+        $('#searchButton').click(function(e) {
             e.preventDefault();
             document.querySelector('.loader').style.display = 'flex';
             $.ajax({
@@ -277,28 +277,28 @@
                 },
                 data: {
                     date: $('#reservationDate').val(),
-                    start: $('#startTime').val()+':00',
-                    end: $('#endTime').val()+':00',
+                    start: $('#startTime').val() + ':00',
+                    end: $('#endTime').val() + ':00',
                 },
-                success: function (response) {
+                success: function(response) {
                     showBookedTables();
                     showAvailableTables(response);
                     document.querySelector('.loader').style.display = 'none';
                 },
-                error: function (error) {
+                error: function(error) {
                     console.error('Error:', error);
                     document.querySelector('.loader').style.display = 'none';
                 }
             });
-            });
-            // showAvailableTables(tables);
+        });
+        // showAvailableTables(tables);
 
         function showAvailableTables(availableTables) {
             const tablesList = document.getElementById('tablesList');
             tablesList.innerHTML = '';
 
             // Filter available tables based on capacity and booking status
-            
+
 
             availableTables.forEach(table => {
                 // Highlight available tables in green
@@ -338,12 +338,7 @@
 
             document.getElementById('availableTablesSection').style.display = 'block';
         }
-
-    
-
-
-
-    </script>
+        </script>
 </body>
 
 </html>

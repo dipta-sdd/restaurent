@@ -10,7 +10,7 @@ class manageTables extends Controller
 {
     public function adminTables()
     {
-        $tables = Table::selectRaw('tables.*, creator.name as creator_name, updater.name as updater_name')
+        $tables = Table::selectRaw('tables.*, CONCAT(creator.first_name, " " , creator.last_name) as creator_name, CONCAT(updater.first_name, " " , updater.last_name) as updater_name')
             ->leftJoin('users as creator', 'tables.created_by', '=', 'creator.id')
             ->leftJoin('users as updater', 'tables.updated_by', '=', 'updater.id')
             ->orderBy('tables.created_at', 'desc')
@@ -36,8 +36,8 @@ class manageTables extends Controller
         $creator = User::find($table->created_by);
         $updater = User::find($table->updated_by);
 
-        $table->creator_name = $creator->name;
-        $table->updater_name = $updater->name;
+        $table->creator_name = $creator->first_name . ' ' . $creator->last_name;
+        $table->updater_name = $updater->first_name . ' ' . $updater->last_name;
 
         return response()->json($table, 201);
     }
@@ -50,7 +50,7 @@ class manageTables extends Controller
         ]);
 
         $table = Table::findOrFail($id);
-        
+
         $data['updated_by'] = auth()->id();
         $table->update($data);
 
@@ -58,8 +58,9 @@ class manageTables extends Controller
         $creator = User::find($table->created_by);
         $updater = User::find($table->updated_by);
 
-        $table->creator_name = $creator->name;
-        $table->updater_name = $updater->name;
+
+        $table->creator_name = $creator->first_name . ' ' . $creator->last_name;
+        $table->updater_name = $updater->first_name . ' ' . $updater->last_name;
 
         return response()->json($table);
     }

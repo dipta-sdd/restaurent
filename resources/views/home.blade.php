@@ -102,6 +102,8 @@
                                 <li><a class="dropdown-item" href="/profile">{{ Auth::user()->name }}</a></li>
                                 @if (Auth::user()->is_admin())
                                 <li><a class="dropdown-item" href="/admin/dashboard">Dashboard</a></li>
+                                @else
+                                <li><a class="dropdown-item" href="/previousorder">Order History</a></li>
                                 @endif
                                 <li><a class="dropdown-item" href="/api/logout">Logout</a></li>
                             </ul>
