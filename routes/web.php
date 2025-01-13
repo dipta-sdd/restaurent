@@ -31,9 +31,7 @@ Route::get('/menu', [MenuController::class, 'index']);
 Route::get('/orderSummary', [OrderController::class, 'showOrderSummary'])->name('orderSummary');
 Route::get('/orderconfirmation/{orderId}', [OrderController::class, 'showOrderConfirmation'])->name('orderConfirmation');
 // add here
-Route::get('/previousorder', function () {
-    return view('/previousorder');
-});
+Route::get('/previousorder', [OrderController::class, 'previousOrders'])->name('previousorder');
 Route::get('/orderconfirmation', function () {
     return view('/orderconfirmation');
 });

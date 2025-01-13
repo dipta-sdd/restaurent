@@ -197,4 +197,25 @@ class OrderController extends Controller
             'new_status' => $order->status
         ]);
     }
+
+    public function previousOrders()
+    {
+        $user_id = Auth::id();
+        
+        // Get delivered orders (history)
+        $delivered_orders = Order::with(['orderItems.item', 'address'])
+            ->where('customer_id', $user_id)
+            ->where('status', 'delivered')
+            ->orderBy('created_at', 'desc')
+            ->get();
+
+        // Get active orders (not delivered)
+        $active_orders = Order::with(['orderItems.item', 'address'])
+            ->where('customer_id', $user_id)
+            ->whereNotIn('status', ['delivered'])
+            ->orderBy('created_at', 'desc')
+            ->get();
+
+        return view('previousorder', compact('delivered_orders', 'active_orders'));
+    }
 } 
