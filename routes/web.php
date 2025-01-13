@@ -28,6 +28,7 @@ Route::get('/signup', function () {
     return view('/signup');
 });
 Route::get('/menu', [MenuController::class, 'index']);
+Route::get('/menu.html', [MenuController::class, 'index']);
 Route::get('/orderSummary', [OrderController::class, 'showOrderSummary'])->name('orderSummary');
 Route::get('/orderconfirmation/{orderId}', [OrderController::class, 'showOrderConfirmation'])->name('orderConfirmation');
 // add here
