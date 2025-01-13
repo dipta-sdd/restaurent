@@ -29,6 +29,10 @@ Route::get('/signup', function () {
 Route::get('/verification', function (AuthController $authController) {
     return $authController->verification(request());
 });
+Route::get('/table_reservation', function () {
+    return view('table_reservation');
+});
+
 Route::middleware([IsActive::class])->group(function () {
     Route::get('/', function () {
         return view(

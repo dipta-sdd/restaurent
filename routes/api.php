@@ -6,6 +6,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\manageCategory;
 use App\Http\Controllers\manageItems;
 use App\Http\Controllers\manageTables;
+use App\Http\Controllers\TabaleReservationController;
 use App\Http\Middleware\IsAdmin;
 
 /*
@@ -53,6 +54,8 @@ Route::middleware('web')->group(function () {
     Route::post('/admin/table', [manageTables::class, 'addTable']);
     Route::post('/admin/table/{id}', [manageTables::class, 'updateTable']);
     Route::delete('/admin/table/{id}', [manageTables::class, 'deleteTable']);
+
+    Route::post('/tables/search', [TabaleReservationController::class, 'searchTables']);
 });
 
 
