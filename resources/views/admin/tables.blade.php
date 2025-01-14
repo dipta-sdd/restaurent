@@ -1,6 +1,6 @@
 <!doctype html>
 <html lang="en">
-   
+
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -20,8 +20,8 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;700&display=swap" rel="stylesheet">
 
-    <link href="{{ asset('/css/bootstrap.min.css') }}" rel="stylesheet">
-    <link href="{{ asset('/css/admin_style.css') }}" rel="stylesheet">
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/css/admin_style.css" rel="stylesheet">
 </head>
 
 <body>
@@ -59,7 +59,7 @@
                                 <label for="status" class="form-label">Status <small class="text-danger">*</small></label>
                                 <select id="status" class="form-control" name="status" required>
                                     @foreach($statusOptions as $value => $label)
-                                        <option value="{{ $value }}">{{ $label }}</option>
+                                    <option value="{{ $value }}">{{ $label }}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -127,10 +127,10 @@
         </div>
     </div>
 
-    <script src="{{ asset('/js/jquery-3.7.1.min.js') }}"></script>
-    <script src="{{ asset('/js/popper.min.js') }}"></script>
-    <script src="{{ asset('/js/bootstrap.min.js') }}"></script>
-    <script src="{{ asset('/js/script.js') }}"></script>
+    <script src="/js/jquery-3.7.1.min.js"></script>
+    <script src="/js/popper.min.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
+    <script src="/js/script.js"></script>
 
     <script>
         $(document).ready(function() {

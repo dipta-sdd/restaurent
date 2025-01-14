@@ -1,12 +1,13 @@
 <!doctype html>
 <html lang="en">
+
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>{{ config('app.name', 'Restaurant') }} - Orders</title>
-    
+
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.5.1/css/all.css">
     <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.5.1/css/sharp-thin.css">
@@ -16,9 +17,10 @@
 
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link href="{{ asset('/css/bootstrap.min.css') }}" rel="stylesheet">
-    <link href="{{ asset('/css/admin_style.css') }}" rel="stylesheet">
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/css/admin_style.css" rel="stylesheet">
 </head>
+
 <body>
     @include('admin.header')
     <div class="container-fluid">
@@ -115,7 +117,7 @@
                                         <td>{{ $order->address->name }}</td>
                                         <td>
                                             @foreach($order->orderItems as $item)
-                                                {{ $item->item->name }}@if(!$loop->last), @endif
+                                            {{ $item->item->name }}@if(!$loop->last), @endif
                                             @endforeach
                                         </td>
                                         <td>£{{ number_format($order->total_amount, 2) }}</td>
@@ -163,7 +165,7 @@
             $('#filter-form').submit(function(e) {
                 e.preventDefault();
                 const params = new URLSearchParams();
-                
+
                 const status = $('#filter-status').val();
                 const dateRange = $('#date-range').val();
                 const type = $('#type').val();
@@ -177,8 +179,9 @@
                 const queryString = params.toString();
                 window.location.href = `/admin/orders${queryString ? '?' + queryString : ''}`;
             });
-            
+
         });
     </script>
 </body>
-</html> 
+
+</html>

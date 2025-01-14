@@ -21,8 +21,8 @@
         rel="stylesheet">
 
     <!-- Bootstrap CSS -->
-    <link href="{{ asset('/css/bootstrap.min.css') }}" rel="stylesheet">
-    <link href="{{ asset('/css/style.css') }}" rel="stylesheet">
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/css/style.css" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
     <title>Restaurant Name</title>
 </head>
@@ -417,9 +417,9 @@
     </div>
 
     <!-- Bootstrap JS -->
-    <script src="{{ asset('/js/jquery-3.7.1.min.js') }}"></script>
-    <script src="{{ asset('/js/popper.min.js') }}"></script>
-    <script src="{{ asset('/js/bootstrap.min.js') }}"></script>
+    <script src="/js/jquery-3.7.1.min.js"></script>
+    <script src="/js/popper.min.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
 
     <script>
         const navbar = document.querySelector('.customNav');

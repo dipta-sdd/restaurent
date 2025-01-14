@@ -20,8 +20,8 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;700&display=swap" rel="stylesheet">
 
-    <link href="{{ asset('/css/bootstrap.min.css') }}" rel="stylesheet">
-    <link href="{{ asset('/css/admin_style.css') }}" rel="stylesheet">
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/css/admin_style.css" rel="stylesheet">
 </head>
 
 <body>
@@ -70,7 +70,7 @@
                                 <label for="role" class="form-label">Role <small class="text-danger">*</small></label>
                                 <select id="role" class="form-control" name="role" required>
                                     @foreach($roles as $value => $label)
-                                        <option value="{{ $value }}">{{ $label }}</option>
+                                    <option value="{{ $value }}">{{ $label }}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -103,9 +103,9 @@
                         <select id="filter_role" class="form-select">
                             <option value="">All Roles</option>
                             @foreach($roles as $value => $label)
-                                <option value="{{ $value }}" {{ request()->query('role') == $value ? 'selected' : '' }}>
-                                    {{ $label }}
-                                </option>
+                            <option value="{{ $value }}" {{ request()->query('role') == $value ? 'selected' : '' }}>
+                                {{ $label }}
+                            </option>
                             @endforeach
                         </select>
                     </div>
@@ -171,10 +171,10 @@
         </div>
     </div>
 
-    <script src="{{ asset('/js/jquery-3.7.1.min.js') }}"></script>
-    <script src="{{ asset('/js/popper.min.js') }}"></script>
-    <script src="{{ asset('/js/bootstrap.min.js') }}"></script>
-    <script src="{{ asset('/js/script.js') }}"></script>
+    <script src="/js/jquery-3.7.1.min.js"></script>
+    <script src="/js/popper.min.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
+    <script src="/js/script.js"></script>
 
     <script>
         $(document).ready(function() {
@@ -380,7 +380,9 @@
                 $.ajax({
                     type: "GET",
                     url: "/api/admin/users",
-                    data: { role: role },
+                    data: {
+                        role: role
+                    },
                     success: function(response) {
                         $('#usersTbody').empty();
                         response.users.forEach(user => {

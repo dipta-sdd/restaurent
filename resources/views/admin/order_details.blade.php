@@ -1,12 +1,13 @@
 <!doctype html>
 <html lang="en">
+
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>{{ config('app.name', 'Restaurant') }} - Order Details</title>
-    
+
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.5.1/css/all.css">
     <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.5.1/css/sharp-thin.css">
@@ -16,9 +17,10 @@
 
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link href="{{ asset('/css/bootstrap.min.css') }}" rel="stylesheet">
-    <link href="{{ asset('/css/admin_style.css') }}" rel="stylesheet">
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/css/admin_style.css" rel="stylesheet">
 </head>
+
 <body>
     @include('admin.header')
     <div class="container-fluid">
@@ -59,21 +61,21 @@
                                         <form class="d-flex align-items-center" id="update-status-form">
                                             @csrf
                                             @if(auth()->user()->is_admin() && $order->status === 'pending')
-                                                <button type="button" class="btn btn-primary update-status" data-status="processing">
-                                                    <i class="fas fa-check"></i> Confirm Order
-                                                </button>
+                                            <button type="button" class="btn btn-primary update-status" data-status="processing">
+                                                <i class="fas fa-check"></i> Confirm Order
+                                            </button>
                                             @endif
-                                            
+
                                             @if(auth()->user()->is_rider())
-                                                @if($order->status === 'processing')
-                                                    <button type="button" class="btn btn-primary update-status" data-status="ready">
-                                                        <i class="fas fa-motorcycle"></i> Pickup Order
-                                                    </button>
-                                                @elseif($order->status === 'ready')
-                                                    <button type="button" class="btn btn-success update-status" data-status="delivered">
-                                                        <i class="fas fa-check-circle"></i> Mark as Delivered
-                                                    </button>
-                                                @endif
+                                            @if($order->status === 'processing')
+                                            <button type="button" class="btn btn-primary update-status" data-status="ready">
+                                                <i class="fas fa-motorcycle"></i> Pickup Order
+                                            </button>
+                                            @elseif($order->status === 'ready')
+                                            <button type="button" class="btn btn-success update-status" data-status="delivered">
+                                                <i class="fas fa-check-circle"></i> Mark as Delivered
+                                            </button>
+                                            @endif
                                             @endif
                                         </form>
                                     </div>
@@ -202,7 +204,7 @@
                 e.preventDefault();
                 const status = $(this).data('status');
                 const orderId = '{{ $order->id }}';
-                
+
                 $.ajax({
                     url: `/api/admin/orders/${orderId}/status`,
                     method: 'POST',
@@ -226,4 +228,5 @@
         });
     </script>
 </body>
-</html> 
+
+</html>

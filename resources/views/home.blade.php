@@ -29,8 +29,8 @@
         as="style" />
     <link rel="preload" href="./Images/slider_1.jpg" as="image" />
     <!-- Bootstrap CSS -->
-    <link href="{{ asset('/css/bootstrap.min.css') }}" rel="stylesheet">
-    <link href="{{ asset('/css/home.css') }}" rel="stylesheet">
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/css/home.css" rel="stylesheet">
     <!-- <link rel="stylesheet" href="style.css"> -->
 </head>
 
@@ -672,9 +672,9 @@
 
     <!-- ================ SCRIPTS ================ -->
     <!-- Bootstrap Bundle with Popper.js -->
-    <script src="{{ asset('/js/jquery-3.7.1.min.js') }}"></script>
-    <script src="{{ asset('/js/popper.min.js') }}"></script>
-    <script src="{{ asset('/js/bootstrap.min.js') }}"></script>
+    <script src="/js/jquery-3.7.1.min.js"></script>
+    <script src="/js/popper.min.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
 
     <!-- Main JavaScript -->
     <script>

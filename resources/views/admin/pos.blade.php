@@ -22,9 +22,9 @@
         href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
         rel="stylesheet">
 
-    <link href="{{ asset('/css/bootstrap.min.css') }}" rel="stylesheet">
-    <link href="{{ asset('/css/admin_style.css') }}" rel="stylesheet">
-    <link href="{{ asset('/css/pos.css') }}" rel="stylesheet">
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/css/admin_style.css" rel="stylesheet">
+    <link href="/css/pos.css" rel="stylesheet">
 </head>
 
 <body>
@@ -56,20 +56,20 @@
                         <div class="card mb-4">
                             <div class="card-header d-flex justify-content-between align-items-center">
                                 <h5 class="card-title mb-0">Foods</h5>
-                                
+
                             </div>
                             <div class="card-body">
                                 <div class="accordion rounded-0 border-0" id="foodsAccordion">
                                     @foreach ($foods as $category)
                                     <div class="accordion-item border-0 rounded-0">
                                         <h2 class="accordion-header">
-                                            <button class="accordion-button text-capitalize collapsed" type="button" data-bs-toggle="collapse" 
-                                                data-bs-target="#category-{{$category[0]->category_id}}" aria-expanded="false" 
+                                            <button class="accordion-button text-capitalize collapsed" type="button" data-bs-toggle="collapse"
+                                                data-bs-target="#category-{{$category[0]->category_id}}" aria-expanded="false"
                                                 aria-controls="food-starters">
                                                 {{$category[0]->category_name}}
                                             </button>
                                         </h2>
-                                        <div id="category-{{$category[0]->category_id}}" class="accordion-collapse collapse border-bottom" 
+                                        <div id="category-{{$category[0]->category_id}}" class="accordion-collapse collapse border-bottom"
                                             data-bs-parent="#foodsAccordion">
                                             <div class="accordion-body">
                                                 <div class="food-item-container">
@@ -99,7 +99,7 @@
                         <div class="card mb-4">
                             <div class="card-header d-flex justify-content-between align-items-center">
                                 <h5 class="card-title mb-0">Drinks</h5>
-                                
+
                             </div>
                             <div class="card-body">
                                 <div class="accordion rounded-0 border-0" id="drinksAccordion">
@@ -107,13 +107,13 @@
                                     @foreach ($drinks as $category)
                                     <div class="accordion-item border-0 rounded-0">
                                         <h2 class="accordion-header">
-                                            <button class="accordion-button text-capitalize collapsed" type="button" data-bs-toggle="collapse" 
-                                                data-bs-target="#category-{{$category[0]->category_id}}" aria-expanded="false" 
+                                            <button class="accordion-button text-capitalize collapsed" type="button" data-bs-toggle="collapse"
+                                                data-bs-target="#category-{{$category[0]->category_id}}" aria-expanded="false"
                                                 aria-controls="drink-starters">
                                                 {{$category[0]->category_name}}
                                             </button>
                                         </h2>
-                                        <div id="category-{{$category[0]->category_id}}" class="accordion-collapse collapse border-bottom" 
+                                        <div id="category-{{$category[0]->category_id}}" class="accordion-collapse collapse border-bottom"
                                             data-bs-parent="#drinksAccordion">
                                             <div class="accordion-body">
                                                 <div class="food-item-container">
@@ -149,7 +149,7 @@
                             <div class="card-body">
                                 <div class="cart-items">
                                     <!-- Cart items will be dynamically added here -->
-                                    
+
                                 </div>
                                 <hr>
                                 <div class="cart-summary">
@@ -183,7 +183,7 @@
                                                     Takeaway
                                                 </label>
                                             </div>
-                                        </div>  
+                                        </div>
                                     </div>
                                     <div class="mb-3 d-none" id="tableNoContainer">
                                         <label for="tableNo" class="form-label">Table Number</label>
@@ -199,10 +199,10 @@
             </main>
         </div>
     </div>
-    <script src="{{ asset('/js/jquery-3.7.1.min.js') }}"></script>
-    <script src="{{ asset('/js/popper.min.js') }}"></script>
-    <script src="{{ asset('/js/bootstrap.min.js') }}"></script>
-    <script src="{{ asset('/js/admin.js') }}"></script>
+    <script src="/js/jquery-3.7.1.min.js"></script>
+    <script src="/js/popper.min.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
+    <script src="/js/admin.js"></script>
     <script>
         $('.sidebar').addClass('autoclose');
     </script>
@@ -211,20 +211,20 @@
             let cart = {};
             // $('.quantity').click(function (e) { 
             //     e.preventDefault();
-                
+
             // });
             $('.food-item').on('click', function(e) {
-                
+
                 let id = $(this).attr('id');
                 let item = $(this).data('json');
                 let quantity = $(this).data('quantity');
                 if (!$(e.target).closest('.quantity').length) {
-                    if(quantity == 0){
+                    if (quantity == 0) {
                         $(this).data('quantity', 1);
                         $(this).find('.quantity').removeClass('d-none');
                         $(this).find('.quantity').text(1);
                         item.quantity = 1;
-                    }else{
+                    } else {
                         $(this).data('quantity', quantity + 1);
                         $(this).find('.quantity').text(quantity + 1);
                         item.quantity = quantity + 1;
@@ -235,18 +235,18 @@
                     $(this).find('.quantity').text(0);
                     item.quantity = 0;
                 }
-                
+
                 addToCart(item);
             });
 
-            function addToCart(item){
+            function addToCart(item) {
                 let cartItem = document.getElementById(`cart-item-${item.id}-${item.variant_id ?? ''}`);
-                if(item.quantity == 0){
-                    if(cartItem){
+                if (item.quantity == 0) {
+                    if (cartItem) {
                         cartItem.remove();
                     }
-                }else{
-                    let cartItemHtml =`
+                } else {
+                    let cartItemHtml = `
                         <div class="cart-item d-flex align-items-center gap-3 py-2 border-bottom" id="cart-item-${item.id}-${item.variant_id ?? ''}" data-json='${JSON.stringify(item)}'>
                                 <!-- Section 1: Image -->
                             <div class="cart-item-img" style="width: 80px;">
@@ -273,21 +273,21 @@
                             </div>
                         </div>
                     `;
-                    if(cartItem){
+                    if (cartItem) {
                         cartItem.outerHTML = cartItemHtml;
-                    }else{
+                    } else {
                         $('.cart-items').append(cartItemHtml);
                     }
                 }
                 updateCartSummary();
             }
 
-            function updateCartSummary(){
+            function updateCartSummary() {
                 let subtotal = 0;
                 let vat = 0;
                 let total = 0;
                 let vatRate = $('#cart-vat').data('vat-rate');
-                $('.cart-item').each(function(){
+                $('.cart-item').each(function() {
                     let item = $(this).data('json');
                     subtotal += item.price * item.quantity;
                 });
@@ -297,7 +297,7 @@
                 $('#cart-vat').text(`£${vat.toFixed(2)}`);
                 $('#cart-total').text(`£${total.toFixed(2)}`);
             }
-            $(document).on('click', '.cart-item-controls .increment', function(e){
+            $(document).on('click', '.cart-item-controls .increment', function(e) {
                 e.preventDefault();
                 let id = $(this).closest('.cart-item').attr('id');
                 let item = $(`#${id}`).data('json');
@@ -306,7 +306,7 @@
                 addToCart(item);
             });
 
-            $(document).on('click', '.cart-item-controls .decrement', function(e){
+            $(document).on('click', '.cart-item-controls .decrement', function(e) {
                 e.preventDefault();
                 let id = $(this).closest('.cart-item').attr('id');
                 let item = $(`#${id}`).data('json');
@@ -315,11 +315,11 @@
                 addToCart(item);
             });
 
-            function updateQuantity(id, quantity){
+            function updateQuantity(id, quantity) {
                 $(id).find('.quantity').text(quantity);
-                if(quantity == 0){
+                if (quantity == 0) {
                     $(id).find('.quantity').addClass('d-none');
-                }else{
+                } else {
                     $(id).find('.quantity').removeClass('d-none');
                 }
             }

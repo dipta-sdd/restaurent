@@ -23,8 +23,8 @@
         href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
         rel="stylesheet">
 
-    <link href="{{ asset('/css/bootstrap.min.css') }}" rel="stylesheet">
-    <link href="{{ asset('/css/admin_style.css') }}" rel="stylesheet">
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/css/admin_style.css" rel="stylesheet">
 </head>
 
 <body>
@@ -231,7 +231,7 @@
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/croppie/2.6.5/croppie.min.js"></script>
-    <script src="{{ asset('/js/script.js') }}"></script>
+    <script src="/js/script.js"></script>
 
     <script>
         $(document).ready(function() {
@@ -330,26 +330,50 @@
                                 ${response.image ? `<img src="${response.image}" alt="${response.name}" class="img-thumbnail" style="max-width:100px;">` : 'N/A'}
                             </td>
                             <td data-val="${response.subcategory_id}">${response.subcategory_name}</td>
-                            <td onclick="window.location='{{ url('/admin/item/') }}/${response.id}'">${response.name}</td>
-                            <td>${parseFloat(response.price).toFixed(2)}</td>
-                            <td>${response.description ?? "N/A"}</td>
-                            <td>${response.allergens ?? "N/A"}</td>
-                            <td>${response.dietary_options ?? "N/A"}</td>
-                            
-                            <td>${response.created_by}</td>
-                            <td>${myDateFormat(response.created_at)}</td>
-                            <td>${response.updated_by}</td>
-                            <td>${myDateFormat(response.updated_at)}</td>
-                            <td>
-                                <button class="btn btn-sm btn-primary edit">
-                                    <i class="fas fa-edit"></i> Edit
-                                </button>
-                                <button class="btn btn-sm btn-danger delete" data-id="${response.id}">
-                                    <i class="fas fa-trash"></i> Delete
-                                </button>
-                            </td>
-                        </tr>
-                    `);
+                            <td onclick="window.location='{{ url('/admin/item/') }}/${response.id}'">
+        $ {
+            response.name
+        } < /td> <
+        td > $ {
+                parseFloat(response.price).toFixed(2)
+            } < /td> <
+            td > $ {
+                response.description ?? "N/A"
+            } < /td> <
+            td > $ {
+                response.allergens ?? "N/A"
+            } < /td> <
+            td > $ {
+                response.dietary_options ?? "N/A"
+            } < /td>
+
+            <
+            td > $ {
+                response.created_by
+            } < /td> <
+            td > $ {
+                myDateFormat(response.created_at)
+            } < /td> <
+            td > $ {
+                response.updated_by
+            } < /td> <
+            td > $ {
+                myDateFormat(response.updated_at)
+            } < /td> <
+            td >
+            <
+            button class = "btn btn-sm btn-primary edit" >
+            <
+            i class = "fas fa-edit" > < /i> Edit <
+            /button> <
+            button class = "btn btn-sm btn-danger delete"
+        data - id = "${response.id}" >
+            <
+            i class = "fas fa-trash" > < /i> Delete <
+            /button> <
+            /td> <
+            /tr>
+        `);
                         // Reset form
                         $('#manage_item form .form-control').val('');
                         $('#manage_item form .form-control').removeClass('is-invalid');
@@ -418,7 +442,10 @@
                     success: function(response) {
                         let $row = $('#tr-' + id);
                         $row.find('td').eq(1).html(response.image ?
-                            `<img src="${response.image}" alt="${response.name}" class="img-thumbnail" style="max-width:100px;">` :
+                            ` < img src = "${response.image}"
+        alt = "${response.name}"
+        class = "img-thumbnail"
+        style = "max-width:100px;" > ` :
                             'N/A');
                         $row.find('td').eq(2).text(response.name);
                         $row.find('td').eq(3).text(parseFloat(response.price).toFixed(2));
@@ -461,7 +488,10 @@
                 if (confirm('Are you sure you want to delete this item?')) {
                     $.ajax({
                         type: "DELETE",
-                        url: `/api/admin/item/${itemId}`,
+                        url: ` / api / admin / item / $ {
+            itemId
+        }
+        `,
                         headers: {
                             "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
                         },
@@ -500,32 +530,64 @@
 
                         // Append the filtered items
                         response.items.forEach(item => {
-                            $('#itemsTbody').append(`
-                            <tr id="tr-${item.id}">
-                                <td>${item.id}</td>
-                                <td>
-                                    ${item.image ? `<img src="${item.image}" alt="${item.name}" class="img-thumbnail" style="max-width:100px;">` : 'N/A'}
-                                </td>
-                                <td onclick="window.location='{{ url('/admin/item/') }}/${item.id}'">${item.name}</td>
-                                <td>${parseFloat(item.price).toFixed(2)}</td>
-                                <td>${item.description ?? "N/A"}</td>
-                                <td data-val="${item.subcategory_id}">${item.subcategory_name}</td>
-                                <td>${item.allergens ?? "N/A"}</td>
-                                <td>${item.dietary_options ?? "N/A"}</td>
-                                <td>${item.created_by}</td>
-                                <td>${myDateFormat(item.created_at)}</td>
-                                <td>${item.updated_by}</td>
-                                <td>${myDateFormat(item.updated_at)}</td>
-                                <td>
-                                    <button class="btn btn-sm btn-primary edit">
-                                        <i class="fas fa-edit"></i> Edit
-                                    </button>
-                                    <button class="btn btn-sm btn-danger delete" data-id="${item.id}">
-                                        <i class="fas fa-trash"></i> Delete
-                                    </button>
-                                </td>
-                            </tr>
-                        `);
+                            $('#itemsTbody').append(` <
+        tr id = "tr-${item.id}" >
+            <
+            td > $ {
+                item.id
+            } < /td> <
+            td >
+            $ {
+                item.image ? ` < img src = "${item.image}"
+                                alt = "${item.name}"
+                                class = "img-thumbnail"
+                                style = "max-width:100px;" > ` : 'N/A'
+            } <
+            /td> <
+            td onclick = "window.location='{{ url('/admin/item/') }}/${item.id}'" > $ {
+                item.name
+            } < /td> <
+            td > $ {
+                parseFloat(item.price).toFixed(2)
+            } < /td> <
+            td > $ {
+                item.description ?? "N/A"
+            } < /td> <
+            td data - val = "${item.subcategory_id}" > $ {
+                item.subcategory_name
+            } < /td> <
+            td > $ {
+                item.allergens ?? "N/A"
+            } < /td> <
+            td > $ {
+                item.dietary_options ?? "N/A"
+            } < /td> <
+            td > $ {
+                item.created_by
+            } < /td> <
+            td > $ {
+                myDateFormat(item.created_at)
+            } < /td> <
+            td > $ {
+                item.updated_by
+            } < /td> <
+            td > $ {
+                myDateFormat(item.updated_at)
+            } < /td> <
+            td >
+            <
+            button class = "btn btn-sm btn-primary edit" >
+            <
+            i class = "fas fa-edit" > < /i> Edit <
+            /button> <
+            button class = "btn btn-sm btn-danger delete"
+        data - id = "${item.id}" >
+            <
+            i class = "fas fa-trash" > < /i> Delete <
+            /button> <
+            /td> <
+            /tr>
+        `);
                         });
                     },
                     error: function(xhr) {
