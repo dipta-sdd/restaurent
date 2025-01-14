@@ -75,8 +75,8 @@ class manageItems extends Controller
         $item->save();
 
         // Fetch additional details for response
-        $item->created_by = auth()->user()->name;
-        $item->updated_by = auth()->user()->name;
+        $item->created_by = auth()->user()->first_name . ' ' . auth()->user()->last_name;
+        $item->updated_by = auth()->user()->first_name . ' ' . auth()->user()->last_name;
         $item->subcategory_name = $item->subcategory->name;
 
         return response()->json($item, 201);
@@ -121,7 +121,7 @@ class manageItems extends Controller
         $item->save();
 
         // Fetch additional details for response
-        $item->updated_by = auth()->user()->name;
+        $item->updated_by = auth()->user()->first_name . ' ' . auth()->user()->last_name;
         $item->subcategory_name = $item->subcategory->name;
 
         return response()->json($item, 200);
@@ -143,8 +143,8 @@ class manageItems extends Controller
         $item = Item::with(['subcategory', 'variants'])->findOrFail($id);
         \Log::info("Item Image Path: " . $item->image);
         foreach ($item->variants as $variant) {
-            $variant->created_by_name = User::find($variant->created_by)->name ?? 'N/A';
-            $variant->updated_by_name = User::find($variant->updated_by)->name ?? 'N/A';
+            $variant->created_by_name = User::find($variant->created_by)->first_name ? User::find($variant->created_by)->first_name . ' ' . User::find($variant->created_by)->last_name : 'N/A';
+            $variant->updated_by_name = User::find($variant->updated_by)->first_name ? User::find($variant->created_by)->first_name . ' ' . User::find($variant->created_by)->last_name : 'N/A';
         }
         // Log the image path
         return view('admin.item_detail', compact('item'));
@@ -172,13 +172,13 @@ class manageItems extends Controller
 
             $variant->created_by = auth()->user()->id;
             $variant->updated_by = auth()->user()->id;
-            // $item->created_by = auth()->user()->name;
-            // $item->updated_by = auth()->user()->name;
+            // $item->created_by = auth()->user()->first_name . ' ' . auth()->user()->last_name;
+            // $item->updated_by = auth()->user()->first_name . ' ' . auth()->user()->last_name;
             // dd($variant->updated_by);
             $variant->save();
 
-            $variant->created_by = auth()->user()->name;
-            $variant->updated_by = auth()->user()->name;
+            $variant->created_by = auth()->user()->first_name . ' ' . auth()->user()->last_name;
+            $variant->updated_by = auth()->user()->first_name . ' ' . auth()->user()->last_name;
 
             // Return the created variant with additional details
             return response()->json([
@@ -214,12 +214,12 @@ class manageItems extends Controller
         // Update the variant
         $variant->fill($data);
         $variant->updated_by = auth()->user()->id;
-        // $item->created_by = auth()->user()->name;
-        // $item->updated_by = auth()->user()->name;
+        // $item->created_by = auth()->user()->first_name . ' ' . auth()->user()->last_name;
+        // $item->updated_by = auth()->user()->first_name . ' ' . auth()->user()->last_name;
         $variant->save();
 
 
-        $variant->updated_by = auth()->user()->name;
+        $variant->updated_by = auth()->user()->first_name . ' ' . auth()->user()->last_name;
 
         // Return the updated variant with additional details
         return response()->json([
@@ -228,7 +228,6 @@ class manageItems extends Controller
             'name' => $variant->name,
             'price' => $variant->price,
             'status' => $variant->status,
-            'created_by' => $variant->created_by,
             'updated_by' => $variant->updated_by,
             'created_at' => $variant->created_at,
             'updated_at' => $variant->updated_at

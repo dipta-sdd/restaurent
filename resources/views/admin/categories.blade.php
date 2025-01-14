@@ -128,10 +128,11 @@
                                                 <td>{{ $item->updated_at ? $item->updated_at->format('d M, Y, H:i') : 'N/A' }}
                                                 </td>
                                                 <td>
-                                                    <button class="btn btn-sm btn-primary">
+                                                    <button class="btn btn-sm btn-primary mb-2">
                                                         <i class="fas fa-edit"></i> Edit
                                                     </button>
-                                                    <button class="btn btn-sm btn-danger" data-id="{{ $item->id }}">
+                                                    <button class="btn btn-sm btn-danger mb-2"
+                                                        data-id="{{ $item->id }}">
                                                         <i class="fas fa-trash"></i> Delete
                                                     </button>
                                                 </td>
@@ -178,10 +179,10 @@
                                 <td>${response.updated_by}</td>
                                 <td>${myDateFormat(response.updated_at)}</td>
                                 <td>
-                                    <button class="btn btn-sm btn-primary">
+                                    <button class="btn btn-sm btn-primary mb-2">
                                         <i class="fas fa-edit"></i> Edit
                                     </button>
-                                    <button class="btn btn-sm btn-danger" data-id="${response.id}">
+                                    <button class="btn btn-sm btn-danger mb-2" data-id="${response.id}">
                                         <i class="fas fa-trash"></i> Delete
                                     </button>
                                 </td>

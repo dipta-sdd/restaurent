@@ -6,8 +6,13 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\manageCategory;
 use App\Http\Controllers\manageItems;
 use App\Http\Controllers\manageUsers;
+use App\Http\Controllers\manageTables;
+use App\Http\Controllers\TabaleReservationController;
+use App\Http\Controllers\managePaymentMethods;
 use App\Http\Middleware\IsAdmin;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\MenuController;
+use App\Http\Controllers\OrderController;
 
 /*
 |--------------------------------------------------------------------------
@@ -58,6 +63,22 @@ Route::middleware('web')->group(function () {
     Route::post('/admin/user/{id}', [manageUsers::class, 'updateUser']);
     Route::delete('/admin/user/{id}', [manageUsers::class, 'deleteUser']);
     Route::get('/admin/users', [manageUsers::class, 'filterUsers']);
+
+    Route::get('/menu/items', [MenuController::class, 'getItems']);
+
+    Route::post('/place-order', [OrderController::class, 'placeOrder']);
+
+    // Table management routes
+    Route::post('/admin/table', [manageTables::class, 'addTable']);
+    Route::post('/admin/table/{id}', [manageTables::class, 'updateTable']);
+    Route::delete('/admin/table/{id}', [manageTables::class, 'deleteTable']);
+
+    Route::post('/tables/search', [TabaleReservationController::class, 'searchTables']);
+
+    // Payment method management routes
+    Route::post('/admin/payment-method', [managePaymentMethods::class, 'addPaymentMethod']);
+    Route::post('/admin/payment-method/{id}', [managePaymentMethods::class, 'updatePaymentMethod']);
+    Route::delete('/admin/payment-method/{id}', [managePaymentMethods::class, 'deletePaymentMethod']);
 });
 
 

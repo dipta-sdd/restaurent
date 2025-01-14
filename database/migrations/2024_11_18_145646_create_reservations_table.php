@@ -15,8 +15,10 @@ return new class extends Migration
             $table->id();
             $table->foreignId('customer_id')->constrained('users')->cascadeOnDelete();
             $table->foreignId('table_id')->nullable()->constrained('tables')->nullOnDelete();
-            $table->dateTime('reservation_time');
-            $table->enum('status', ['pending', 'confirmed', 'cancelled'])->default('pending');
+            $table->date('reservation_date');
+            $table->time('start');
+            $table->time('end');
+            $table->enum('status', ['pending', 'confirmed', 'cancelled'])->default('confirmed');
             $table->timestamps();
             $table->foreignId('created_by')->nullable()->constrained('users')->nullOnDelete();
             $table->foreignId('updated_by')->nullable()->constrained('users')->nullOnDelete();

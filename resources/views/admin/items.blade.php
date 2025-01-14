@@ -352,6 +352,7 @@
                     `);
                         // Reset form
                         $('#manage_item form .form-control').val('');
+                        $('#manage_item form .form-control').removeClass('is-invalid');
                         $('#image-preview-container').hide();
                         showToast('Item added successfully', 'success');
                     },
@@ -380,10 +381,10 @@
                     description: tr.find('td').eq(4).text().trim() === 'N/A' ? '' : tr.find('td').eq(4)
                         .text().trim(),
                     subcategory_id: tr.find('td').eq(5).data('val'),
-                    allergens: tr.find('td').eq(6).text().trim() === 'N/A' ? '' : tr.find('td').eq(5)
+                    allergens: tr.find('td').eq(6).text().trim() === 'N/A' ? '' : tr.find('td').eq(6)
                         .text().trim(),
-                    dietary_options: tr.find('td').eq(8).text().trim() === 'N/A' ? '' : tr.find('td')
-                        .eq(6).text().trim()
+                    dietary_options: tr.find('td').eq(7).text().trim() === 'N/A' ? '' : tr.find('td')
+                        .eq(7).text().trim()
                 };
 
                 loadData('#manage_item form .form-control', data);
@@ -438,6 +439,8 @@
                         $('#manage_item form button.save').removeClass('d-none');
                         $('#manage_item form button.update').addClass('d-none');
                         $('#manage_item .card-title').text('Create New Item');
+
+                        $('#manage_item form .form-control').removeClass('is-invalid');
                     },
                     error: function(xhr) {
                         let res = xhr.responseJSON;

@@ -33,8 +33,8 @@ class manageCategory extends Controller
         $subcategory->created_by = auth()->user()->id;
         $subcategory->updated_by = auth()->user()->id;
         $subcategory->save();
-        $subcategory->created_by = auth()->user()->name;
-        $subcategory->updated_by = auth()->user()->name;
+        $subcategory->created_by = auth()->user()->first_name . ' ' . auth()->user()->last_name;
+        $subcategory->updated_by = auth()->user()->first_name . ' ' . auth()->user()->last_name;
 
         return response()->json($subcategory, 201);
     }
@@ -50,7 +50,7 @@ class manageCategory extends Controller
         $subcategory->update($data);
         $subcategory->updated_by = auth()->user()->id;
         $subcategory->save();
-        $subcategory->updated_by = auth()->user()->name;
+        $subcategory->updated_by = auth()->user()->first_name . ' ' . auth()->user()->last_name;
         return response()->json($subcategory, 201);
     }
     public function deleteSubcategory($id)
