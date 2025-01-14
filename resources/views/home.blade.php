@@ -30,8 +30,8 @@
     <link rel="preload" href="./Images/slider_1.jpg" as="image" />
     <!-- Bootstrap CSS -->
     <link href="{{ asset('/css/bootstrap.min.css') }}" rel="stylesheet">
-    <link href="{{ asset('/css/style.css') }}" rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
+    <link href="{{ asset('/css/home.css') }}" rel="stylesheet">
+    <!-- <link rel="stylesheet" href="style.css"> -->
 </head>
 
 <body>
@@ -617,7 +617,10 @@
             </p>
         </div>
     </footer>
-
+    <!-- Scroll to Top Button -->
+    <button id="scrollToTop" class="scroll-to-top" aria-label="Scroll to top">
+        <i class="fas fa-arrow-up"></i>
+    </button>
     <!-- ================ MODAL SECTION ================ -->
     <!-- 
       Features:
@@ -816,10 +819,7 @@
         });
     </script>
 
-    <!-- Scroll to Top Button -->
-    <button id="scrollToTop" class="scroll-to-top" aria-label="Scroll to top">
-        <i class="fas fa-arrow-up"></i>
-    </button>
+
 </body>
 
 </html>

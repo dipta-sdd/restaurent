@@ -1,52 +1,4 @@
-/* Single, efficient reset */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
 
-/* Additional specific resets */
-li,
-ol,
-ul {
-    list-style: none;
-}
-
-/* Global Typography */
-body {
-    font-family: "Poppins", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
-}
-
-/* Links */
-a {
-    text-decoration: none;
-}
-
-/* Global Typography */
-
-body {
-    background: linear-gradient(135deg, #fdfbfb, #ebedee);
-    font-family: 'Poppins', sans-serif;
-}
-
-/* --------------------- Buttons ---------------------*/
-
-.btn-primary {
-    background-color: var(--blue-colour);
-    border-color: var(--blue-colour);
-    color: var(--white-colur);
-}
-
-.btn-primary:hover {
-    background-color: var(--yellow-colour);
-    border-color: var(--yellow-colour);
-    color: var(--blue-colour);
-}
-
-.heading_h2 {
-    font-weight: 700;
-    color: #343a40;
-}
 
 /* --------------------- Colours ---------------------*/
 
@@ -136,44 +88,4 @@ body {
     margin-left: 15px;
     display: inline-block;
     vertical-align: middle;
-}
-
-.breadcrumb {
-    background: #f8f9fa;
-    padding: 10px 15px;
-    border-radius: 8px;
-    display: flex;
-    justify-content: start;
-    align-items: center;
-    margin-bottom: 20px;
-}
-.breadcrumb-item {
-    font-size: 16px;
-    font-weight: 500;
-}
-.breadcrumb-item a {
-    text-decoration: none;
-    color: #007bff;
-    display: flex;
-    align-items: center;
-    gap: 5px;
-    padding: 8px 12px;
-    border-radius: 20px;
-    transition: background-color 0.3s, color 0.3s;
-}
-.breadcrumb-item a:hover {
-    background-color: #e9ecef;
-    color: #0056b3;
-}
-.breadcrumb-item.active {
-    font-weight: bold;
-    color: #495057;
-    display: flex;
-    align-items: center;
-    gap: 5px;
-}
-.breadcrumb-item + .breadcrumb-item::before {
-    content: ">";
-    color: #6c757d;
-    margin: 0 8px;
 }

@@ -1,49 +1,10 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="csrf-token" content="{{ csrf_token() }}">
-    <title>Table Reservation - Bengal Tandoori Restaurant</title>
-
-    <!-- External Libraries -->
-    <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.5.1/css/all.css">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
-        rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="/css/table_reservation.css">
+@include('top')
+<link rel="stylesheet" href="/css/table_reservation.css">
 </head>
 
 <body>
     <!-- Navigation -->
-    <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: var(--primary-color);">
-        <div class="container">
-            <a class="navbar-brand" href="index.html">
-                <img src="./Images/logo.png" height="40" alt="Restaurant Logo">
-                Bengal Tandoori
-            </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ms-auto">
-                    <li class="nav-item">
-                        <a class="nav-link" href="index.html">Home</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="menu.html">Menu</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link active" href="#">Reservations</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Contact</a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </nav>
+    @include('navbar')
 
     <!-- Main Content -->
     <div class="container reservation-container">
@@ -229,12 +190,10 @@
                 </div>
             </div>
         </div>
-
-        <!-- Bootstrap Bundle -->
-        <script src="/js/jquery-3.7.1.min.js"></script>
-        <script src="/js/popper.min.js"></script>
-        <script src="/js/bootstrap.min.js"></script>
-        <script>
+    </div>
+    <!-- Bootstrap Bundle -->
+    @include('footer')
+    <script>
         // Updated table data based on the floor plan
 
 
@@ -338,7 +297,7 @@
 
             document.getElementById('availableTablesSection').style.display = 'block';
         }
-        </script>
+    </script>
 </body>
 
 </html>

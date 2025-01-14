@@ -44,7 +44,7 @@
                 </button>
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-                    <li class="nav-item">
+                        <li class="nav-item">
                             <a class="customItem" href="">Home</a>
                         </li>
                         <li class="nav-item">
@@ -449,12 +449,12 @@
         //         password: "12345678",
         //         password_confirmation: "12345678"
         //     },
-            
+
         //     headers: {
         //         "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
         //     },
         //     success: function (response) {
-                
+
         //     }
         // });
     </script>

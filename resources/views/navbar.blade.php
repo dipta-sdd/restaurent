@@ -1,22 +1,22 @@
-<header>
-        <nav class="navbar navbar-expand-lg fixed-nav">
+    <header>
+        <nav class="navbar navbar-expand-lg customNav">
             <div class="container-fluid">
                 <!-- Brand Logo and Text -->
                 <div class="d-flex align-items-center">
-                    <a class="navbar-brand d-flex align-items-center" href="index.html">
+                    <a class="navbar-brand d-flex align-items-center" href="/">
                         <picture>
-                            <img src="./Images/logo.png" class="nav__logo" alt="Bengal Tandoori Restaurant Logo">
+                            <img src="/Images/logo.png" class="nav__logo" alt="Bengal Tandoori Restaurant Logo" />
                         </picture>
-                        <h3 class="logo__text px-2">BENGAL TANDOORI RESTAURANT</h3>
+                        <h3 class="logo__text px-2">
+                            BENGAL TANDOORI RESTAURANT
+                        </h3>
                     </a>
                 </div>
 
                 <!-- Mobile Toggle Button -->
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" 
-                        data-bs-target="#navbarSupportedContent" 
-                        aria-controls="navbarSupportedContent" 
-                        aria-expanded="false" 
-                        aria-label="Toggle navigation">
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
 
@@ -24,19 +24,16 @@
                 <div class="collapse navbar-collapse text-end" id="navbarSupportedContent">
                     <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
                         <li class="nav-item">
-                            <a class="nav-link" href="/">Home</a>
+                            <a class="customItem" aria-current="page" href="/menu">Menu</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="menu">Menu</a>
+                            <a class="customItem" aria-current="page" href="#">Order Online</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Order Online</a>
+                            <a class="customItem" aria-current="page" href="/table_reservation">Reservations</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Reservations</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Contact</a>
+                            <a class="customItem" aria-current="page" href="/contact">Contact</a>
                         </li>
                         @if (Auth::user())
                         <li class="nav-item dropdown">
@@ -51,6 +48,8 @@
                                 <li><a class="dropdown-item" href="/profile">{{ Auth::user()->name }}</a></li>
                                 @if (Auth::user()->is_admin())
                                 <li><a class="dropdown-item" href="/admin/dashboard">Dashboard</a></li>
+                                @else
+                                <li><a class="dropdown-item" href="/previousorder">Order History</a></li>
                                 @endif
                                 <li><a class="dropdown-item" href="/api/logout">Logout</a></li>
                             </ul>

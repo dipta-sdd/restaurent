@@ -1,21 +1,9 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-<meta name="csrf-token" content="{{ csrf_token() }}">
-
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Order Summary - Bengal Tandoori Restaurant</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <link rel="stylesheet" href="/css/menu.css">
-    <link rel="stylesheet" href="/css/style.css">
-    <link rel="stylesheet" href="/css/summary.css">
+@include('top')
+<link rel="stylesheet" href="/css/summary.css">
 </head>
 
 <body>
-  
+
     <!-- ================ NAVIGATION SECTION ================ -->
     @include('navbar')
 
@@ -24,7 +12,8 @@
         <div class="row justify-content-center">
             <div class="col-lg-8">
                 <div class="card shadow-lg">
-                    <img src="./Images/3343542.jpg" alt="Bengal Tandoori Restaurant Banner" class="card-img-top img-fluid w-50 mx-auto d-block">
+                    <img src="/Images/3343542.jpg" alt="Bengal Tandoori Restaurant Banner"
+                        class="card-img-top img-fluid w-50 mx-auto d-block">
                     <div class="card-body">
                         <h1 class="card-title text-center mb-4">Order Summary</h1>
 
@@ -76,11 +65,14 @@
                                 <hr>
                                 <div class="mb-3">
                                     <label for="address" class="form-label">Enter your address:</label>
-                                    <input type="text" class="form-control" id="address" placeholder="123 Main St, City, Country" required>
+                                    <input type="text" class="form-control" id="address"
+                                        placeholder="123 Main St, City, Country" required>
                                 </div>
                                 <div class="mb-3">
-                                    <label for="instructions" class="form-label">Special Instructions (Optional):</label>
-                                    <textarea class="form-control" id="instructions" rows="3" placeholder="Any special instructions for your order..."></textarea>
+                                    <label for="instructions" class="form-label">Special Instructions
+                                        (Optional):</label>
+                                    <textarea class="form-control" id="instructions" rows="3"
+                                        placeholder="Any special instructions for your order..."></textarea>
                                 </div>
                             </div>
 
@@ -109,21 +101,18 @@
             </div>
         </div>
     </div>
-    <script src="/js/jquery-3.7.1.min.js"></script>
-    <script src="/js/popper.min.js"></script>
-    <script src="/js/bootstrap.min.js"></script>
-    <script src="/js/script.js"></script>
+    @include('footer')
 
     <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script> -->
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             const orderItemsList = document.getElementById('orderItemsList');
             const noItemsMessage = document.getElementById('noItemsMessage');
-            
+
             try {
                 // Get order data from localStorage
                 const orderData = JSON.parse(localStorage.getItem('orderData'));
-                
+
                 if (!orderData || !orderData.items || orderData.items.length === 0) {
                     noItemsMessage.classList.remove('d-none');
                     orderItemsList.classList.add('d-none');
@@ -154,7 +143,7 @@
                 // Handle form submission
                 document.getElementById('order-form').addEventListener('submit', function(e) {
                     e.preventDefault();
-                    
+
                     // Get form data
                     const address = document.getElementById('address').value;
                     const paymentMethod = document.getElementById('paymentMethod').value;
@@ -170,25 +159,25 @@
 
                     // Send order data to backend
                     fetch('/api/place-order', {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json',
-                            "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
-                        },
-                        body: JSON.stringify(orderDetails)
-                    })
-                    .then(response => response.json())
-                    .then(data => {
-                        // Clear cart data
-                        localStorage.removeItem('orderData');
-                        // Redirect to order confirmation page
-                        window.location.href = `/orderconfirmation/${data.order_id}`;
-                        // console.log(data);
-                    })
-                    .catch(error => {
-                        console.error('Error:', error);
-                        alert('There was an error processing your order. Please try again.');
-                    });
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json',
+                                "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+                            },
+                            body: JSON.stringify(orderDetails)
+                        })
+                        .then(response => response.json())
+                        .then(data => {
+                            // Clear cart data
+                            localStorage.removeItem('orderData');
+                            // Redirect to order confirmation page
+                            window.location.href = `/orderconfirmation/${data.order_id}`;
+                            // console.log(data);
+                        })
+                        .catch(error => {
+                            console.error('Error:', error);
+                            alert('There was an error processing your order. Please try again.');
+                        });
                 });
             } catch (error) {
                 console.error('Error loading order data:', error);
