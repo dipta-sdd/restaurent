@@ -102,24 +102,20 @@
                     </button>
                     <div class="collapse" id="users-collapse">
                         <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-                            <li><a href="/users"
+                            <li><a href="/admin/users"
                                     class="link-body-emphasis d-inline-flex text-decoration-none rounded">All Users</a>
                             </li>
-                            <li><a href="/users/add"
-                                    class="link-body-emphasis d-inline-flex text-decoration-none rounded">Add
-                                    User</a></li>
-                            <li><a href="/users?role=manager"
+                            <li><a href="/admin/users?role=manager"
                                     class="link-body-emphasis d-inline-flex text-decoration-none rounded">Managers</a>
                             </li>
-                            <li><a href="/users?role=branch_manager"
-                                    class="link-body-emphasis d-inline-flex text-decoration-none rounded">Branch
-                                    Managers</a></li>
-
-                            <li><a href="/users?role=cashier"
-                                    class="link-body-emphasis d-inline-flex text-decoration-none rounded">Cashiers</a>
+                            <li><a href="/admin/users?role=staff"
+                                    class="link-body-emphasis d-inline-flex text-decoration-none rounded">Staff</a>
                             </li>
-                            <li><a href="/users?role=staff"
-                                    class="link-body-emphasis d-inline-flex text-decoration-none rounded">Staffs</a>
+                            <li><a href="/admin/users?role=rider"
+                                    class="link-body-emphasis d-inline-flex text-decoration-none rounded">Riders</a>
+                            </li>
+                            <li><a href="/admin/users?role=user"
+                                    class="link-body-emphasis d-inline-flex text-decoration-none rounded">Customers</a>
                             </li>
                         </ul>
                     </div>

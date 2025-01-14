@@ -3,9 +3,11 @@
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\manageCategory;
 use App\Http\Controllers\manageItems;
+use App\Http\Controllers\manageUsers;
 use App\Http\Middleware\IsActive;
 use App\Http\Middleware\IsAdmin;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ProfileController;
 
 /*
 |--------------------------------------------------------------------------
@@ -43,8 +45,9 @@ Route::middleware([IsActive::class])->group(function () {
     Route::get('/forget_password', function () {
         return view('/forget_pass');
     });
-
-
+    Route::get('/profile', function () {
+        return view('/about');
+    });
 
     Route::group(['middleware' => ['auth:sanctum', IsAdmin::class], 'prefix' => 'admin'], function () {
         Route::get('/categories', function (manageCategory $manageCategory) {
@@ -61,5 +64,7 @@ Route::middleware([IsActive::class])->group(function () {
         });
 
         Route::get('/item/{id}', [manageItems::class, 'showItem']);
+        Route::get('/users', [manageUsers::class, 'adminUsers']);
+        Route::get('/users/add', [manageUsers::class, 'adminUsers']);
     });
 });

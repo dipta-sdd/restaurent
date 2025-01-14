@@ -5,7 +5,9 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\manageCategory;
 use App\Http\Controllers\manageItems;
+use App\Http\Controllers\manageUsers;
 use App\Http\Middleware\IsAdmin;
+use App\Http\Controllers\ProfileController;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,8 +20,10 @@ use App\Http\Middleware\IsAdmin;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+Route::middleware('auth:sanctum')->group(function () {
+    Route::get('/user', function (Request $request) {
+        return $request->user();
+    });
 });
 
 Route::post('signup', [AuthController::class, 'signup']);
@@ -30,12 +34,13 @@ Route::middleware('web')->group(function () {
     Route::get('/me', [AuthController::class, 'me']);
     Route::post('/verify-otp', [AuthController::class, 'verifyOtp']);
 
+    // Profile routes
+    Route::post('/profile/update', [ProfileController::class, 'update'])->name('profile.update');
+    Route::post('/profile/change-password', [ProfileController::class, 'changePassword'])->name('profile.change-password');
+
     // Route::group(['middleware' => ['auth:sanctum', IsAdmin::class], 'prefix' => 'admin'], function () {
-    //     Route::post('/category/add', [manageCategory::class, 'addSubCategory']);
-    // });
     Route::post('/admin/category', [manageCategory::class, 'addSubCategory']);
     Route::delete('/admin/category/{id}', [manageCategory::class, 'deleteSubCategory']);
-
 
     Route::post('/admin/item', [manageItems::class, 'addItem']);
     Route::post('/admin/item/{id}', [manageItems::class, 'editItem']);
@@ -47,6 +52,12 @@ Route::middleware('web')->group(function () {
 
     Route::get('/admin/items', [manageItems::class, 'filterItems']);
     Route::post('/admin/category/{id}', [manageCategory::class, 'editSubCategory']);
+
+    // User management routes
+    Route::post('/admin/user', [manageUsers::class, 'addUser']);
+    Route::post('/admin/user/{id}', [manageUsers::class, 'updateUser']);
+    Route::delete('/admin/user/{id}', [manageUsers::class, 'deleteUser']);
+    Route::get('/admin/users', [manageUsers::class, 'filterUsers']);
 });
 
 
