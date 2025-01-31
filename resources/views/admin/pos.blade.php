@@ -203,6 +203,7 @@
     <script src="/js/popper.min.js"></script>
     <script src="/js/bootstrap.min.js"></script>
     <script src="/js/admin.js"></script>
+
     <script>
         $('.sidebar').addClass('autoclose');
     </script>

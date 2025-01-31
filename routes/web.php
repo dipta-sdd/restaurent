@@ -85,6 +85,9 @@ Route::middleware([IsActive::class])->group(function () {
         Route::get('/pos', function (PosController $posController) {
             return $posController->pos();
         });
+        Route::get('/pos2', function (PosController $posController) {
+            return $posController->pos2();
+        });
 
         Route::get('/item/{id}', [manageItems::class, 'showItem']);
         Route::get('/users', [manageUsers::class, 'adminUsers']);

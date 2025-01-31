@@ -106,6 +106,7 @@
         padding: .5rem;
       }
       .btn-toggle i {
+      min-width:1.1rem;
         transform: scale(1.5);
         /* margin: .9rem; */
       }

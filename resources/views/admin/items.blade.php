@@ -530,64 +530,66 @@
 
                         // Append the filtered items
                         response.items.forEach(item => {
-                            $('#itemsTbody').append(` <
-        tr id = "tr-${item.id}" >
-            <
-            td > $ {
-                item.id
-            } < /td> <
-            td >
-            $ {
-                item.image ? ` < img src = "${item.image}"
-                                alt = "${item.name}"
-                                class = "img-thumbnail"
-                                style = "max-width:100px;" > ` : 'N/A'
-            } <
-            /td> <
-            td onclick = "window.location='{{ url('/admin/item/') }}/${item.id}'" > $ {
-                item.name
-            } < /td> <
-            td > $ {
-                parseFloat(item.price).toFixed(2)
-            } < /td> <
-            td > $ {
-                item.description ?? "N/A"
-            } < /td> <
-            td data - val = "${item.subcategory_id}" > $ {
-                item.subcategory_name
-            } < /td> <
-            td > $ {
-                item.allergens ?? "N/A"
-            } < /td> <
-            td > $ {
-                item.dietary_options ?? "N/A"
-            } < /td> <
-            td > $ {
-                item.created_by
-            } < /td> <
-            td > $ {
-                myDateFormat(item.created_at)
-            } < /td> <
-            td > $ {
-                item.updated_by
-            } < /td> <
-            td > $ {
-                myDateFormat(item.updated_at)
-            } < /td> <
-            td >
-            <
-            button class = "btn btn-sm btn-primary edit" >
-            <
-            i class = "fas fa-edit" > < /i> Edit <
-            /button> <
-            button class = "btn btn-sm btn-danger delete"
-        data - id = "${item.id}" >
-            <
-            i class = "fas fa-trash" > < /i> Delete <
-            /button> <
-            /td> <
-            /tr>
-        `);
+                            $('#itemsTbody').append(` 
+                            <tr id = "tr-${item.id}" >
+                                <td> $ {
+                                    item.id
+                                } </td> 
+                                <td >
+                                ${
+                                    item.image ? ` < img src = "${item.image}"
+                                                    alt = "${item.name}"
+                                                    class = "img-thumbnail"
+                                                    style = "max-width:100px;" > ` : 'N/A'
+                                } 
+                                <
+
+                                
+                                /td> <
+                                td onclick = "window.location='{{ url('/admin/item/') }}/${item.id}'" > $ {
+                                    item.name
+                                } < /td> <
+                                td > $ {
+                                    parseFloat(item.price).toFixed(2)
+                                } < /td> <
+                                td > $ {
+                                    item.description ?? "N/A"
+                                } < /td> <
+                                td data - val = "${item.subcategory_id}" > $ {
+                                    item.subcategory_name
+                                } < /td> <
+                                td > $ {
+                                    item.allergens ?? "N/A"
+                                } < /td> <
+                                td > $ {
+                                    item.dietary_options ?? "N/A"
+                                } < /td> <
+                                td > $ {
+                                    item.created_by
+                                } < /td> <
+                                td > $ {
+                                    myDateFormat(item.created_at)
+                                } < /td> <
+                                td > $ {
+                                    item.updated_by
+                                } < /td> <
+                                td > $ {
+                                    myDateFormat(item.updated_at)
+                                } < /td> <
+                                td >
+                                <
+                                button class = "btn btn-sm btn-primary edit" >
+                                <
+                                i class = "fas fa-edit" > < /i> Edit <
+                                /button> <
+                                button class = "btn btn-sm btn-danger delete"
+                            data - id = "${item.id}" >
+                                <
+                                i class = "fas fa-trash" > < /i> Delete <
+                                /button> <
+                                /td> <
+                                /tr>
+                            `);
                         });
                     },
                     error: function(xhr) {

@@ -143,10 +143,12 @@ a {
 /* --------------------- Navbar ---------------------*/
 
 .nav__logo {
-	width: 60px;
+	width: clamp(35px, 7vw, 60px);
+  /* width:60px; */
 }
 
 .logo__text {
+  font-size:clamp(0.9rem, 3vw, 2rem);
 	color: var(--white-colur);
 }
 
@@ -223,6 +225,7 @@ a {
 /* --------------------- Slider ---------------------*/
 
 .carousel-caption {
+  min-width: 350px;
 	z-index: 10;
 	position: absolute;
 	top: 50%;
