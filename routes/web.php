@@ -58,7 +58,7 @@ Route::middleware([IsActive::class])->group(function () {
     });
     Route::get('/dashboard', function () {
         return view(
-            'admin.tmp_admin'
+            'admin.dashboard'
         );
     });
 

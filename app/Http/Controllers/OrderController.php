@@ -161,7 +161,8 @@ class OrderController extends Controller
 
         // Get customer details from User model
         $customer = User::find($order->customer_id);
-        $order->customerName = $customer->name; 
+        $order->customerName = $customer->first_name ?? 'Guest' . ' ' ;
+        $order->customerName .=  $customer->last_name ?? ' ';
         // dd($customer->name);
         
 

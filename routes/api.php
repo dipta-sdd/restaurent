@@ -9,6 +9,7 @@ use App\Http\Controllers\manageUsers;
 use App\Http\Controllers\manageTables;
 use App\Http\Controllers\TabaleReservationController;
 use App\Http\Controllers\managePaymentMethods;
+use App\Http\Controllers\PosController;
 use App\Http\Middleware\IsAdmin;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\MenuController;
@@ -79,6 +80,10 @@ Route::middleware('web')->group(function () {
     Route::post('/admin/payment-method', [managePaymentMethods::class, 'addPaymentMethod']);
     Route::post('/admin/payment-method/{id}', [managePaymentMethods::class, 'updatePaymentMethod']);
     Route::delete('/admin/payment-method/{id}', [managePaymentMethods::class, 'deletePaymentMethod']);
+
+    // POS routes
+    Route::post('/pos/process-order', [PosController::class, 'processOrder']);
+    Route::get('/dashboard/tables', [PosController::class, 'getTables']);
 });
 
 

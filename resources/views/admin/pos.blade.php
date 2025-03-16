@@ -172,25 +172,42 @@
                                         <label class="form-label">Order Type</label>
                                         <div class="d-flex gap-3">
                                             <div class="form-check">
-                                                <input class="form-check-input" type="radio" name="orderType" id="dineIn" value="dine_in">
+                                                <input class="form-check-input" type="radio" name="orderType" id="dineIn" value="dine-in" checked>
                                                 <label class="form-check-label" for="dineIn">
                                                     Dine In
                                                 </label>
                                             </div>
                                             <div class="form-check">
-                                                <input class="form-check-input" type="radio" name="orderType" id="takeaway" value="takeaway">
+                                                <input class="form-check-input" type="radio" name="orderType" id="takeaway" value="pickup">
                                                 <label class="form-check-label" for="takeaway">
-                                                    Takeaway
+                                                    Pickup
                                                 </label>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="mb-3 d-none" id="tableNoContainer">
                                         <label for="tableNo" class="form-label">Table Number</label>
-                                        <input type="number" class="form-control" id="tableNo" min="1">
+                                        <input type="number" name="tableNo" class="form-control" id="tableNo" min="1" max="21">
                                     </div>
+                                    <!--  -->
+                                    <div class="mb-3">
+                                        <label class="form-label">Payment Method</label>
+                                        <select class="form-select" name="payment_method_id" id="paymentMethod">
+                                            <option value="">Select Payment Method</option>
+                                            @foreach ($paymentMethods as $paymentMethod)
+                                            <option value="{{$paymentMethod->id}}">{{$paymentMethod->name}}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+
+ 
+                                    <div class="mb-3">
+                                        <label for="reservationId" class="form-label">Reservation ID (Optional)</label>
+                                        <input type="text" class="form-control" id="reservationId" name="reservationId">
+                                    </div>
+                                    
                                 </div>
-                                <button class="btn btn-success w-100">Process Order</button>
+                                <button class="btn btn-success w-100" id="processOrder">Process Order</button>
                             </div>
                         </div>
                     </div>
@@ -297,6 +314,7 @@
                 $('#cart-subtotal').text(`£${subtotal.toFixed(2)}`);
                 $('#cart-vat').text(`£${vat.toFixed(2)}`);
                 $('#cart-total').text(`£${total.toFixed(2)}`);
+                $('#cart-total').attr('data-total', total.toFixed(2));
             }
             $(document).on('click', '.cart-item-controls .increment', function(e) {
                 e.preventDefault();
@@ -324,6 +342,39 @@
                     $(id).find('.quantity').removeClass('d-none');
                 }
             }
+
+            $('#processOrder').click(function(e) {
+                e.preventDefault();
+                let orderType = $('input[name="orderType"]:checked').val();
+                let tableNo = $('#tableNo').val();
+                let totalAmount = $('#cart-total').data('total');
+                let paymentMethodId = $('#paymentMethod').val();
+                let reservationId = $('#reservationId').val();
+                let cart = {};
+                $('.cart-item').each(function() {
+                    let item = $(this).data('json');
+                    cart[item.id] = {
+                        id: item.id,
+                        quantity: item.quantity,
+                        variant_id: item.variant_id
+                    }
+                });
+                
+                $.ajax({
+                    url: '/api/pos/process-order',
+                    type: 'POST',
+                    data: {cart: cart, orderType: orderType, tableNo: tableNo, totalAmount: totalAmount, paymentMethodId: paymentMethodId, reservationId: reservationId},
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    },
+                    success: function(response) {
+                        console.log(response);
+                    },
+                    error: function(xhr, status, error) {
+                        console.log(xhr.responseText);
+                    }
+                });
+            });
 
         });
     </script>

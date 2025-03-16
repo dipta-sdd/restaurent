@@ -112,9 +112,9 @@
                                     @foreach($orders as $order)
                                     <tr class="order-row" data-order-id="{{ $order->id }}" style="cursor: pointer;">
                                         <td>#{{ $order->id }}</td>
-                                        <td>{{ $order->customerName }}</td>
-                                        <td>{{ $order->address->phone }}</td>
-                                        <td>{{ $order->address->name }}</td>
+                                        <td>{{ $order->customerName?? 'Guest' }}</td>
+                                        <td>{{ $order->address->phone?? 'N/A' }}</td>
+                                        <td>{{ $order->address->name?? 'N/A' }}</td>
                                         <td>
                                             @foreach($order->orderItems as $item)
                                             {{ $item->item->name }}@if(!$loop->last), @endif

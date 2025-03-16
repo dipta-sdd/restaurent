@@ -94,11 +94,11 @@
                                 <table class="table table-borderless">
                                     <tr>
                                         <th width="150">Name:</th>
-                                        <td>{{ $order->customerName }}</td>
+                                        <td>{{ $order->customerName ?? 'Guest' }}</td>
                                     </tr>
                                     <tr>
                                         <th>Phone:</th>
-                                        <td>{{ $order->customerPhone ?? $order->address->phone }}</td>
+                                        <td>{{ $order->customerPhone ?? $order->address->phone ?? 'N/A' }}</td>
                                     </tr>
                                     <tr>
                                         <th>Email:</th>
@@ -106,12 +106,12 @@
                                     </tr>
                                     <tr>
                                         <th>Address:</th>
-                                        <td>{{ $order->address->name }}</td>
+                                        <td>{{ $order->address->name ?? 'N/A' }}</td>
                                     </tr>
                                     @if($order->instructions)
                                     <tr>
                                         <th>Instructions:</th>
-                                        <td>{{ $order->instructions }}</td>
+                                        <td>{{ $order->instructions ?? 'N/A' }}</td>
                                     </tr>
                                     @endif
                                 </table>
